@@ -1,8 +1,6 @@
 package CTCI;
-
 import java.util.HashMap;
 import java.util.Scanner;
-
 public class C1P1 {
 	public static void main(String[] args) {
 		Scanner s = new Scanner(System.in);
@@ -11,8 +9,7 @@ public class C1P1 {
 		System.out.println("Using Hashmap: " + check(str.trim()));
 		System.out.println("Using No Additional Data Structures: " + check2(str.trim()));
 	}
-
-	// Using hashmap.
+	// Using a Hash Map.
 	private static boolean check(String str) {
 		HashMap<Character, Boolean> m = new HashMap<Character, Boolean>();
 		for (int i = 0; i < str.length(); i++) {
