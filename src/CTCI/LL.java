@@ -9,12 +9,12 @@ public class LL {
 		LinkedList<Integer> l1 = new LinkedList<Integer>();
 		generateRandomList(l1, 15);
 		print(l1);
-		LL21.removeDuplicatesBuffer(l1);
+		LL1.removeDuplicatesBuffer(l1);
 		print(l1);
 		l1.clear();
 		generateRandomList(l1, 15);
 		print(l1);
-		LL21.removeDuplicatesNoBuffer(l1);
+		LL1.removeDuplicatesNoBuffer(l1);
 		print(l1);
 		
 		//LL22
@@ -23,7 +23,8 @@ public class LL {
 		int k = (int) (Math.random() * 5);
 		generateRandomList(l2, n);
 		print(l2);
-		LL22.returnKtoLast(l2, k);
+		System.out.println(k);
+		LL2.returnKtoLast(l2, k);
 		print(l2);
 	}
 

@@ -3,14 +3,17 @@ package CTCI;
 import java.util.HashSet;
 import java.util.LinkedList;
 
-public class LL21 {
+public class LL1 {
 
 	public static void removeDuplicatesNoBuffer(LinkedList<Integer> l) {
 		System.out.println("Removing Duplicates without Buffer.");
 		for (int i = 0; i < l.size()-1; i++) {
 			for (int j = i+1; j < l.size(); j++) {
-				if(l.get(i)==l.get(j))
+				if(l.get(i)==l.get(j)){
 					l.remove(j);
+					j--;
+				}
+					
 			}
 		}
 	}

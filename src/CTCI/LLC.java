@@ -6,7 +6,7 @@ package CTCI;
 
 import java.util.HashSet;
 
-public class LL21Custom {
+public class LLC {
 
 	public static void main(String[] args) {
 		MyLinkedList myl = new MyLinkedList();
