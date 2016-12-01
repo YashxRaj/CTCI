@@ -1,4 +1,4 @@
-package CTCI;
+package linkedLists;
 
 public class Node {
 	Node next;

@@ -1,4 +1,4 @@
-package CTCI;
+package linkedLists;
 
 import java.util.LinkedList;
 

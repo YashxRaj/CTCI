@@ -1,4 +1,4 @@
-package CTCI;
+package strings;
 
 import java.util.HashMap;
 

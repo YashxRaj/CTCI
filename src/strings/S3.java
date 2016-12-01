@@ -1,4 +1,4 @@
-package CTCI;
+package strings;
 
 class S3 {
 	public static String URLify(String str, int l) {

@@ -2,7 +2,7 @@
  * Remove duplicates from an unsorted linked list.
  * Follow Up: Temporary buffer is not allowed.
 */
-package CTCI;
+package linkedLists;
 
 import java.util.HashSet;
 

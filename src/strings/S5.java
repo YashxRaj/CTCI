@@ -1,4 +1,4 @@
-package CTCI;
+package strings;
 
 public class S5 {
 }
