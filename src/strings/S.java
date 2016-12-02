@@ -9,13 +9,21 @@ public class S {
 		//S1(s);
 		//S2(s);
 		//S3(s);
-		S4(s);
-		//S5(s);
+		//S4(s);
+		S5(s);
+	}
+
+	private static void S5(Scanner s) {
+		System.out.print("Enter String One: ");
+		String one = s.nextLine();
+		System.out.print("Enter String Two: ");
+		String two = s.nextLine();		
+		System.out.println("One Away: "+S5.OneAway(one,two));
 	}
 
 	private static void S4(Scanner s) {
 		System.out.print("Enter String: ");
-		System.out.println(S4.PalindromePermutationCheck(s.nextLine()));
+		System.out.println("Palindrome Permutation Check: "+S4.PalindromePermutationCheck(s.nextLine()));
 	}
 
 	private static void S3(Scanner s) {
