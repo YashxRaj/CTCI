@@ -9,16 +9,22 @@ public class S {
 		//S1(s);
 		//S2(s);
 		//S3(s);
-		//S4(s);
+		S4(s);
 		//S5(s);
+	}
+
+	private static void S4(Scanner s) {
+		System.out.print("Enter String: ");
+		System.out.println(S4.PalindromePermutationCheck(s.nextLine()));
 	}
 
 	private static void S3(Scanner s) {
 		System.out.print("Enter String: ");
-		String str = s.next();
+		String str = s.nextLine();
 		System.out.println("Enter true length of the string: ");
 		int l = s.nextInt();
-		System.out.println("Insertion of %20: " + S3.URLify(str, l));
+		System.out.println("Insertion of %20:");
+		System.out.println(S3.URLify(str, l));
 	}
 
 	private static void S2(Scanner s) {
@@ -28,8 +34,8 @@ public class S {
 
 	private static void S1(Scanner s) {
 		System.out.print("Enter String: ");
-		String str =s.next();
-		System.out.println("Using Hashmap: " + S1.check(str.trim()));
-		System.out.println("Using No Additional Data Structures: " + S1.check2(str.trim()));
+		String str =s.next().trim();
+		System.out.println("Using Hashmap: " + S1.check(str));
+		System.out.println("Using No Additional Data Structures: " + S1.check2(str));
 	}
 }
