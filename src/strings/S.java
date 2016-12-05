@@ -6,24 +6,54 @@ public class S {
 
 	public static void main(String[] args) {
 		Scanner s = new Scanner(System.in);
-		//S1(s);
-		//S2(s);
-		//S3(s);
-		//S4(s);
-		S5(s);
+		// S1(s);
+		// S2(s);
+		// S3(s);
+		// S4(s);
+		// S5(s);
+		// S8(s);
+		S9(s);
+	}
+
+	private static void S9(Scanner s) {
+		System.out.print("Enter string one: ");
+		String one = s.nextLine();
+		System.out.print("Enter string two: ");
+		String two = s.nextLine();
+		System.out.println("String Rotation: "+S9.StringRotation(one,two));
+	}
+
+	private static void S8(Scanner s) {
+		System.out.print("Enter M: ");
+		int m = s.nextInt();
+		System.out.print("Enter N: ");
+		int n = s.nextInt();
+		int[][] a = new int[m][n];
+		System.out.println("Enter matrix:");
+		for (int i = 0; i < m; i++)
+			for (int j = 0; j < n; j++) {
+				System.out.print(i + "\t" + j + " : ");
+				a[i][j] = s.nextInt();
+			}
+		S8.ZeroMatrix(a, m, n);
+		for (int i = 0; i < m; i++) {
+			for (int j = 0; j < n; j++)
+				System.out.print(a[i][j] + "\t");
+			System.out.println();
+		}
 	}
 
 	private static void S5(Scanner s) {
 		System.out.print("Enter String One: ");
 		String one = s.nextLine();
 		System.out.print("Enter String Two: ");
-		String two = s.nextLine();		
-		System.out.println("One Away: "+S5.OneAway(one,two));
+		String two = s.nextLine();
+		System.out.println("One Away: " + S5.OneAway(one, two));
 	}
 
 	private static void S4(Scanner s) {
 		System.out.print("Enter String: ");
-		System.out.println("Palindrome Permutation Check: "+S4.PalindromePermutationCheck(s.nextLine()));
+		System.out.println("Palindrome Permutation Check: " + S4.PalindromePermutationCheck(s.nextLine()));
 	}
 
 	private static void S3(Scanner s) {
@@ -37,12 +67,12 @@ public class S {
 
 	private static void S2(Scanner s) {
 		System.out.println("Enter Strings:");
-		System.out.println("Permutation Check: "+S2.permutationCheck(s.next(),s.next()));
+		System.out.println("Permutation Check: " + S2.permutationCheck(s.next(), s.next()));
 	}
 
 	private static void S1(Scanner s) {
 		System.out.print("Enter String: ");
-		String str =s.next().trim();
+		String str = s.next().trim();
 		System.out.println("Using Hashmap: " + S1.check(str));
 		System.out.println("Using No Additional Data Structures: " + S1.check2(str));
 	}
