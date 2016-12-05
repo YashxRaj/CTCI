@@ -1,46 +1,51 @@
 package linkedLists;
 
 import java.util.LinkedList;
+import java.util.Scanner;
 
 public class LL {
 
 	public static void main(String[] args) {
-		//LL21
-		LinkedList<Integer> l1 = new LinkedList<Integer>();
-		generateRandomList(l1, 15);
-		print(l1);
-		LL1.removeDuplicatesBuffer(l1);
-		print(l1);
-		l1.clear();
-		generateRandomList(l1, 15);
-		print(l1);
-		LL1.removeDuplicatesNoBuffer(l1);
-		print(l1);
-		
-		//LL22
-		LinkedList<Integer> l2 = new LinkedList<Integer>();
-		int n = 5 + (int) (Math.random() * 10);
-		int k = (int) (Math.random() * 5);
-		generateRandomList(l2, n);
-		print(l2);
+		Scanner s = new Scanner(System.in());
+		// LL1(s);
+		// LL2(s);
+	}
+
+	private static void LL2(Scanner s) {
+		LinkedList<Integer> l = new LinkedList<Integer>();
+		int n = 5 + (int) (Math.random() * 10), k = (int) (Math.random() * 5);
+		generateRandomList(l, n);
+		print(l);
 		System.out.println(k);
-		LL2.returnKtoLast(l2, k);
-		print(l2);
+		LL2.returnKtoLast(l, k);
+		print(l);
+	}
+
+	private static void LL1(Scanner s) {
+		LinkedList<Integer> l = new LinkedList<Integer>();
+		generateRandomList(l, 15);
+		print(l);
+		LL1.removeDuplicatesBuffer(l);
+		print(l);
+
+		l.clear();
+
+		generateRandomList(l, 15);
+		print(l);
+		LL1.removeDuplicatesNoBuffer(l);
+		print(l);
 	}
 
 	private static void print(LinkedList<Integer> l) {
 		System.out.println("Printing Linked List:");
-		for (int i = 0; i < l.size(); i++) {
+		for (int i = 0; i < l.size(); i++)
 			System.out.print(l.get(i) + "\t");
-		}
 		System.out.println();
 	}
 
 	private static void generateRandomList(LinkedList<Integer> l, int n) {
 		System.out.println("Generating List.");
-		for (int i = 0; i < n; i++) {
+		for (int i = 0; i < n; i++)
 			l.add((int) (Math.random() * 10));
-		}
 	}
-
 }
