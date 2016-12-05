@@ -6,19 +6,22 @@ import java.util.Scanner;
 public class LL {
 
 	public static void main(String[] args) {
-		Scanner s = new Scanner(System.in());
+		Scanner s = new Scanner(System.in);
 		// LL1(s);
 		// LL2(s);
+		// LL3(s);
 	}
 
 	private static void LL2(Scanner s) {
 		LinkedList<Integer> l = new LinkedList<Integer>();
-		int n = 5 + (int) (Math.random() * 10), k = (int) (Math.random() * 5);
+		LinkedList<Integer> l2 = new LinkedList<Integer>();
+		int n = 6 + (int) (Math.random() * 10);
+		int k = 1 + (int) (Math.random() * 5);
 		generateRandomList(l, n);
 		print(l);
 		System.out.println(k);
-		LL2.returnKtoLast(l, k);
-		print(l);
+		l2 = LL2.returnKtoLast(l, k, l2);
+		print(l2);
 	}
 
 	private static void LL1(Scanner s) {
