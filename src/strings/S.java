@@ -11,10 +11,11 @@ public class S {
 		// S3(s);
 		// S4(s);
 		// S5(s);
+		// S6(s);
+		// S7(s);
 		// S8(s);
 		S9(s);
 	}
-
 	private static void S9(Scanner s) {
 		System.out.print("Enter string one: ");
 		String one = s.nextLine();
@@ -41,6 +42,36 @@ public class S {
 				System.out.print(a[i][j] + "\t");
 			System.out.println();
 		}
+	}
+	private static void S7(Scanner s) {
+		System.out.print("Enter N: ");
+		int n = s.nextInt();
+		int[][] m = new int[n][n];
+		System.out.println("Enter the values for NxN matrix.");
+		System.out.println("Row Column:");
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				System.out.println(i + " " + j);
+				m[i][j] = s.nextInt();
+			}
+		}
+		boolean flag = S7.Rotate(m, n);
+		if (!flag)
+			System.out.println("Invalid.");
+		else {
+			System.out.println("Rotated Matrix:");
+			for (int i = 0; i < n; i++) {
+				for (int j = 0; j < n; j++) {
+					System.out.println(m[i][j] + "\t");
+				}
+				System.out.println();
+			}
+		}
+	}
+
+	private static void S6(Scanner s) {
+		System.out.print("Enter String: ");
+		System.out.println(S6.Compress(s.nextLine()));
 	}
 
 	private static void S5(Scanner s) {
