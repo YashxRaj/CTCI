@@ -14,7 +14,7 @@ public class S {
 		// S6(s);
 		// S7(s);
 		// S8(s);
-		S9(s);
+		// S9(s);
 	}
 	private static void S9(Scanner s) {
 		System.out.print("Enter string one: ");
