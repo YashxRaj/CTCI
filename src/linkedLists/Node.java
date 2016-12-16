@@ -1,26 +1,32 @@
 package linkedLists;
 
 public class Node {
-	Node next;
-	Object data;
+	Node next = null;
+	int data;
 
-	public Node(Object d) {
-		next = null;
+	public Node(int d) {
 		data = d;
 	}
 
-	public Object getData() {
-		return data;
+	void AppendToTail(int d) {
+		Node end = new Node(d);
+		Node n = this;
+		while (n.next != null)
+			n = n.next;
+		n.next = end;
 	}
 
-	public void setData(Object data) {
-		this.data = data;
-	}
-
-	public Node getNext() {
-		return this.next;
-	}
-	public void setNext(Node Next) {
-		next = Next;
+	Node deleteNode(Node head, int d) {
+		Node n = head;
+		if (n.data == d)
+			return head.next;
+		while (n.next != null) {
+			if (n.next.data == d) {
+				n.next = n.next.next;
+				return head;
+			}
+			n = n.next;
+		}
+		return head;
 	}
 }
