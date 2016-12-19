@@ -1,12 +1,20 @@
 package linkedLists;
 
+import java.util.Scanner;
+
 public class LL {
 
 	public static void main(String[] args) {
 		Node head = new Node((int) (Math.random() * 10));
 		MakeLinkedList(head);
 		printLL(head,"Printing linked list:");
-		LL1(head);
+		// LL1(head);
+		LL2(head);
+	}
+
+	private static void LL2(Node head) {
+		System.out.print("Enter k for k-th to last element: ");
+		LL2.kthToLastElement(head,new Scanner(System.in).nextInt());
 	}
 
 	private static void LL1(Node head) {
