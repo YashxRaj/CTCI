@@ -5,20 +5,19 @@ public class LL {
 	public static void main(String[] args) {
 		Node head = new Node((int) (Math.random() * 10));
 		MakeLinkedList(head);
+		printLL(head,"Printing linked list:");
 		LL1(head);
 	}
 
 	private static void LL1(Node head) {
-		System.out.println("Printing linked list...");
-		printLL(head);
+		System.out.println("Removing duplicates from linked list:");
 		LL1.removeDuplicates(head);
-		System.out.println("Removing duplicates from the linked list...");
-		printLL(head);
 	}
 
-	private static void printLL(Node head) {
+	public static void printLL(Node head, String msg) {
+		System.out.println(msg);
 		Node n = head;
-		while (n.next != null) {
+		while (n != null) {
 			System.out.print(n.data + "\t");
 			n = n.next;
 		}
@@ -29,6 +28,17 @@ public class LL {
 		int len = 4 + ((int) (Math.random() * 10));
 		for (int i = 0; i < len; i++)
 			head.AppendToTail((int) (Math.random() * 10));
+	}
+	
+	public static Node copyLL(Node n) {
+		Node head = new Node(n.data);
+		n = n.next;
+		while (n != null) {
+			head.AppendToTail(n.data);
+			n = n.next;
+		}
+		LL.printLL(head,"Copied linked list:");
+		return head;
 	}
 
 }

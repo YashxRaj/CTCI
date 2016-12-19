@@ -29,4 +29,14 @@ public class Node {
 		}
 		return head;
 	}
+
+	int size() {
+		int l = 0;
+		Node n = this;
+		while (n != null) {
+			l++;
+			n=n.next;
+		}
+		return l;
+	}
 }
