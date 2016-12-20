@@ -17,4 +17,5 @@ public class LL4 {
 		tail.next = null;
 		return head;
 	}
+	
 }
