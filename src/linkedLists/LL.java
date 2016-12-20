@@ -17,7 +17,7 @@ public class LL {
 	private static void LL4(Node head) {
 		System.out.print("Enter partition value x: ");
 		int x = new Scanner(System.in).nextInt();
-		LL4.partition(head,x);
+		head = LL4.partition(head,x);
 		printLL(head,"Partitioned linked list:");
 	}
 
