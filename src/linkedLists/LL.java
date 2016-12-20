@@ -7,14 +7,29 @@ public class LL {
 	public static void main(String[] args) {
 		Node head = new Node((int) (Math.random() * 10));
 		MakeLinkedList(head);
-		printLL(head,"Printing linked list:");
+		printLL(head, "Printing linked list:");
 		// LL1(head);
-		LL2(head);
+		// LL2(head);
+		// LL3(head);
+		LL4(head);
+	}
+
+	private static void LL4(Node head) {
+		System.out.print("Enter partition value x: ");
+		int x = new Scanner(System.in).nextInt();
+		LL4.partition(head);
+		printLL(head,"Partitioned linked list:");
+	}
+
+	private static void LL3(Node head) {
+		int r = randomNodeNumberBetweenLL(head);
+		LL3.deleteMiddleNode(randomNodeBetweenLL(head, r));
+		printLL(head, "Printing after deleting node number: " + r);
 	}
 
 	private static void LL2(Node head) {
 		System.out.print("Enter k for k-th to last element: ");
-		LL2.kthToLastElement(head,new Scanner(System.in).nextInt());
+		LL2.kthToLastElement(head, new Scanner(System.in).nextInt());
 	}
 
 	private static void LL1(Node head) {
@@ -37,7 +52,7 @@ public class LL {
 		for (int i = 0; i < len; i++)
 			head.AppendToTail((int) (Math.random() * 10));
 	}
-	
+
 	public static Node copyLL(Node n) {
 		Node head = new Node(n.data);
 		n = n.next;
@@ -45,8 +60,18 @@ public class LL {
 			head.AppendToTail(n.data);
 			n = n.next;
 		}
-		LL.printLL(head,"Copied linked list:");
+		LL.printLL(head, "Copied linked list:");
 		return head;
 	}
 
+	public static Node randomNodeBetweenLL(Node head, int r) {
+		Node n = head;
+		for (int i = 1; n != null && i != r; i++)
+			n = n.next;
+		return n;
+	}
+
+	public static int randomNodeNumberBetweenLL(Node head) {
+		return 2 + (int) (Math.random() * (head.size() - 3));
+	}
 }
