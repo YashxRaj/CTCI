@@ -7,17 +7,15 @@ public class LL2 {
 			LL.printLL(head, "Entered value for K is larger than the size of the list. Printing list:");
 			return;
 		}
-		Node n = head, newHead = null;
+		Node n = head;
 		int l = 0;
 		while (n != null) {
-			if (l != (k - 1)) {
-				l++;
-				n = n.next;
-				continue;
+			if (l == (k - 1)) {
+				LL.printLL(n, "K-th element to last element:");
+				break;
 			}
-			newHead = n;
-			LL.printLL(newHead, "K-th element to last element:");
-			break;
+			l++;
+			n = n.next;
 		}
 	}
 }
