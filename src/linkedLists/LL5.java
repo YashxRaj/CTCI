@@ -25,7 +25,6 @@ public class LL5 {
 			n = n.next;
 			i *= 10;
 		}
-		System.out.println(val);
 		return val;
 	}
 
