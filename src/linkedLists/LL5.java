@@ -2,9 +2,10 @@ package linkedLists;
 
 public class LL5 {
 
-	public static Node sum(Node one, Node two) {
-
-		return makeReverseLLFromInt((makeIntFromReverseLL(one)) + makeIntFromReverseLL(two));
+	public static void sum(Node one, Node two) {
+		// Incomplete, you have to pad the arrays in case length is not same.
+		LL.printLL(makeReverseLLFromInt((makeIntFromReverseLL(one)) + makeIntFromReverseLL(two)), "Sum of lists:");
+		LL.printLL(makeLLFromInt(makeIntFromArray(makeArrayfromLL(LL.copyLL(one))) + (makeIntFromArray(makeArrayfromLL(LL.copyLL(two))))), "Sum of lists when digits are stored in forward order:");
 	}
 
 	private static Node makeReverseLLFromInt(int sum) {
@@ -29,34 +30,35 @@ public class LL5 {
 
 	private static Node makeLLFromInt(int res) {
 		Node s = null;
+		int k = (int) Math.pow(10, (String.valueOf(res).length() - 1));
 		while (res != 0) {
-			int d = res % 10;
 			if (s == null)
-				s = new Node(d);
+				s = new Node(res % k);
 			else {
-				Node temp = new Node(d);
+				Node temp = new Node(res % k);
 				temp.next = s;
 				s = temp;
 			}
 			res /= 10;
+			k /= 10;
 		}
 		return s;
 	}
 
 	private static int[] makeArrayfromLL(Node n) {
 		int i = 0;
-		int[] a = new int[n.size()];
+		int[] array = new int[n.size()];
 		while (n != null) {
-			a[i++] = n.data;
+			array[i++] = n.data;
 			n = n.next;
 		}
-		return a;
+		return array;
 	}
 
-	private static int makeIntFromArray(int[] a) {
+	private static int makeIntFromArray(int[] array) {
 		int val = 0;
-		for (int i = 0, j = 1; i < a.length; i++, j *= 10) {
-			val += a[i] * j;
+		for (int i = array.length - 1, j = 1; i >= 0; i--, j *= 10) {
+			val += array[i] * j;
 		}
 		return val;
 	}

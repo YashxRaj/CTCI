@@ -9,12 +9,12 @@ public class LL {
 		// LL2(MakeLL(randomLength()));
 		// LL3(MakeLL(randomLength()));
 		// LL4(MakeLL(randomLength()));
-		// LL5(MakeLL(randomLength()), MakeLL(randomLength()));
+		 LL5(MakeLL(randomLength()), MakeLL(randomLength()));
 		// LL6();
 	}
 
 	private static void LL5(Node one, Node two) {
-		printLL(LL5.sum(one, two), "Sum:");
+		LL5.sum(one, two);
 	}
 
 	private static void LL4(Node head) {
@@ -65,7 +65,7 @@ public class LL {
 			head.AppendToTail(n.data);
 			n = n.next;
 		}
-		LL.printLL(head, "Copied linked list:");
+		// LL.printLL(head, "Copied linked list:");
 		return head;
 	}
 
