@@ -5,20 +5,24 @@ import java.util.Scanner;
 public class LL {
 
 	public static void main(String[] args) {
-		Node head = new Node((int) (Math.random() * 10));
-		MakeLinkedList(head);
-		printLL(head, "Printing linked list:");
-		// LL1(head);
-		// LL2(head);
-		// LL3(head);
-		LL4(head);
+		int len = 4 + ((int) (Math.random() * 5));
+		// LL1(MakeLL(len));
+		// LL2(MakeLL(len));
+		// LL3(MakeLL(len));
+		// LL4(MakeLL(len));
+		// LL5(MakeLL(len), MakeLL(len));
+		// LL6();
+	}
+
+	private static void LL5(Node one, Node two) {
+		printLL(LL5.sum(one, two), "Sum:");
 	}
 
 	private static void LL4(Node head) {
 		System.out.print("Enter partition value x: ");
 		int x = new Scanner(System.in).nextInt();
-		head = LL4.partition(head,x);
-		printLL(head,"Partitioned linked list:");
+		head = LL4.partition(head, x);
+		printLL(head, "Partitioned linked list:");
 	}
 
 	private static void LL3(Node head) {
@@ -47,10 +51,12 @@ public class LL {
 		System.out.println();
 	}
 
-	private static void MakeLinkedList(Node head) {
-		int len = 4 + ((int) (Math.random() * 10));
+	private static Node MakeLL(int len) {
+		Node head = new Node((int) (Math.random() * 10));
 		for (int i = 0; i < len; i++)
 			head.AppendToTail((int) (Math.random() * 10));
+		printLL(head, "Printing linked list:");
+		return head;
 	}
 
 	public static Node copyLL(Node n) {
