@@ -7,12 +7,10 @@ public class LL5 {
 	}
 
 	private static Node makeReverseLLFromInt(int sum) {
-		Node s = null;
+		Node s = new Node(sum % 10);
+		sum /= 10;
 		while (sum != 0) {
-			if (s == null)
-				s = new Node(sum % 10);
-			else
-				s.AppendToTail(sum % 10);
+			s.AppendToTail(sum % 10);
 			sum /= 10;
 		}
 		return s;

@@ -5,12 +5,11 @@ import java.util.Scanner;
 public class LL {
 
 	public static void main(String[] args) {
-		int len = 4 + ((int) (Math.random() * 5));
-		// LL1(MakeLL(len));
-		// LL2(MakeLL(len));
-		// LL3(MakeLL(len));
-		// LL4(MakeLL(len));
-		// LL5(MakeLL(len), MakeLL(len));
+		// LL1(MakeLL(randomLength()));
+		// LL2(MakeLL(randomLength()));
+		// LL3(MakeLL(randomLength()));
+		// LL4(MakeLL(randomLength()));
+		// LL5(MakeLL(randomLength()), MakeLL(randomLength()));
 		// LL6();
 	}
 
@@ -79,5 +78,9 @@ public class LL {
 
 	public static int randomNodeNumberBetweenLL(Node head) {
 		return 2 + (int) (Math.random() * (head.size() - 3));
+	}
+
+	private static int randomLength() {
+		return (4 + ((int) (Math.random() * 5)));
 	}
 }
