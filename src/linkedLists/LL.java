@@ -9,8 +9,13 @@ public class LL {
 		// LL2(MakeLL(randomLength()));
 		// LL3(MakeLL(randomLength()));
 		// LL4(MakeLL(randomLength()));
-		 LL5(MakeLL(randomLength()), MakeLL(randomLength()));
-		// LL6();
+		// LL5(MakeLL(randomLength()), MakeLL(randomLength()));
+		// LL6(MakeLL(randomLength()));
+		
+	}
+
+	private static void LL6(Node head) {
+		System.out.println("Palindrome Check: " + LL6.palindromeCheck(head));
 	}
 
 	private static void LL5(Node one, Node two) {
