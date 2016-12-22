@@ -3,9 +3,33 @@ package linkedLists;
 public class LL5 {
 
 	public static void sum(Node one, Node two) {
-		// Incomplete, you have to pad the arrays in case length is not same.
 		LL.printLL(makeReverseLLFromInt((makeIntFromReverseLL(one)) + makeIntFromReverseLL(two)), "Sum of lists:");
-		LL.printLL(makeLLFromInt(makeIntFromArray(makeArrayfromLL(LL.copyLL(one))) + (makeIntFromArray(makeArrayfromLL(LL.copyLL(two))))), "Sum of lists when digits are stored in forward order:");
+		padWithZerosForLength(one, two);
+		LL.printLL(
+				makeLLFromInt(makeIntFromArray(makeArrayfromLL(LL.copyLL(one)))
+						+ (makeIntFromArray(makeArrayfromLL(LL.copyLL(two))))),
+				"Sum of lists when digits are stored in forward order:");
+	}
+
+	private static void padWithZerosForLength(Node one, Node two) {
+		int l1 = one.size(), l2 = two.size(), diff = Math.abs(l2 - l1);
+		if (l1 < l2)
+			padWithZeros(one, diff);
+		else if (l2 < l1)
+			padWithZeros(two, diff);
+		else
+			return;
+	}
+
+	private static void padWithZeros(Node n, int diff) {
+		Node temp = null;
+		while (diff != 0) {
+			temp = new Node(0);
+			temp.next = n;
+			n = temp;
+			diff--;
+		}
+		LL.printLL(n, "Padded linked list:");
 	}
 
 	private static Node makeReverseLLFromInt(int sum) {
@@ -18,6 +42,18 @@ public class LL5 {
 		return s;
 	}
 
+	private static Node makeLLFromInt(int res) {
+		Node s = new Node(res % 10);
+		res /= 10;
+		while (res != 0) {
+			Node temp = new Node(res % 10);
+			temp.next = s;
+			s = temp;
+			res /= 10;
+		}
+		return s;
+	}
+
 	private static int makeIntFromReverseLL(Node n) {
 		int val = 0, i = 1;
 		while (n != null) {
@@ -26,23 +62,6 @@ public class LL5 {
 			i *= 10;
 		}
 		return val;
-	}
-
-	private static Node makeLLFromInt(int res) {
-		Node s = null;
-		int k = (int) Math.pow(10, (String.valueOf(res).length() - 1));
-		while (res != 0) {
-			if (s == null)
-				s = new Node(res % k);
-			else {
-				Node temp = new Node(res % k);
-				temp.next = s;
-				s = temp;
-			}
-			res /= 10;
-			k /= 10;
-		}
-		return s;
 	}
 
 	private static int[] makeArrayfromLL(Node n) {
