@@ -24,9 +24,7 @@ public class LL5 {
 	private static void padWithZeros(Node n, int diff) {
 		Node temp = null;
 		while (diff != 0) {
-			temp = new Node(0);
-			temp.next = n;
-			n = temp;
+			n = n.AppendToHead(0);
 			diff--;
 		}
 		LL.printLL(n, "Padded linked list:");
@@ -46,9 +44,7 @@ public class LL5 {
 		Node s = new Node(res % 10);
 		res /= 10;
 		while (res != 0) {
-			Node temp = new Node(res % 10);
-			temp.next = s;
-			s = temp;
+			s = s.AppendToHead(res % 10);
 			res /= 10;
 		}
 		return s;
