@@ -16,6 +16,12 @@ public class Node {
 		n.next = end;
 	}
 
+	Node AppendToHead(int d) {
+		Node n = new Node(d);
+		n.next = this;
+		return n;
+	}
+
 	Node deleteNode(Node head, int d) {
 		Node n = head;
 		if (n.data == d)
@@ -35,7 +41,7 @@ public class Node {
 		Node n = this;
 		while (n != null) {
 			l++;
-			n=n.next;
+			n = n.next;
 		}
 		return l;
 	}
