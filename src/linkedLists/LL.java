@@ -11,7 +11,18 @@ public class LL {
 		// LL4(MakeLL(randomLength()));
 		// LL5(MakeLL(randomLength()), MakeLL(randomLength()));
 		// LL6(MakeLL(randomLength()));
-		
+		LL7(MakeLL(randomLength()));
+	}
+
+	private static void LL7(Node one) {
+		Node two = null;
+		Boolean chance = true;
+		if (Math.random() > 0.5)
+			chance = false;
+		if (chance)
+			two = randomNodeBetweenLL(one, randomNodeNumberBetweenLL(one));
+		LL7.checkIntersection(one,two);	
+
 	}
 
 	private static void LL6(Node head) {
