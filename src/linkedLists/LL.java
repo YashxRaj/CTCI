@@ -21,8 +21,9 @@ public class LL {
 			chance = false;
 		if (chance)
 			two = randomNodeBetweenLL(one, randomNodeNumberBetweenLL(one));
-		LL7.checkIntersection(one,two);	
-
+		else
+			two = MakeLL(randomLength());
+		LL7.checkIntersection(one, two);
 	}
 
 	private static void LL6(Node head) {
@@ -87,8 +88,9 @@ public class LL {
 
 	public static Node randomNodeBetweenLL(Node head, int r) {
 		Node n = head;
-		for (int i = 1; n != null && i != r; i++)
+		for (int i = 1; n.next != null && i != r; i++)
 			n = n.next;
+		printLL(n, "Linked list randomly generated from given linked list:");
 		return n;
 	}
 
