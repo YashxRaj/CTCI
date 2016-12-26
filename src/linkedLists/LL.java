@@ -11,7 +11,7 @@ public class LL {
 		// LL4(MakeLL(randomLength()));
 		// LL5(MakeLL(randomLength()), MakeLL(randomLength()));
 		// LL6(MakeLL(randomLength()));
-		// LL7(MakeLL(randomLength()));
+		LL7(MakeLL(randomLength()));
 		// LL8(MakeLL(randomLength()));
 	}
 
@@ -34,11 +34,22 @@ public class LL {
 
 	private static void LL7(Node one) {
 		Node two = null;
-		if (chance())
+		if (chance()) {
 			two = randomNodeBetweenLL(one, randomNodeNumberBetweenLL(one));
-		else
+			if(chance())
+				two = maybePadded(two,one.size() - two.size());
+		} else
 			two = MakeLL(randomLength());
 		LL7.checkIntersection(one, two);
+	}
+
+	private static Node maybePadded(Node two, int l) {
+		while (l > 0) {
+			two = two.AppendToHead((int) (Math.random() * 10));
+			l--;
+		}
+		LL.printLL(two, "After padding:");
+		return two;
 	}
 
 	private static void LL6(Node head) {
