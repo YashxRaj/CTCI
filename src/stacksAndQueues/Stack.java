@@ -1,6 +1,6 @@
 package stacksAndQueues;
 
-public class SQ {
+public class Stack {
 
 	public static void main(String[] args) {
 		
