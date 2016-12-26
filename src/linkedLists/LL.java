@@ -11,15 +11,30 @@ public class LL {
 		// LL4(MakeLL(randomLength()));
 		// LL5(MakeLL(randomLength()), MakeLL(randomLength()));
 		// LL6(MakeLL(randomLength()));
-		LL7(MakeLL(randomLength()));
+		// LL7(MakeLL(randomLength()));
+		// LL8(MakeLL(randomLength()));
+	}
+
+	private static void LL8(Node one) {
+		if (chance())
+			generateRandomCircularLL(one);
+		Node loopHead = LL8.loopDetection(one);
+		if (loopHead == null)
+			System.out.println("No loops detected.");
+		else
+			printCircularLL(loopHead, "Circular loop:");
+	}
+
+	private static void generateRandomCircularLL(Node one) {
+		Node temp = one;
+		while (temp.next != null)
+			temp = temp.next;
+		temp.next = randomNodeBetweenLL(one, randomNodeNumberBetweenLL(one));
 	}
 
 	private static void LL7(Node one) {
 		Node two = null;
-		Boolean chance = true;
-		if (Math.random() > 0.5)
-			chance = false;
-		if (chance)
+		if (chance())
 			two = randomNodeBetweenLL(one, randomNodeNumberBetweenLL(one));
 		else
 			two = MakeLL(randomLength());
@@ -55,6 +70,24 @@ public class LL {
 	private static void LL1(Node head) {
 		System.out.println("Removing duplicates from linked list:");
 		LL1.removeDuplicates(head);
+	}
+
+	private static boolean chance() {
+		Boolean chance = true;
+		if (Math.random() > 0.5)
+			chance = false;
+		return chance;
+	}
+
+	private static void printCircularLL(Node loopHead, String msg) {
+		System.out.println(msg);
+		System.out.print(loopHead.data + "\t");
+		Node temp = loopHead.next;
+		while (temp != loopHead) {
+			System.out.print(temp.data + "\t");
+			temp = temp.next;
+		}
+		System.out.println();
 	}
 
 	public static void printLL(Node head, String msg) {
