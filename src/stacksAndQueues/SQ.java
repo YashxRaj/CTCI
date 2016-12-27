@@ -5,11 +5,16 @@ import java.util.Scanner;
 public class SQ {
 
 	public static void main(String[] args) {
-		SQ1(); // Read solution on how to implement flexible stacks
+		// SQ1(); // Read solution on how to implement flexible stacks
 		// SQ2();
 	}
 
 	
+	private static void SQ2() {
+
+	}
+
+
 	private static void SQ1() {
 		int stackSize = (int) (Math.random() * 10);
 		SQ1 stack = new SQ1(stackSize);
