@@ -3,7 +3,7 @@ package stacksAndQueues;
 public class StackWithMin extends Stack<Integer> {
 	Stack<Integer> s;
 
-	public StackWithMin(int value) {
+	public StackWithMin() {
 		s = new Stack<Integer>();
 	}
 
