@@ -2,14 +2,14 @@ package stacksAndQueues;
 
 import java.util.EmptyStackException;
 
-public class SQ1 {
+public class MultipleStacksInOneArray {
 
 	private int numberOfStacks;
 	private int stackCapacity;
 	private int[] values;
 	private int[] sizes;
 
-	public SQ1(int stackSize, int nOS) {
+	public MultipleStacksInOneArray(int stackSize, int nOS) {
 		numberOfStacks = nOS;
 		stackCapacity = stackSize;
 		values = new int[stackCapacity * numberOfStacks];

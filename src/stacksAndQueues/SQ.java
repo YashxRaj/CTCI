@@ -45,7 +45,7 @@ public class SQ {
 		System.out.print("Enter size of a stack and number of stacks: ");
 		int stackSize = s.nextInt();
 		int numberOfStacks = s.nextInt();
-		SQ1 stack = new SQ1(stackSize, numberOfStacks);
+		MultipleStacksInOneArray stack = new MultipleStacksInOneArray(stackSize, numberOfStacks);
 		for (int i = 0, k = 0; i < (stackSize * numberOfStacks); i++, k = k == numberOfStacks - 1 ? 0 : k + 1) {
 			System.out.print("[" + k + "]" + " -> " + stack.push(k, randomNumberBetweenZeroAnd(10)) + " | ");
 			if (chance())
