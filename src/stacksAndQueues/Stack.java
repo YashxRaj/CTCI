@@ -3,6 +3,12 @@ package stacksAndQueues;
 import java.util.EmptyStackException;
 
 public class Stack<T> {
+	int stackSize, currentSize;
+
+	public Stack(int stackCapacity) {
+		stackSize = stackCapacity;
+		currentSize = 0;
+	}
 
 	private static class StackNode<T> {
 		private T data;
@@ -20,13 +26,17 @@ public class Stack<T> {
 			throw new EmptyStackException();
 		T item = top.data;
 		top = top.next;
+		currentSize--;
 		return item;
 	}
 
 	public void push(T item) {
+		if (this.isFull())
+			throw new FullStackException();
 		StackNode<T> t = new StackNode<T>(item);
 		t.next = top;
 		top = t;
+		currentSize++;
 	}
 
 	public T peek() {
@@ -37,5 +47,9 @@ public class Stack<T> {
 
 	public boolean isEmpty() {
 		return top == null;
+	}
+
+	public boolean isFull() {
+		return currentSize == stackSize;
 	}
 }
