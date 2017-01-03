@@ -5,6 +5,9 @@ import java.util.EmptyStackException;
 public class Stack<T> {
 	int stackSize, currentSize;
 
+	public Stack() {
+	}
+
 	public Stack(int stackCapacity) {
 		stackSize = stackCapacity;
 		currentSize = 0;
