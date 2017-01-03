@@ -5,9 +5,10 @@ import java.util.Scanner;
 public class SaQ {
 
 	public static void main(String[] args) {
-		// MultipleStacksInOneArray(); // Read solution on how to implement flexible stacks
+		// MultipleStacksInOneArray(); // Read solution on how to implement
+		// flexible stacks
 		// StackWithMin();
-		SetOfStacks();
+		// SetOfStacks();
 	}
 
 	private static void SetOfStacks() {
@@ -20,6 +21,11 @@ public class SaQ {
 			System.out.print("-> " + sos.push((int) (Math.random() * 10)) + " | ");
 			if (chance())
 				System.out.println("<- " + sos.pop());
+		}
+		sos.print();
+		for (int i = 0; i < size; i++) {
+			int x = randomNumberBetweenZeroAnd((int) (elements / size));
+			System.out.println("[" + x + "]" + " <- " + sos.popAt(x));
 		}
 		sos.print();
 	}
