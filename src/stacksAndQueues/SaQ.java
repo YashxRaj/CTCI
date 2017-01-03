@@ -2,7 +2,7 @@ package stacksAndQueues;
 
 import java.util.Scanner;
 
-public class SQ {
+public class SaQ {
 
 	public static void main(String[] args) {
 		// SQ1(); // Read solution on how to implement flexible stacks
