@@ -5,13 +5,12 @@ import java.util.Scanner;
 public class SaQ {
 
 	public static void main(String[] args) {
-		// SQ1(); // Read solution on how to implement flexible stacks
-		// SQ2();
-		SQ3();
-		// SQ4();
+		// MultipleStacksInOneArray(); // Read solution on how to implement flexible stacks
+		// StackWithMin();
+		SetOfStacks();
 	}
 
-	private static void SQ3() {
+	private static void SetOfStacks() {
 		Scanner s = new Scanner(System.in);
 		System.out.print("Enter stack size and number of values to store: ");
 		int size = s.nextInt();
@@ -25,7 +24,7 @@ public class SaQ {
 		sos.print();
 	}
 
-	private static void SQ2() {
+	private static void StackWithMin() {
 		int stackSize = 7 + (int) (Math.random() * 5);
 		StackWithMin sm = new StackWithMin(stackSize);
 		for (int i = 0; i < stackSize; i++) {
@@ -40,7 +39,7 @@ public class SaQ {
 		return Math.random() <= 0.5;
 	}
 
-	private static void SQ1() {
+	private static void MultipleStacksInOneArray() {
 		Scanner s = new Scanner(System.in);
 		System.out.print("Enter size of a stack and number of stacks: ");
 		int stackSize = s.nextInt();
