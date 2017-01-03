@@ -3,14 +3,14 @@ package stacksAndQueues;
 public class StackWithMin extends Stack<Integer> {
 	Stack<Integer> s;
 
-	public StackWithMin() {
-		s = new Stack<Integer>();
+	public StackWithMin(int stackSize) {
+		s = new Stack<Integer>(stackSize);
 	}
 
-	public void push(int value) {
+	public int push(int value) {
 		if (value <= min())
 			s.push(value);
-		super.push(value);
+		return super.push(value);
 	}
 
 	public Integer pop() {
