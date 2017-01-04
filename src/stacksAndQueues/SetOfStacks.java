@@ -60,34 +60,32 @@ public class SetOfStacks<T> extends Stack<T> {
 	}
 
 	public T popAt(int index) {
-		T item = null;
-		if (index > stacks.size()) {
+		if (index >= stacks.size()) {
 			System.out.println("Number of stacks present < given index. Try again.");
+			return null;
+		} else {
+			T item = (T) stacks.get(index).pop();
+			if (stacks.get(stacks.size() - 1).isEmpty()) { // Therefore, stacks.size()-1 == index.
+				stacks.remove(stacks.get(index));
+				return item;
+			} else {
+				int i = index + 1;
+				while (i < stacks.size()) {
+					ArrayList<T> temp = new ArrayList<T>();
+					while (stacks.get(i).currentSize != 0)
+						temp.add((T) stacks.get(i).pop());
+					stacks.get(i - 1).push(temp.remove(temp.size() - 1));
+					if (temp.isEmpty())
+						stacks.remove(i);
+					else {
+						Collections.reverse(temp);
+						for (T t : temp)
+							stacks.get(i).push(t);
+					}
+					i++;
+				}
+			}
 			return item;
 		}
-		if (index == stacks.size() - 1)
-			item = getLastStack().pop();
-		else {
-			int i = index + 1;
-			Stack<T> s = stacks.get(index);
-			item = s.pop();
-			while (i < stacks.size()) {
-				ArrayList<T> temp = new ArrayList<T>();
-				s = stacks.get(i);
-				while (s.currentSize != 0)
-					temp.add(s.pop());
-				stacks.get(i - 1).push(temp.remove(temp.size() - 1));
-				if (temp.isEmpty())
-					stacks.remove(i);
-				else {
-					Collections.reverse(temp);
-					for (T t : temp)
-						s.push(t);
-				}
-				i++;
-			}
-
-		}
-		return item;
 	}
 }
