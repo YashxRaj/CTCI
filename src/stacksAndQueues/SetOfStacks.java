@@ -65,27 +65,28 @@ public class SetOfStacks<T> extends Stack<T> {
 			return null;
 		} else {
 			T item = (T) stacks.get(index).pop();
-			if (stacks.get(stacks.size() - 1).isEmpty()) { // Therefore, stacks.size()-1 == index.
+			if (stacks.get(stacks.size() - 1).isEmpty())
 				stacks.remove(stacks.get(index));
-				return item;
-			} else {
-				int i = index + 1;
-				while (i < stacks.size()) {
-					ArrayList<T> temp = new ArrayList<T>();
-					while (stacks.get(i).currentSize != 0)
-						temp.add((T) stacks.get(i).pop());
-					stacks.get(i - 1).push(temp.remove(temp.size() - 1));
-					if (temp.isEmpty())
-						stacks.remove(i);
-					else {
-						Collections.reverse(temp);
-						for (T t : temp)
-							stacks.get(i).push(t);
-					}
-					i++;
-				}
-			}
+			else
+				shiftLeft(index + 1);
 			return item;
+		}
+	}
+
+	private void shiftLeft(int i) {
+		while (i < stacks.size()) {
+			ArrayList<T> temp = new ArrayList<T>();
+			while (stacks.get(i).currentSize != 0)
+				temp.add((T) stacks.get(i).pop());
+			stacks.get(i - 1).push(temp.remove(temp.size() - 1));
+			if (temp.isEmpty())
+				stacks.remove(i);
+			else {
+				Collections.reverse(temp);
+				for (T t : temp)
+					stacks.get(i).push(t);
+			}
+			i++;
 		}
 	}
 }
