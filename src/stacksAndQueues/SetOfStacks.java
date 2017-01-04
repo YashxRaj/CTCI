@@ -60,13 +60,33 @@ public class SetOfStacks<T> extends Stack<T> {
 	}
 
 	public T popAt(int index) {
-		Stack<T> s;
 		T item = null;
-		try {
-			s = stacks.get(index);
-			item = s.pop();
-		} catch (IndexOutOfBoundsException e) {
+		if (index > stacks.size()) {
 			System.out.println("Number of stacks present < given index. Try again.");
+			return item;
+		}
+		if (index == stacks.size() - 1)
+			item = getLastStack().pop();
+		else {
+			int i = index + 1;
+			Stack<T> s = stacks.get(index);
+			item = s.pop();
+			while (i < stacks.size()) {
+				ArrayList<T> temp = new ArrayList<T>();
+				s = stacks.get(i);
+				while (s.currentSize != 0)
+					temp.add(s.pop());
+				stacks.get(i - 1).push(temp.remove(temp.size() - 1));
+				if (temp.isEmpty())
+					stacks.remove(i);
+				else {
+					Collections.reverse(temp);
+					for (T t : temp)
+						s.push(t);
+				}
+				i++;
+			}
+
 		}
 		return item;
 	}
