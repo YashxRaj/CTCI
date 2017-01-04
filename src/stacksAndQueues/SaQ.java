@@ -5,8 +5,7 @@ import java.util.Scanner;
 public class SaQ {
 
 	public static void main(String[] args) {
-		// MultipleStacksInOneArray(); // Read solution on how to implement
-		// flexible stacks
+		// MultipleStacksInOneArray(); // Read solution on making flexible stacks
 		// StackWithMin();
 		// SetOfStacks();
 	}
