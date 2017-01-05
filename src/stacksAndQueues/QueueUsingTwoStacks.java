@@ -51,4 +51,8 @@ public class QueueUsingTwoStacks<T> extends Stack<T> {
 				System.out.print(pushStack.push(t) + "\t");
 		}
 	}
+
+	public int size() {
+		return pushStack.currentSize == 0 ? popStack.currentSize : pushStack.currentSize;
+	}
 }
