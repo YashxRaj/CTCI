@@ -5,13 +5,27 @@ import java.util.Scanner;
 public class SaQ {
 
 	public static void main(String[] args) {
-		// MultipleStacksInOneArray(); // Read solution on making flexible
-		// stacks
+		// MultipleStacksInOneArray(); // Read solution on flexible stacks
 		// StackWithMin();
 		// SetOfStacks(); // Better than book? XD
 		// QueueUsingTwoStacks();
 		// StackSort();
-		
+		// AnimalShelter();
+	}
+
+	private static void AnimalShelter() { // Bad, but works.
+		AnimalQueue aq = new AnimalQueue();
+		System.out.println("Adding Animals:");
+		for (int i = 0; i < 10; i++) {
+			String name = Integer.toString((int) (Math.random() * Integer.MAX_VALUE));
+			System.out.println(name);
+			aq.enqueue(chance() == true ? new Dog(name) : new Cat(name));
+		}
+		System.out.println("Removing Animals:");
+		for (int i = 0; i < 10; i++)
+			System.out
+					.println(chance() == true ? aq.dequeueAny() : chance() == true ? aq.dequeueDog() : aq.dequeueCat());
+
 	}
 
 	private static void StackSort() {
