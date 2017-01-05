@@ -5,9 +5,23 @@ import java.util.Scanner;
 public class SaQ {
 
 	public static void main(String[] args) {
-		// MultipleStacksInOneArray(); // Read solution on making flexible stacks
+		// MultipleStacksInOneArray(); // Read solution on making flexible
+		// stacks
 		// StackWithMin();
 		// SetOfStacks(); // Better than book? XD
+		// QueueUsingTwoStacks();
+	}
+
+	private static void QueueUsingTwoStacks() {
+		QueueUsingTwoStacks<Integer> q = new QueueUsingTwoStacks<Integer>();
+		int len = 5 + randomNumberBetweenZeroAnd(5);
+		for (int i = 0; i < len; i++) {
+			System.out.print(" -> " + q.push((int) (Math.random() * 10)));
+			if (chance())
+				System.out.print("\n <- " + q.pop());
+		}
+		System.out.println("\nPrinting:");
+		q.print();
 	}
 
 	private static void SetOfStacks() {
