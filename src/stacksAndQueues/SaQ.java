@@ -10,6 +10,17 @@ public class SaQ {
 		// StackWithMin();
 		// SetOfStacks(); // Better than book? XD
 		// QueueUsingTwoStacks();
+		// StackSort();
+		
+	}
+
+	private static void StackSort() {
+		int len = 10;
+		StackSort s = new StackSort(len);
+		for (int i = 0; i < len; i++)
+			System.out.print(s.push((int) (Math.random() * 10)) + "\t");
+		System.out.println();
+		s.print();
 	}
 
 	private static void QueueUsingTwoStacks() {
