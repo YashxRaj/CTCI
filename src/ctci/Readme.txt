@@ -61,4 +61,12 @@ Complete Binary Tree:
 
 Perfect Binary Tree:
 - Both Full and Complete. (All leaves on the same level, and this level has the maximum nodes it can have.)
-- (RARE)
+
+Traversals:
+ <      ^       >
+Pre    In	  Post
+N,L,R  L,N,R  L,R,N
+
+MinHeap:
+- Complete binary tree where each node is smaller than its children.
+- Operations: Insert and extractMin.
