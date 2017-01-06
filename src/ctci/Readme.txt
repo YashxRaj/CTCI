@@ -22,3 +22,43 @@ Relevant sections from .project:
 Then from Project>Properties>Java Build Path>Source add your source folders (and possible libraries).
 
 Edit: Added the conversion to Java project.
+
+Few Words on Chapter 4 : Trees and Graphs
+-----------------------------------------
+Tree:
+- Can have many nodes.
+(Binary Tree , Ternary Tree, etc.)
+
+Binary Tree:
+- Can have atmost 2 child nodes.
+
+Binary Search Tree:
+- For every node N, all descendents left of N <= N > all descendents right of N.
+Possible variations include: 
+Duplicate values not allowed in the tree, OR
+Duplicate values must be on the right side, OR
+Duplicate values can be on either side.
+ - This must be true for all nodes.
+ 				INVALID BST (Because 12 appears to the left of 8)
+ 					8
+ 				   / \
+ 				  4	  10
+ 				/  \    \
+ 			   2	12   20
+
+Balanced BST:
+- Left and right subtree's heights differ by ATMOST 1 level (FOR EACH NODE).
+- Must have O(log n) times for insert and delete.
+- 2 Types: Red-Black Trees and AVL Trees.
+
+Full(Strictly) Binary Tree:
+- Each node must have either zero or two child nodes. (ie, no node has only one child.) 
+- Always contains (2*(number of leaves in the tree) - 1) Nodes (4 Leaves ? 2*4 - 1 = 7 Nodes.)
+
+Complete Binary Tree:
+- All levels except the last level must be FULLY filled.
+- Last level must have leaves filled from left to right.
+
+Perfect Binary Tree:
+- Both Full and Complete. (All leaves on the same level, and this level has the maximum nodes it can have.)
+- (RARE)
