@@ -6,4 +6,7 @@ public class TaG {
 		
 	}
 
+	public static int randomInt() {
+		return ((int) (Math.random() * Integer.MAX_VALUE));
+	}
 }
