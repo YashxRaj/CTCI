@@ -22,7 +22,7 @@ public class Graph {
 					nodes[i].add(generateRandomNodeNumber(i));
 				} while (0.5 < Math.random());
 			for (int j = 0; j < numNodes; j++)
-				if (nodes[i].children[j] == true && 0.5 < Math.random())
+				if (nodes[i].children[j] == true && 0.4 < Math.random())
 					nodes[j].children[i] = true;
 		}
 		return nodes;
