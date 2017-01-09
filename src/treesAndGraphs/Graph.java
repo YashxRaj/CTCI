@@ -1,8 +1,13 @@
 package treesAndGraphs;
 
+import java.util.Vector;
+
+import stacksAndQueues.Queue;
+import treesAndGraphs.Node.state;
+
 public class Graph {
 	public static Node[] nodes;
-	private static int numNodes = 0;
+	public static int numNodes;
 	boolean directed = false;
 
 	public Graph(int numberOfNodes, Boolean directed) {
@@ -78,4 +83,41 @@ public class Graph {
 		}
 		System.out.println(s.toString());
 	}
+
+	public boolean search(Node start, Node end) {
+		if (start == end)
+			return true;
+		stacksAndQueues.Queue<Node> q = new Queue<Node>();
+		for (Node n : nodes)
+			n.state = state.unvisited;
+		start.state = state.visiting;
+		q.enqueue(start);
+		Node temp;
+		while (!q.isEmpty()) {
+			temp = q.dequeue();
+			if (temp != null) {
+				for (Node t : getAdjacent(temp)) {
+					if (t.state == state.unvisited) {
+						if (t == end)
+							return true;
+						else {
+							t.state = state.visiting;
+							q.enqueue(t);
+						}
+					}
+				}
+				temp.state = state.visited;
+			}
+		}
+		return false;
+	}
+
+	public Vector<Node> getAdjacent(Node n) {
+		Vector<Node> adjacentNodes = new Vector<Node>();
+		for (int i = 0, k = 0; i < n.children.length; i++)
+			if (n.children[i] == true)
+				adjacentNodes.addElement(nodes[i]);
+		return adjacentNodes;
+	}
+
 }
