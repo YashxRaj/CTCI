@@ -15,7 +15,7 @@ public class Queue<T> {
 	private QueueNode<T> first;
 	private QueueNode<T> last;
 
-	public void add(T item) {
+	public void enqueue(T item) {
 		QueueNode<T> t = new QueueNode<T>(item);
 		if (last != null)
 			last.next = t;
@@ -24,7 +24,7 @@ public class Queue<T> {
 			first = last;
 	}
 
-	public T remove() {
+	public T dequeue() {
 		if (first == null)
 			throw new NoSuchElementException();
 		T data = first.data;
