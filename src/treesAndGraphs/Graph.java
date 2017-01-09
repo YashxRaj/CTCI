@@ -96,7 +96,7 @@ public class Graph {
 		while (!q.isEmpty()) {
 			temp = q.dequeue();
 			if (temp != null) {
-				for (Node t : getAdjacent(temp)) {
+				for (Node t : getAdjacent(temp))
 					if (t.state == state.unvisited) {
 						if (t == end)
 							return true;
@@ -105,7 +105,6 @@ public class Graph {
 							q.enqueue(t);
 						}
 					}
-				}
 				temp.state = state.visited;
 			}
 		}
