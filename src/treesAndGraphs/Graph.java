@@ -3,27 +3,34 @@ package treesAndGraphs;
 public class Graph {
 	public static Node[] nodes;
 	private static int numNodes = 0;
+	boolean directed = false;
 
-	public Graph(int numberOfNodes) {
+	public Graph(int numberOfNodes, Boolean directed) {
+		if (directed == true)
+			this.directed = true;
 		numNodes = numberOfNodes;
 		nodes = new Node[numNodes];
 	}
 
-	public static Node[] generateNodes() {
+	public Node[] generateNodes() {
 		for (int i = 0; i < numNodes; i++)
 			nodes[i] = new Node(Integer.toString(i), numNodes);
 		return nodes;
 	}
 
-	public static Node[] connectNodes() {
+	public Node[] connectNodes() {
 		for (int i = 0; i < nodes.length; i++) {
 			if (0.85 > Math.random())
 				do {
 					nodes[i].add(generateRandomNodeNumber(i));
 				} while (0.5 < Math.random());
 			for (int j = 0; j < numNodes; j++)
-				if (nodes[i].children[j] == true && 0.4 < Math.random())
-					nodes[j].children[i] = true;
+				if (nodes[i].children[j] == true) {
+					if (!directed)
+						nodes[j].add(i);
+					else if (0.5 < Math.random())
+						nodes[j].add(i);
+				}
 		}
 		return nodes;
 	}
@@ -37,6 +44,7 @@ public class Graph {
 
 	public void printAdjacencyMatrix() {
 		StringBuffer s = new StringBuffer();
+		print(s);
 		s.append("  ");
 		for (Node n : nodes)
 			s.append(n.name + " ");
@@ -50,8 +58,14 @@ public class Graph {
 		System.out.println(s.toString());
 	}
 
+	private void print(StringBuffer s) {
+		s.append(directed == true ? "Printing Directed Graph:" : "Printing Undirected Graph:");
+		s.append(System.lineSeparator());
+	}
+
 	public void printAdjacencyList() {
 		StringBuffer s = new StringBuffer();
+		print(s);
 		for (Node n : nodes) {
 			s.append(n.name + " : ");
 			int i = 0;
