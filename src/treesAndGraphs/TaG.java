@@ -3,10 +3,14 @@ package treesAndGraphs;
 public class TaG {
 
 	public static void main(String[] args) {
-		
+		RouteBetweenNodes();
 	}
 
-	public static int randomInt() {
-		return ((int) (Math.random() * Integer.MAX_VALUE));
+	private static void RouteBetweenNodes() {
+		Graph g = new Graph(5 + (int) (Math.random() * 5));
+		g.generateNodes();
+		g.connectNodes();
+		g.printAdjacencyList(); // g.printAdjacencyMatrix();
+
 	}
 }
