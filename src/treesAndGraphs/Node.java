@@ -1,9 +1,14 @@
 package treesAndGraphs;
 
 public class Node {
+	enum state {
+		unvisited, visiting, visited;
+	}
+
 	public String name;
 	public Boolean[] children;
 	public int numNodes;
+	public state state;
 
 	public Node(String name, int l) {
 		numNodes = l;
