@@ -5,27 +5,7 @@ public class TaG {
 	public static void main(String[] args) {
 		// RouteBetweenNodes(makeGraph());
 		// sortedArrayToBST(makeSortedArray(randomSize()));
-	}
-
-	private static Graph makeGraph() {
-		Graph g = new Graph(randomSize(), true);
-		g.generateNodes();
-		g.connectNodes();
-		g.printAdjacencyList();
-		return g;
-	}
-
-	private static void sortedArrayToBST(int[] a) {
-		Tree t = new Tree();
-		t.print(t.createMinimalBST(a, 0, a.length - 1));
-	}
-
-	private static int[] makeSortedArray(int size) {
-		int[] a = new int[size];
-		int key1 = (int) (Math.random() * 1000), key2 = (int) (Math.random() * 1000);
-		for (int i = 0; i < size; i++)
-			a[i] = i * key1 + key2;
-		return a;
+		
 	}
 
 	private static void RouteBetweenNodes(Graph directed) {
@@ -34,6 +14,26 @@ public class TaG {
 		System.out.println("Start node: " + start.name);
 		System.out.println("End node: " + end.name);
 		System.out.println(directed.search(start, end) == true ? "Route exists!" : "No route connecting them!");
+	}
+
+	private static void sortedArrayToBST(int[] a) {
+		printArray(a);
+		Tree.print(Tree.createMinimalBST(a));
+	}
+
+	private static void printArray(int[] a) {
+		System.out.print("[ ");
+		for (int i = 0; i < a.length; i++)
+			System.out.print(a[i] + " ");
+		System.out.println("]");
+	}
+
+	private static int[] makeSortedArray(int size) {
+		int[] a = new int[size];
+		int key1 = (int) (Math.random() * 10), key2 = (int) (Math.random() * 10);
+		for (int i = 0; i < size; i++)
+			a[i] = i * (key1 + key2 + i);
+		return a;
 	}
 
 	private static int randomSize() {
@@ -49,4 +49,11 @@ public class TaG {
 		return g.nodes[randomInt] == n ? randomNodeOtherThan(g, n) : g.nodes[randomInt];
 	}
 
+	private static Graph makeGraph() {
+		Graph g = new Graph(randomSize(), true);
+		g.generateNodes();
+		g.connectNodes();
+		g.printAdjacencyList();
+		return g;
+	}
 }

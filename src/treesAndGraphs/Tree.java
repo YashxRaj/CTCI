@@ -5,7 +5,11 @@ import java.util.List;
 
 public class Tree {
 
-	public TreeNode createMinimalBST(int[] a, int start, int end) {
+	public static TreeNode createMinimalBST(int[] a) {
+		return createMinimalBST(a, 0, a.length - 1);
+	}
+
+	private static TreeNode createMinimalBST(int[] a, int start, int end) {
 		if (end < start)
 			return null;
 		int mid = (start + end) / 2;

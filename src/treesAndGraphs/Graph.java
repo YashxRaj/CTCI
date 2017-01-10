@@ -6,8 +6,8 @@ import stacksAndQueues.Queue;
 import treesAndGraphs.GraphNode.state;
 
 public class Graph {
-	public static GraphNode[] nodes;
-	public static int numNodes;
+	public GraphNode[] nodes;
+	public int numNodes;
 	boolean directed = false;
 
 	public Graph(int numberOfNodes, Boolean directed) {
@@ -40,7 +40,7 @@ public class Graph {
 		return nodes;
 	}
 
-	private static int generateRandomNodeNumber(int i) {
+	private int generateRandomNodeNumber(int i) {
 		int k = i;
 		while (k == i)
 			k = (int) (Math.random() * (nodes.length - 1));
