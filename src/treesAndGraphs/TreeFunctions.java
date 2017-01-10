@@ -5,6 +5,13 @@ import java.util.List;
 
 public class TreeFunctions {
 
+	public static ArrayList<ArrayList<TreeNode>> listOfDepths(TreeNode root) {
+		ArrayList<ArrayList<TreeNode>> a = new ArrayList<ArrayList<TreeNode>>();
+		ArrayList<TreeNode> temp = new ArrayList<TreeNode>();
+		
+		return null;
+	}
+
 	public static TreeNode createMinimalBST(int[] a) {
 		return createMinimalBST(a, 0, a.length - 1);
 	}

@@ -5,22 +5,27 @@ import java.util.ArrayList;
 public class TaG {
 
 	public static void main(String[] args) {
-		// routeBetweenNodes(makeGraph());
+		// routeBetweenNodes(makeGraph(true));
 		// sortedArrayToBST(makeSortedArray(randomSize()));
-		listOfDepths(makeGraph());
+		listOfDepths(TreeFunctions.createMinimalBST(makeSortedArray(randomSize())));
 	}
 
-	private static void listOfDepths(Graph makeGraph) {
-		ArrayList<ArrayList<GraphNode>> a = new ArrayList<ArrayList<GraphNode>>();
-		
+	private static void listOfDepths(TreeNode root) {
+		ArrayList<ArrayList<TreeNode>> a = TreeFunctions.listOfDepths(root);
+
 	}
 
 	private static void routeBetweenNodes(Graph directed) {
 		GraphNode start = randomNode(directed);
 		GraphNode end = randomNodeOtherThan(directed, start);
-		System.out.println("Start node: " + start.name);
-		System.out.println("End node: " + end.name);
-		System.out.println(directed.search(start, end) == true ? "Route exists!" : "No route connecting them!");
+		StringBuffer s = new StringBuffer();
+		s.append("Start node: " + start.name);
+		s.append(System.lineSeparator());
+		s.append("End node: " + end.name);
+		s.append(System.lineSeparator());
+		s.append(GraphFunctions.routeBetweenNodes(directed, start, end) == true ? "Route exists!"
+				: "No route connecting them!");
+		System.out.println(s.toString());
 	}
 
 	private static void sortedArrayToBST(int[] a) {
@@ -56,8 +61,8 @@ public class TaG {
 		return g.nodes[randomInt] == n ? randomNodeOtherThan(g, n) : g.nodes[randomInt];
 	}
 
-	private static Graph makeGraph() {
-		Graph g = new Graph(randomSize(), true);
+	private static Graph makeGraph(boolean directed) {
+		Graph g = directed == true ? new Graph(randomSize(), true) : new Graph(randomSize(), false);
 		g.generateNodes();
 		g.connectNodes();
 		g.printAdjacencyList();
