@@ -12,7 +12,7 @@ public class TaG {
 
 	private static void listOfDepths(TreeNode root) {
 		ArrayList<ArrayList<TreeNode>> a = TreeFunctions.listOfDepths(root);
-
+		
 	}
 
 	private static void routeBetweenNodes(Graph directed) {

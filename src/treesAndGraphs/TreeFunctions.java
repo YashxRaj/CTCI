@@ -3,12 +3,25 @@ package treesAndGraphs;
 import java.util.ArrayList;
 import java.util.List;
 
+import stacksAndQueues.Queue;
+
 public class TreeFunctions {
 
 	public static ArrayList<ArrayList<TreeNode>> listOfDepths(TreeNode root) {
 		ArrayList<ArrayList<TreeNode>> a = new ArrayList<ArrayList<TreeNode>>();
-		ArrayList<TreeNode> temp = new ArrayList<TreeNode>();
-		
+		Queue<TreeNode> q = new Queue<TreeNode>();
+		ArrayList<TreeNode> temp;
+		q.enqueue(root);
+		while (!q.isEmpty()) {
+			temp = new ArrayList<TreeNode>();
+			temp.add(root);
+			TreeNode tn = q.dequeue();
+			if (tn.getLeft() != null)
+				q.enqueue(tn.getLeft());
+			if (tn.getRight() != null)
+				q.enqueue(tn.getRight());
+
+		}
 		return null;
 	}
 
