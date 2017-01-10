@@ -1,6 +1,6 @@
 package treesAndGraphs;
 
-public class Node {
+public class GraphNode {
 	enum state {
 		unvisited, visiting, visited;
 	}
@@ -10,7 +10,7 @@ public class Node {
 	public int numNodes;
 	public state state;
 
-	public Node(String name, int l) {
+	public GraphNode(String name, int l) {
 		numNodes = l;
 		children = new Boolean[numNodes];
 		for (int i = 0; i < children.length; i++)

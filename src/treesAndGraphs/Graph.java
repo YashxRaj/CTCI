@@ -3,10 +3,10 @@ package treesAndGraphs;
 import java.util.Vector;
 
 import stacksAndQueues.Queue;
-import treesAndGraphs.Node.state;
+import treesAndGraphs.GraphNode.state;
 
 public class Graph {
-	public static Node[] nodes;
+	public static GraphNode[] nodes;
 	public static int numNodes;
 	boolean directed = false;
 
@@ -14,16 +14,16 @@ public class Graph {
 		if (directed == true)
 			this.directed = true;
 		numNodes = numberOfNodes;
-		nodes = new Node[numNodes];
+		nodes = new GraphNode[numNodes];
 	}
 
-	public Node[] generateNodes() {
+	public GraphNode[] generateNodes() {
 		for (int i = 0; i < numNodes; i++)
-			nodes[i] = new Node(Integer.toString(i), numNodes);
+			nodes[i] = new GraphNode(Integer.toString(i), numNodes);
 		return nodes;
 	}
 
-	public Node[] connectNodes() {
+	public GraphNode[] connectNodes() {
 		for (int i = 0; i < nodes.length; i++) {
 			if (0.85 > Math.random())
 				do {
@@ -51,10 +51,10 @@ public class Graph {
 		StringBuffer s = new StringBuffer();
 		print(s);
 		s.append("  ");
-		for (Node n : nodes)
+		for (GraphNode n : nodes)
 			s.append(n.name + " ");
 		s.append(System.lineSeparator());
-		for (Node n : nodes) {
+		for (GraphNode n : nodes) {
 			s.append(n.name + " ");
 			for (Boolean child : n.children)
 				s.append((child == false ? "F" : "T") + " ");
@@ -71,7 +71,7 @@ public class Graph {
 	public void printAdjacencyList() {
 		StringBuffer s = new StringBuffer();
 		print(s);
-		for (Node n : nodes) {
+		for (GraphNode n : nodes) {
 			s.append(n.name + " : ");
 			int i = 0;
 			for (Boolean child : n.children) {
@@ -84,19 +84,19 @@ public class Graph {
 		System.out.println(s.toString());
 	}
 
-	public boolean search(Node start, Node end) {
+	public boolean search(GraphNode start, GraphNode end) {
 		if (start == end)
 			return true;
-		stacksAndQueues.Queue<Node> q = new Queue<Node>();
-		for (Node n : nodes)
+		stacksAndQueues.Queue<GraphNode> q = new Queue<GraphNode>();
+		for (GraphNode n : nodes)
 			n.state = state.unvisited;
 		start.state = state.visiting;
 		q.enqueue(start);
-		Node temp;
+		GraphNode temp;
 		while (!q.isEmpty()) {
 			temp = q.dequeue();
 			if (temp != null) {
-				for (Node t : getAdjacent(temp))
+				for (GraphNode t : getAdjacent(temp))
 					if (t.state == state.unvisited) {
 						if (t == end)
 							return true;
@@ -111,8 +111,8 @@ public class Graph {
 		return false;
 	}
 
-	public Vector<Node> getAdjacent(Node n) {
-		Vector<Node> adjacentNodes = new Vector<Node>();
+	public Vector<GraphNode> getAdjacent(GraphNode n) {
+		Vector<GraphNode> adjacentNodes = new Vector<GraphNode>();
 		for (int i = 0; i < n.children.length; i++)
 			if (n.children[i] == true)
 				adjacentNodes.addElement(nodes[i]);
