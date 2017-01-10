@@ -3,7 +3,7 @@ package treesAndGraphs;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tree {
+public class TreeFunctions {
 
 	public static TreeNode createMinimalBST(int[] a) {
 		return createMinimalBST(a, 0, a.length - 1);

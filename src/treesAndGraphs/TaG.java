@@ -1,14 +1,21 @@
 package treesAndGraphs;
 
+import java.util.ArrayList;
+
 public class TaG {
 
 	public static void main(String[] args) {
-		// RouteBetweenNodes(makeGraph());
+		// routeBetweenNodes(makeGraph());
 		// sortedArrayToBST(makeSortedArray(randomSize()));
+		listOfDepths(makeGraph());
+	}
+
+	private static void listOfDepths(Graph makeGraph) {
+		ArrayList<ArrayList<GraphNode>> a = new ArrayList<ArrayList<GraphNode>>();
 		
 	}
 
-	private static void RouteBetweenNodes(Graph directed) {
+	private static void routeBetweenNodes(Graph directed) {
 		GraphNode start = randomNode(directed);
 		GraphNode end = randomNodeOtherThan(directed, start);
 		System.out.println("Start node: " + start.name);
@@ -18,7 +25,7 @@ public class TaG {
 
 	private static void sortedArrayToBST(int[] a) {
 		printArray(a);
-		Tree.print(Tree.createMinimalBST(a));
+		TreeFunctions.print(TreeFunctions.createMinimalBST(a));
 	}
 
 	private static void printArray(int[] a) {
