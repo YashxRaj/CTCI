@@ -113,7 +113,7 @@ public class Graph {
 
 	public Vector<Node> getAdjacent(Node n) {
 		Vector<Node> adjacentNodes = new Vector<Node>();
-		for (int i = 0, k = 0; i < n.children.length; i++)
+		for (int i = 0; i < n.children.length; i++)
 			if (n.children[i] == true)
 				adjacentNodes.addElement(nodes[i]);
 		return adjacentNodes;
