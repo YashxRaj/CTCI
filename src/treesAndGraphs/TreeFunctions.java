@@ -9,11 +9,11 @@ public class TreeFunctions {
 
 	public static ArrayList<ArrayList<TreeNode>> listOfDepthsDFS(TreeNode root) {
 		ArrayList<ArrayList<TreeNode>> lists = new ArrayList<ArrayList<TreeNode>>();
-		ListOfDepthsDFS(root, lists, 0);
-		return lists;
+		return ListOfDepthsDFS(root, lists, 0);
 	}
 
-	private static void ListOfDepthsDFS(TreeNode root, ArrayList<ArrayList<TreeNode>> lists, int level) {
+	private static ArrayList<ArrayList<TreeNode>> ListOfDepthsDFS(TreeNode root, ArrayList<ArrayList<TreeNode>> lists,
+			int level) {
 		ArrayList<TreeNode> list = null;
 		if (lists.size() == level) {
 			list = new ArrayList<TreeNode>();
@@ -25,6 +25,7 @@ public class TreeFunctions {
 			ListOfDepthsDFS(root.getLeft(), lists, level + 1);
 		if (root.getRight() != null)
 			ListOfDepthsDFS(root.getRight(), lists, level + 1);
+		return lists;
 	}
 
 	public static ArrayList<ArrayList<TreeNode>> listOfDepthsBFS(TreeNode root) {
