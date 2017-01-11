@@ -5,8 +5,13 @@ public class TaG {
 	public static void main(String[] args) {
 		// routeBetweenNodes(makeGraph(true));
 		// sortedArrayToBST(makeSortedArray(randomSize()));
-		listOfDepths(TreeFunctions.createMinimalBST(makeSortedArray(randomSize())));
+		// listOfDepths(TreeFunctions.createMinimalBST(makeSortedArray(randomSize())));
+		checkBalancedTree(makeArray(randomSize()));
 
+	}
+
+	private static void checkBalancedTree(int[] a) {
+		TreeFunctions.checkBalanced(TreeNode root);
 	}
 
 	private static void listOfDepths(TreeNode root) {
@@ -38,6 +43,13 @@ public class TaG {
 		for (int i = 0; i < a.length; i++)
 			System.out.print(a[i] + " ");
 		System.out.println("]");
+	}
+
+	private static int[] makeArray(int size) {
+		int[] a = new int[size];
+		for (int i = 0; i < size; i++)
+			a[i] = (int) (Math.random() * 100);
+		return a;
 	}
 
 	private static int[] makeSortedArray(int size) {
