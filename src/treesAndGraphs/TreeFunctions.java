@@ -57,10 +57,8 @@ public class TreeFunctions {
 		if (end < start)
 			return null;
 		int mid = (start + end) / 2;
-		TreeNode n = new TreeNode(Integer.toString(a[mid]));
-		n.setLeft(createMinimalBST(a, start, mid - 1));
-		n.setRight(createMinimalBST(a, mid + 1, end));
-		return n;
+		return new TreeNode(Integer.toString(a[mid]), createMinimalBST(a, start, mid - 1),
+				createMinimalBST(a, mid + 1, end));
 	}
 
 	// Not mine, tweaked a little though.
@@ -109,7 +107,7 @@ public class TreeFunctions {
 					char c = ' ';
 					if (j % 2 == 1) {
 						if (line.get(j - 1) != null)
-							c = (line.get(j) != null) ? '^' : 'J';
+							c = (line.get(j) != null) ? '^' : '/';
 						else if (j < line.size() && line.get(j) != null)
 							c = '\\';
 					}
@@ -156,5 +154,32 @@ public class TreeFunctions {
 			s.append(System.lineSeparator());
 		}
 		System.out.println(s.toString());
+	}
+
+	public static TreeNode arrayToBinaryTree(int[] a) {
+		return arrayToBinaryTree(a, 1);
+	}
+
+	private static TreeNode arrayToBinaryTree(int[] a, int index) {
+		if (index <= a.length)
+			return new TreeNode(Integer.toString(a[index - 1]), arrayToBinaryTree(a, index * 2),
+					arrayToBinaryTree(a, index * 2 + 1));
+		else
+			return null;
+	}
+
+	public static boolean checkBalanced(TreeNode root) {
+		if (root == null)
+			return true;
+		if (Math.abs(heightOfSubtree(root.getLeft()) - heightOfSubtree(root.getRight())) > 1)
+			return false;
+		else
+			return checkBalanced(root.getLeft()) && checkBalanced(root.getRight());
+	}
+
+	public static int heightOfSubtree(TreeNode n) {
+		if (n == null)
+			return -1;
+		return (1 + Math.max(heightOfSubtree(n.getLeft()), heightOfSubtree(n.getRight())));
 	}
 }

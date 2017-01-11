@@ -11,7 +11,15 @@ public class TaG {
 	}
 
 	private static void checkBalancedTree(int[] a) {
-		TreeFunctions.checkBalanced(TreeNode root);
+		TreeNode root = TreeFunctions.arrayToBinaryTree(a);
+		if (Math.random() > 0.5) {
+			TreeNode t = root;
+			while (t.getLeft() != null)
+				t = t.getLeft();
+			t.setLeft(new TreeNode(Integer.toString(50)));
+		}
+		TreeFunctions.print(root);
+		System.out.println(TreeFunctions.checkBalanced(root) == true ? "Balanced" : "Unbalanced");
 	}
 
 	private static void listOfDepths(TreeNode root) {
