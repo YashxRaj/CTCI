@@ -70,3 +70,26 @@ N,L,R  L,N,R  L,R,N
 MinHeap:
 - Complete binary tree where each node is smaller than its children.
 - Operations: Insert and extractMin.
+-------------------------------------------------------------------------------------
+|DFS Pseudocode:						|BFS Pseudocode:							|
+-------------------------------------------------------------------------------------
+|void search(Node root) {				|void search(Node root) {					|
+|	if(root == null) return;			|	Queue q = new Queue();					|
+|	visit(root);						|	root.marked = true;						|
+|	root.visited = true;				|	q.enqueue(root);						|
+|	for each(Node n in root.adjacent)	|	while(!q.isEmpty()) {					|
+|		if(n.visited == false)			|		Node r = q.dequeue();				|
+|			search(n);					|		visit(r);							|
+|}										|		for each(Node n in root.adjacent)	|
+|										|			if(n.marked == false) {			|
+|										|				n.marked = true;			|
+|										|				q.enqueue(n);				|
+|										|	}										|
+|										|}											|
+-------------------------------------------------------------------------------------
+			
+				
+				
+
+
+

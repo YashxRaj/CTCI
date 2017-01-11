@@ -7,22 +7,45 @@ import stacksAndQueues.Queue;
 
 public class TreeFunctions {
 
-	public static ArrayList<ArrayList<TreeNode>> listOfDepths(TreeNode root) {
-		ArrayList<ArrayList<TreeNode>> a = new ArrayList<ArrayList<TreeNode>>();
-		Queue<TreeNode> q = new Queue<TreeNode>();
-		ArrayList<TreeNode> temp;
-		q.enqueue(root);
-		while (!q.isEmpty()) {
-			temp = new ArrayList<TreeNode>();
-			temp.add(root);
-			TreeNode tn = q.dequeue();
-			if (tn.getLeft() != null)
-				q.enqueue(tn.getLeft());
-			if (tn.getRight() != null)
-				q.enqueue(tn.getRight());
+	public static ArrayList<ArrayList<TreeNode>> listOfDepthsDFS(TreeNode root) {
+		ArrayList<ArrayList<TreeNode>> lists = new ArrayList<ArrayList<TreeNode>>();
+		ListOfDepthsDFS(root, lists, 0);
+		return lists;
+	}
 
+	private static void ListOfDepthsDFS(TreeNode root, ArrayList<ArrayList<TreeNode>> lists, int level) {
+		ArrayList<TreeNode> list = null;
+		if (lists.size() == level) {
+			list = new ArrayList<TreeNode>();
+			lists.add(list);
+		} else
+			list = lists.get(level);
+		list.add(root);
+		if (root.getLeft() != null)
+			ListOfDepthsDFS(root.getLeft(), lists, level + 1);
+		if (root.getRight() != null)
+			ListOfDepthsDFS(root.getRight(), lists, level + 1);
+	}
+
+	public static ArrayList<ArrayList<TreeNode>> listOfDepthsBFS(TreeNode root) {
+		ArrayList<ArrayList<TreeNode>> lists = new ArrayList<ArrayList<TreeNode>>();
+		ArrayList<TreeNode> current = new ArrayList<TreeNode>();
+		Queue<TreeNode> q = new Queue<TreeNode>();
+		q.enqueue(root);
+		if (root != null)
+			current.add(root);
+		while (!current.isEmpty()) {
+			lists.add(current);
+			ArrayList<TreeNode> parent = current;
+			current = new ArrayList<TreeNode>();
+			for (TreeNode n : parent) {
+				if (n.getLeft() != null)
+					current.add(n.getLeft());
+				if (n.getRight() != null)
+					current.add(n.getRight());
+			}
 		}
-		return null;
+		return lists;
 	}
 
 	public static TreeNode createMinimalBST(int[] a) {
@@ -118,5 +141,19 @@ public class TreeFunctions {
 			System.out.println();
 			perpiece /= 2;
 		}
+	}
+
+	public static void printListOfDepths(ArrayList<ArrayList<TreeNode>> lists, String str) {
+		StringBuffer s = new StringBuffer();
+		s.append(str);
+		s.append(System.lineSeparator());
+		int i = 0;
+		for (ArrayList<TreeNode> list : lists) {
+			s.append("Level " + i++ + ": ");
+			for (TreeNode n : list)
+				s.append(n.getData() + " ");
+			s.append(System.lineSeparator());
+		}
+		System.out.println(s.toString());
 	}
 }

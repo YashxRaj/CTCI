@@ -1,23 +1,23 @@
 package treesAndGraphs;
 
-import java.util.ArrayList;
-
 public class TaG {
 
 	public static void main(String[] args) {
 		// routeBetweenNodes(makeGraph(true));
 		// sortedArrayToBST(makeSortedArray(randomSize()));
 		listOfDepths(TreeFunctions.createMinimalBST(makeSortedArray(randomSize())));
+
 	}
 
 	private static void listOfDepths(TreeNode root) {
-		ArrayList<ArrayList<TreeNode>> a = TreeFunctions.listOfDepths(root);
-		
+		TreeFunctions.print(root);
+		TreeFunctions.printListOfDepths(TreeFunctions.listOfDepthsBFS(root), "BFS:");
+		TreeFunctions.printListOfDepths(TreeFunctions.listOfDepthsDFS(root), "DFS:");
 	}
 
 	private static void routeBetweenNodes(Graph directed) {
-		GraphNode start = randomNode(directed);
-		GraphNode end = randomNodeOtherThan(directed, start);
+		GraphNode start = randomGraphNode(directed);
+		GraphNode end = randomGraphNodeOtherThan(directed, start);
 		StringBuffer s = new StringBuffer();
 		s.append("Start node: " + start.name);
 		s.append(System.lineSeparator());
@@ -52,13 +52,13 @@ public class TaG {
 		return 10 + (int) (Math.random() * 5);
 	}
 
-	public static GraphNode randomNode(Graph g) {
+	public static GraphNode randomGraphNode(Graph g) {
 		return g.nodes[(int) (Math.random() * (g.numNodes - 1))];
 	}
 
-	public static GraphNode randomNodeOtherThan(Graph g, GraphNode n) {
+	public static GraphNode randomGraphNodeOtherThan(Graph g, GraphNode n) {
 		int randomInt = (int) (Math.random() * (g.numNodes - 1));
-		return g.nodes[randomInt] == n ? randomNodeOtherThan(g, n) : g.nodes[randomInt];
+		return g.nodes[randomInt] == n ? randomGraphNodeOtherThan(g, n) : g.nodes[randomInt];
 	}
 
 	private static Graph makeGraph(boolean directed) {
