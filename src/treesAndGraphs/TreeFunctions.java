@@ -168,18 +168,59 @@ public class TreeFunctions {
 			return null;
 	}
 
-	public static boolean checkBalanced(TreeNode root) {
-		if (root == null)
-			return true;
-		if (Math.abs(heightOfSubtree(root.getLeft()) - heightOfSubtree(root.getRight())) > 1)
-			return false;
-		else
-			return checkBalanced(root.getLeft()) && checkBalanced(root.getRight());
-	}
-
-	public static int heightOfSubtree(TreeNode n) {
+	public static int height(TreeNode n) {
 		if (n == null)
 			return -1;
-		return (1 + Math.max(heightOfSubtree(n.getLeft()), heightOfSubtree(n.getRight())));
+		else
+			return Math.max(height(n.getLeft()), height(n.getRight())) + 1;
+	}
+
+	public static boolean checkBalanced(TreeNode root) {
+		return heightIfBalanced(root) != Integer.MIN_VALUE;
+	}
+
+	private static int heightIfBalanced(TreeNode root) {
+		if (root == null)
+			return -1;
+		int leftHeight = heightIfBalanced(root.getLeft());
+		if (leftHeight == Integer.MIN_VALUE)
+			return Integer.MIN_VALUE;
+		int rightHeight = heightIfBalanced(root.getRight());
+		if (rightHeight == Integer.MIN_VALUE)
+			return Integer.MIN_VALUE;
+		int heightDiff = Math.abs(leftHeight - rightHeight);
+		if (heightDiff > 1)
+			return Integer.MIN_VALUE;
+		else
+			return Math.max(leftHeight, rightHeight) + 1;
+	}
+
+	public static void inOrderTraversal(TreeNode n) {
+		if (n != null) {
+			inOrderTraversal(n.getLeft());
+			System.out.print(n.getData() + " ");
+			inOrderTraversal(n.getRight());
+		}
+	}
+
+	public static void preOrderTraversal(TreeNode n) {
+		if (n != null) {
+			System.out.print(n.getData() + " ");
+			preOrderTraversal(n.getLeft());
+			preOrderTraversal(n.getRight());
+		}
+	}
+
+	public static void postOrderTraversal(TreeNode n) {
+		if (n != null) {
+			postOrderTraversal(n.getLeft());
+			postOrderTraversal(n.getRight());
+			System.out.print(n.getData() + " ");
+		}
+	}
+
+	public static boolean checkBST(TreeNode root) {
+		
+		return false;
 	}
 }

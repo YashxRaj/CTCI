@@ -6,12 +6,16 @@ public class TaG {
 		// routeBetweenNodes(makeGraph(true));
 		// sortedArrayToBST(makeSortedArray(randomSize()));
 		// listOfDepths(TreeFunctions.createMinimalBST(makeSortedArray(randomSize())));
-		checkBalancedTree(makeArray(randomSize()));
-
+		// checkBalancedTree(TreeFunctions.arrayToBinaryTree(makeArray(randomSize())));
+		checkBinaryTreeIsBST(TreeFunctions.arrayToBinaryTree(makeArray(randomSize())));
 	}
 
-	private static void checkBalancedTree(int[] a) {
-		TreeNode root = TreeFunctions.arrayToBinaryTree(a);
+	private static void checkBinaryTreeIsBST(TreeNode root) {
+		TreeFunctions.print(root);
+		System.out.println(TreeFunctions.checkBST(root) == true ? "Is a BST" : "Is not a BST");
+	}
+
+	private static void checkBalancedTree(TreeNode root) {
 		if (Math.random() > 0.5) {
 			TreeNode t = root;
 			while (t.getLeft() != null)
