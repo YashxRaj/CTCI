@@ -226,7 +226,22 @@ public class TreeFunctions {
 			return 1 + size(root.getLeft()) + size(root.getRight());
 	}
 
-	private static int value(TreeNode root) {
-		return Integer.parseInt(root.getData());
+	private static int value(TreeNode n) {
+		return Integer.parseInt(n.getData());
+	}
+	// This is supposed to work.
+	public static boolean checkBST(TreeNode root) {
+		return checkBST(root, Integer.MAX_VALUE, Integer.MIN_VALUE);
+	}
+
+	private static boolean checkBST(TreeNode n, int max, int min) {
+		if (n == null)
+			return true;
+		System.out.print(value(n) + " ");
+		if (value(n) > min && value(n) < max && checkBST(n.getLeft(), min, value(n))
+				&& checkBST(n.getRight(), value(n), max))
+			return true;
+		else
+			return false;
 	}
 }
