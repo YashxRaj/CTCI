@@ -5,9 +5,17 @@ public class TaG {
 	public static void main(String[] args) {
 		// routeBetweenNodes(makeGraph(true));
 		// sortedArrayToBST(makeSortedArray(randomSize()));
-		// listOfDepths(TreeFunctions.createMinimalBST(makeSortedArray(randomSize())));
-		// checkBalancedTree(TreeFunctions.arrayToBinaryTree(makeArray(randomSize())));
-		checkBinaryTreeIsBST(TreeFunctions.arrayToBinaryTree(makeArray(randomSize())));
+		// listOfDepths(randomBST());
+		// checkBalancedTree(randomBinaryTree());
+		checkBinaryTreeIsBST(randomBinaryTree());
+	}
+
+	private static TreeNode randomBST() {
+		return TreeFunctions.createMinimalBST(makeSortedArray(randomSize()));
+	}
+
+	private static TreeNode randomBinaryTree() {
+		return TreeFunctions.arrayToBinaryTree(makeArray(randomSize()));
 	}
 
 	private static void checkBinaryTreeIsBST(TreeNode root) {
@@ -73,7 +81,7 @@ public class TaG {
 	}
 
 	private static int randomSize() {
-		return 10 + (int) (Math.random() * 5);
+		return 3 + (int) (Math.random() * 5);
 	}
 
 	public static GraphNode randomGraphNode(Graph g) {

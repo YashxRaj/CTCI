@@ -150,7 +150,7 @@ public class TreeFunctions {
 		for (ArrayList<TreeNode> list : lists) {
 			s.append("Level " + i++ + ": ");
 			for (TreeNode n : list)
-				s.append(n.getData() + " ");
+				s.append(value(n) + " ");
 			s.append(System.lineSeparator());
 		}
 		System.out.println(s.toString());
@@ -198,14 +198,14 @@ public class TreeFunctions {
 	public static void inOrderTraversal(TreeNode n) {
 		if (n != null) {
 			inOrderTraversal(n.getLeft());
-			System.out.print(n.getData() + " ");
+			System.out.print(value(n) + " ");
 			inOrderTraversal(n.getRight());
 		}
 	}
 
 	public static void preOrderTraversal(TreeNode n) {
 		if (n != null) {
-			System.out.print(n.getData() + " ");
+			System.out.print(value(n) + " ");
 			preOrderTraversal(n.getLeft());
 			preOrderTraversal(n.getRight());
 		}
@@ -215,12 +215,18 @@ public class TreeFunctions {
 		if (n != null) {
 			postOrderTraversal(n.getLeft());
 			postOrderTraversal(n.getRight());
-			System.out.print(n.getData() + " ");
+			System.out.print(value(n) + " ");
 		}
 	}
 
-	public static boolean checkBST(TreeNode root) {
-		
-		return false;
+	public static int size(TreeNode root) {
+		if (root == null)
+			return 0;
+		else
+			return 1 + size(root.getLeft()) + size(root.getRight());
+	}
+
+	private static int value(TreeNode root) {
+		return Integer.parseInt(root.getData());
 	}
 }
