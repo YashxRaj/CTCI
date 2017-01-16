@@ -161,10 +161,12 @@ public class TreeFunctions {
 	}
 
 	private static TreeNode arrayToBinaryTree(int[] a, int index) {
-		if (index <= a.length)
-			return new TreeNode(Integer.toString(a[index - 1]), arrayToBinaryTree(a, index * 2),
-					arrayToBinaryTree(a, index * 2 + 1));
-		else
+		if (index <= a.length) {
+			TreeNode n = new TreeNode(Integer.toString(a[index - 1]));
+			n.setLeft(arrayToBinaryTree(a, index * 2));
+			n.setRight(arrayToBinaryTree(a, index * 2 + 1));
+			return n;
+		} else
 			return null;
 	}
 
@@ -300,6 +302,11 @@ public class TreeFunctions {
 			return false;
 		else
 			return (checkBST(n.getLeft(), min, value(n) - 1) && checkBST(n.getRight(), value(n), max));
+	}
+
+	public static TreeNode successor(TreeNode randomNode) {
+
+		return null;
 	}
 
 }
