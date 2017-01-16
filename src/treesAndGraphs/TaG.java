@@ -8,7 +8,7 @@ public class TaG {
 		// listOfDepths(randomBST());
 		// checkBalancedTree(randomBinaryTree());
 		// checkBinaryTreeIsBST(randomBinaryTree());
-		
+
 	}
 
 	private static TreeNode randomBST() {
@@ -21,8 +21,6 @@ public class TaG {
 
 	private static void checkBinaryTreeIsBST(TreeNode root) {
 		TreeFunctions.print(root);
-		System.out.println("In-Order Traversal Method: "
-				+ (TreeFunctions.checkBSTinOT(root) == true ? "Is a BST" : "Is not a BST"));
 		System.out.println("Min Max Method: " + (TreeFunctions.checkBST(root) == true ? "Is a BST" : "Is not a BST"));
 	}
 
@@ -51,8 +49,8 @@ public class TaG {
 		s.append(System.lineSeparator());
 		s.append("End node: " + end.name);
 		s.append(System.lineSeparator());
-		s.append(GraphFunctions.routeBetweenNodes(directed, start, end) == true ? "Route exists!"
-				: "No route connecting them!");
+		s.append(GraphFunctions.routeBetweenNodesDFS(directed, start, end) == GraphFunctions
+				.routeBetweenNodesBFS(directed, start, end) ? "Route exists!" : "No route connecting them!");
 		System.out.println(s.toString());
 	}
 

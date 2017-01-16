@@ -56,9 +56,8 @@ public class TreeFunctions {
 	private static TreeNode createMinimalBST(int[] a, int start, int end) {
 		if (end < start)
 			return null;
-		int mid = (start + end) / 2;
-		return new TreeNode(Integer.toString(a[mid]), createMinimalBST(a, start, mid - 1),
-				createMinimalBST(a, mid + 1, end));
+		return new TreeNode(Integer.toString(a[(start + end) / 2]), createMinimalBST(a, start, ((start + end) / 2) - 1),
+				createMinimalBST(a, ((start + end) / 2) + 1, end));
 	}
 
 	// Not mine, tweaked a little though.
@@ -234,26 +233,48 @@ public class TreeFunctions {
 		return checkBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
 	}
 
-	public static boolean checkBSTinOT(TreeNode root) {
-		int[] a = new int[TreeFunctions.size(root)];
-		copyBST(root, a);
-		for (int i = 1; i < a.length; i++)
-			if (a[i] < a[i - 1])
-				return false;
-		return true;
-	}
+	/*
+	 * Method 1: Take inorder traversal and compare i to i-1.
+	 * Problem: Duplicate values in binary tree cannot be handled.
+	 * public static boolean checkBSTinOT(TreeNode root) {
+	 * int[] a = new int[TreeFunctions.size(root)];
+	 * copyBST(root, a);
+	 * for (int i = 1; i < a.length; i++)
+	 * if (a[i] < a[i - 1])
+	 * return false;
+	 * return true;
+	 * }
+	 * 
+	 * static int index = 0;
+	 * 
+	 * private static void copyBST(TreeNode root, int[] a) {
+	 * if (root == null)
+	 * return;
+	 * copyBST(root.getLeft(), a);
+	 * a[index] = value(root);
+	 * index++;
+	 * copyBST(root.getRight(), a);
+	 * }
+	 */
 
-	static int index = 0;
-
-	private static void copyBST(TreeNode root, int[] a) {
-		if (root == null)
-			return;
-		copyBST(root.getLeft(), a);
-		a[index] = value(root);
-		index++;
-		copyBST(root.getRight(), a);
-	}
-
+	/*
+	 * Method 1 Optimized, to compare during in-order traversal.
+	 * static int last_printed = -1;
+	 * 
+	 * public static boolean checkBST2(TreeNode n) {
+	 * if (n == null)
+	 * return true;
+	 * if (!checkBST2(n.getLeft()))
+	 * return false;
+	 * if (last_printed != -1 && value(n) < last_printed)
+	 * return false;
+	 * last_printed = value(n);
+	 * if (!checkBST2(n.getRight()))
+	 * return false;
+	 * return true;
+	 * }
+	 */
+	// Final optimized method to check if BT is BST.
 	private static boolean checkBST(TreeNode n, int min, int max) {
 		if (n == null)
 			return true;
@@ -262,6 +283,5 @@ public class TreeFunctions {
 		else
 			return (checkBST(n.getLeft(), min, value(n) - 1) && checkBST(n.getRight(), value(n), max));
 	}
-	
-	
+
 }
