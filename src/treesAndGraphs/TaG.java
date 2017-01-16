@@ -13,8 +13,11 @@ public class TaG {
 		successor(randomBST());
 	}
 
-	private static void successor(TreeNode randomBST) {
-
+	private static void successor(TreeNode root) {
+		TreeNode randomNode = randomTreeNode(root);
+		TreeFunctions.print(root);
+		System.out.println("Previous Node: " + randomNode.getData() + "\nSuccessor: "
+				+ TreeFunctions.successor(randomNode).getData());
 	}
 
 	private static TreeNode randomBST() {
