@@ -7,7 +7,8 @@ public class TaG {
 		// sortedArrayToBST(makeSortedArray(randomSize()));
 		// listOfDepths(randomBST());
 		// checkBalancedTree(randomBinaryTree());
-		checkBinaryTreeIsBST(randomBinaryTree());
+		// checkBinaryTreeIsBST(randomBinaryTree());
+		
 	}
 
 	private static TreeNode randomBST() {
@@ -20,7 +21,9 @@ public class TaG {
 
 	private static void checkBinaryTreeIsBST(TreeNode root) {
 		TreeFunctions.print(root);
-		System.out.println(TreeFunctions.checkBST(root) == true ? "Is a BST" : "Is not a BST");
+		System.out.println("In-Order Traversal Method: "
+				+ (TreeFunctions.checkBSTinOT(root) == true ? "Is a BST" : "Is not a BST"));
+		System.out.println("Min Max Method: " + (TreeFunctions.checkBST(root) == true ? "Is a BST" : "Is not a BST"));
 	}
 
 	private static void checkBalancedTree(TreeNode root) {

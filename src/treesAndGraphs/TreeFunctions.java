@@ -229,19 +229,39 @@ public class TreeFunctions {
 	private static int value(TreeNode n) {
 		return Integer.parseInt(n.getData());
 	}
-	// This is supposed to work.
+
 	public static boolean checkBST(TreeNode root) {
-		return checkBST(root, Integer.MAX_VALUE, Integer.MIN_VALUE);
+		return checkBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
 	}
 
-	private static boolean checkBST(TreeNode n, int max, int min) {
+	public static boolean checkBSTinOT(TreeNode root) {
+		int[] a = new int[TreeFunctions.size(root)];
+		copyBST(root, a);
+		for (int i = 1; i < a.length; i++)
+			if (a[i] < a[i - 1])
+				return false;
+		return true;
+	}
+
+	static int index = 0;
+
+	private static void copyBST(TreeNode root, int[] a) {
+		if (root == null)
+			return;
+		copyBST(root.getLeft(), a);
+		a[index] = value(root);
+		index++;
+		copyBST(root.getRight(), a);
+	}
+
+	private static boolean checkBST(TreeNode n, int min, int max) {
 		if (n == null)
 			return true;
-		System.out.print(value(n) + " ");
-		if (value(n) > min && value(n) < max && checkBST(n.getLeft(), min, value(n))
-				&& checkBST(n.getRight(), value(n), max))
-			return true;
-		else
+		if (value(n) < min || value(n) > max)
 			return false;
+		else
+			return (checkBST(n.getLeft(), min, value(n) - 1) && checkBST(n.getRight(), value(n), max));
 	}
+	
+	
 }
