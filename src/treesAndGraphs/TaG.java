@@ -1,5 +1,7 @@
 package treesAndGraphs;
 
+import java.util.Vector;
+
 public class TaG {
 
 	public static void main(String[] args) {
@@ -8,6 +10,10 @@ public class TaG {
 		// listOfDepths(randomBST());
 		// checkBalancedTree(randomBinaryTree());
 		// checkBinaryTreeIsBST(randomBinaryTree());
+		successor(randomBST());
+	}
+
+	private static void successor(TreeNode randomBST) {
 
 	}
 
@@ -83,6 +89,11 @@ public class TaG {
 
 	private static int randomSize() {
 		return 3 + (int) (Math.random() * 5);
+	}
+
+	private static TreeNode randomTreeNode(TreeNode root) {
+		Vector<TreeNode> v = TreeFunctions.traversal(root, "in");
+		return v.get((int) (Math.random() * v.size() - 1));
 	}
 
 	public static GraphNode randomGraphNode(Graph g) {

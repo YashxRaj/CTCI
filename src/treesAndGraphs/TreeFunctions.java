@@ -2,6 +2,7 @@ package treesAndGraphs;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import stacksAndQueues.Queue;
 
@@ -194,28 +195,45 @@ public class TreeFunctions {
 			return Math.max(leftHeight, rightHeight) + 1;
 	}
 
-	public static void inOrderTraversal(TreeNode n) {
-		if (n != null) {
-			inOrderTraversal(n.getLeft());
-			System.out.print(value(n) + " ");
-			inOrderTraversal(n.getRight());
+	public static Vector<TreeNode> traversal(TreeNode n, String traversalOrder) {
+		Vector<TreeNode> v = new Vector<TreeNode>();
+		if (traversalOrder == "in")
+			return inOrderTraversal(n, v);
+		else if (traversalOrder == "pre")
+			return preOrderTraversal(n, v);
+		else if (traversalOrder == "post")
+			return postOrderTraversal(n, v);
+		else {
+			System.out.println("String passed to traversal function is invalid.");
+			return v;
 		}
 	}
 
-	public static void preOrderTraversal(TreeNode n) {
+	private static Vector<TreeNode> inOrderTraversal(TreeNode n, Vector<TreeNode> v) {
 		if (n != null) {
-			System.out.print(value(n) + " ");
-			preOrderTraversal(n.getLeft());
-			preOrderTraversal(n.getRight());
+			inOrderTraversal(n.getLeft(), v);
+			v.addElement(n);
+			inOrderTraversal(n.getRight(), v);
 		}
+		return v;
 	}
 
-	public static void postOrderTraversal(TreeNode n) {
+	private static Vector<TreeNode> preOrderTraversal(TreeNode n, Vector<TreeNode> v) {
 		if (n != null) {
-			postOrderTraversal(n.getLeft());
-			postOrderTraversal(n.getRight());
-			System.out.print(value(n) + " ");
+			v.addElement(n);
+			preOrderTraversal(n.getLeft(), v);
+			preOrderTraversal(n.getRight(), v);
 		}
+		return v;
+	}
+
+	private static Vector<TreeNode> postOrderTraversal(TreeNode n, Vector<TreeNode> v) {
+		if (n != null) {
+			postOrderTraversal(n.getLeft(), v);
+			postOrderTraversal(n.getRight(), v);
+			v.addElement(n);
+		}
+		return v;
 	}
 
 	public static int size(TreeNode root) {
