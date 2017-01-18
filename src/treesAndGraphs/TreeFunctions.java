@@ -303,16 +303,4 @@ public class TreeFunctions {
 		else
 			return (checkBST(n.getLeft(), min, value(n) - 1) && checkBST(n.getRight(), value(n), max));
 	}
-
-	public static TreeNode successor(TreeNode randomNode) {
-		return null;
-	}
-	// incomplete
-	public static TreeNode parent(TreeNode n, TreeNode root) {
-		Vector v = TreeFunctions.traversal(root, "pre");
-		for (int i = 0; i < v.size(); i++) {
-			if (v.get(i) == n)
-				
-		}
-	}
 }
