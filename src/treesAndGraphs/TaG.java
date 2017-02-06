@@ -2,24 +2,34 @@ package treesAndGraphs;
 
 import java.util.Vector;
 
+import treesAndGraphs.Graph.GraphNode;
+
 public class TaG {
 
 	public static void main(String[] args) {
-		// routeBetweenNodes(makeGraph(true));
+		 routeBetweenNodes(makeGraph(true));
 		// sortedArrayToBST(makeSortedArray(randomSize()));
 		// listOfDepths(randomBST());
 		// checkBalancedTree(randomBinaryTree());
 		// checkBinaryTreeIsBST(randomBinaryTree());
-		successor(randomBST());
+		// successor(randomBST()); // Incomplete
+		// buildOrder(makeGraph(true));
 	}
 
-	private static void successor(TreeNode root) {
-		TreeNode randomNode = randomTreeNode(root);
-		TreeFunctions.print(root);
-		System.out.println("Previous Node: " + randomNode.getData() + "\nSuccessor: "
-				+ TreeFunctions.successor(randomNode).getData());
+	private static void buildOrder(Graph g) {
+		
 	}
 
+	/*
+	 * private static void successor(TreeNode root) {
+	 * 
+	 * TreeNode randomNode = randomTreeNode(root);
+	 * TreeFunctions.print(root);
+	 * System.out.println("Previous Node: " + randomNode.getData() +
+	 * "\nSuccessor: "
+	 * + TreeFunctions.successor(randomNode).getData());
+	 * }
+	 */
 	private static TreeNode randomBST() {
 		return TreeFunctions.createMinimalBST(makeSortedArray(randomSize()));
 	}
@@ -100,18 +110,18 @@ public class TaG {
 	}
 
 	public static GraphNode randomGraphNode(Graph g) {
-		return g.nodes[(int) (Math.random() * (g.numNodes - 1))];
+		return g.listOfNodes.get((int) (Math.random() * (g.listOfNodes.size() - 1)));
 	}
 
 	public static GraphNode randomGraphNodeOtherThan(Graph g, GraphNode n) {
-		int randomInt = (int) (Math.random() * (g.numNodes - 1));
-		return g.nodes[randomInt] == n ? randomGraphNodeOtherThan(g, n) : g.nodes[randomInt];
+		int randomInt = (int) (Math.random() * (g.listOfNodes.size() - 1));
+		return g.listOfNodes.get(randomInt) == n ? randomGraphNodeOtherThan(g, n) : g.listOfNodes.get(randomInt);
 	}
 
 	private static Graph makeGraph(boolean directed) {
-		Graph g = directed == true ? new Graph(randomSize(), true) : new Graph(randomSize(), false);
-		g.generateNodes();
-		g.connectNodes();
+		Graph g = new Graph();
+		g.generateRandomGraphNodes(randomSize());
+		g.connectRandomGraphNodes(directed);
 		g.printAdjacencyList();
 		return g;
 	}

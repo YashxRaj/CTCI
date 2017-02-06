@@ -1,15 +1,16 @@
 package treesAndGraphs;
 
 import stacksAndQueues.Queue;
-import treesAndGraphs.GraphNode.state;
+import treesAndGraphs.Graph.GraphNode;
+import treesAndGraphs.Graph.GraphNode.state;
 
 public class GraphFunctions {
 
-	public static boolean routeBetweenNodesBFS(Graph g, GraphNode current, GraphNode target) {
+	public static boolean routeBetweenNodesBFS(Graph g, Graph.GraphNode current, Graph.GraphNode target) {
 		if (current == target)
 			return true;
-		stacksAndQueues.Queue<GraphNode> q = new Queue<GraphNode>();
-		for (GraphNode n : g.nodes)
+		stacksAndQueues.Queue<Graph.GraphNode> q = new Queue<Graph.GraphNode>();
+		for (GraphNode n : g.listOfNodes)
 			n.state = state.unvisited;
 		current.state = state.visiting;
 		q.enqueue(current);
@@ -32,18 +33,27 @@ public class GraphFunctions {
 		return false;
 	}
 
-	public static boolean routeBetweenNodesDFS(Graph g, GraphNode current, GraphNode target) {
-		if (current == null || target == null)
+	public static boolean routeBetweenNodesDFS(Graph g, Graph.GraphNode start, Graph.GraphNode end) {
+		if (start == null || end == null)
 			return false;
-		current.state = state.visited;
-		if (current == target)
+		start.state = state.visited;
+		if (start == end)
 			return true;
-		for (GraphNode x : g.getAdjacent(current)) {
-			if (x == target)
+		for (GraphNode x : g.getAdjacent(start)) {
+			if (x == end)
 				return true;
-			if (x.state != state.visited && routeBetweenNodesDFS(g, x, target))
+			if (x.state != state.visited && routeBetweenNodesDFS(g, x, end))
 				return true;
 		}
+		return false;
+	}
+
+	public static boolean buildOrder(int[] projects, int[] dependencies) {
+		Graph g = new Graph();
+		int nameInt = 65;
+		GraphNode x = new GraphNode(Character.toString((char) nameInt));
+		// x.children[]
+		
 		return false;
 	}
 }
