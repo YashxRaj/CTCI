@@ -3,36 +3,43 @@ package treesAndGraphs;
 import java.util.Vector;
 
 public class Graph {
+	enum state {
+		unvisited, visiting, visited;
+	}
 
-	public static class GraphNode {
-		enum state {
-			unvisited, visiting, visited;
-		}
+	public class GraphNode {
 
 		public String name;
-		Vector<GraphNode> children;
+		Vector<GraphNode> children = new Vector<GraphNode>();
 		public state state;
 
 		public GraphNode(String name) {
 			super();
 			this.name = name;
-			this.children = null;
+			this.children = new Vector<GraphNode>();
 		}
 	}
 
-	public Vector<GraphNode> listOfNodes;
+	public Vector<GraphNode> listOfNodes = null;
+	public boolean directed;
+
+	public Graph(boolean directed) {
+		super();
+		this.listOfNodes = new Vector<GraphNode>();
+		this.directed = directed;
+	}
 
 	public void createGraphNode(String name) {
 		GraphNode gn = new GraphNode(name);
 		listOfNodes.add(gn);
 	}
 
-	public boolean connectGraphNodes(GraphNode gn, GraphNode gn2, boolean directed) {
+	public boolean connectGraphNodes(GraphNode gn, GraphNode gn2) {
 		if (!(listOfNodes.contains(gn) && listOfNodes.contains(gn2)))
 			return false;
 		else {
 			gn.children.addElement(gn2);
-			if (!(directed))
+			if (!directed)
 				gn2.children.addElement(gn);
 			return true;
 		}
@@ -47,23 +54,23 @@ public class Graph {
 
 	public void generateRandomGraphNodes(int numberOfNodes) {
 		int nameInt = 65;
-		for (int i = 0; i < numberOfNodes; i++) {
-			GraphNode gn = new GraphNode(Character.toString((char) nameInt++));
-			listOfNodes.addElement(gn);
-		}
+		for (int i = 0; i < numberOfNodes; i++)
+			createGraphNode(Character.toString((char) nameInt++));
 	}
 
 	public void connectRandomGraphNodes(boolean directed) {
 		for (int i = 0; i < listOfNodes.size(); i++) {
 			if (0.85 > Math.random())
 				do {
-					listOfNodes.get(i).children.addElement(randomGraphNode(i));
+					GraphNode x = randomGraphNode(i);
+					if (!listOfNodes.get(i).children.contains(x))
+						listOfNodes.get(i).children.addElement(x);
 				} while (0.5 < Math.random());
 			for (int j = 0; j < listOfNodes.size(); j++)
 				if (listOfNodes.get(i).children.contains(j) == true) {
 					if (!directed)
 						listOfNodes.get(j).children.addElement(listOfNodes.get(i));
-					else if (0.5 < Math.random())
+					else if (0.5 < Math.random() && !listOfNodes.get(j).children.contains(listOfNodes.get(i)))
 						listOfNodes.get(j).children.addElement(listOfNodes.get(i));
 				}
 		}
@@ -79,6 +86,11 @@ public class Graph {
 		for (GraphNode n : listOfNodes) {
 			s.append(n.name + " : ");
 			int i = 0;
+			if (n.children.isEmpty()) {
+				s.append("-");
+				s.append(System.lineSeparator());
+				continue;
+			}
 			for (GraphNode child : n.children) {
 				s.append(child.name + " ");
 				i++;

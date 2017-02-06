@@ -1,13 +1,12 @@
 package treesAndGraphs;
 
 import java.util.Vector;
-
 import treesAndGraphs.Graph.GraphNode;
 
 public class TaG {
 
 	public static void main(String[] args) {
-		 routeBetweenNodes(makeGraph(true));
+		routeBetweenNodes(makeGraph(true));
 		// sortedArrayToBST(makeSortedArray(randomSize()));
 		// listOfDepths(randomBST());
 		// checkBalancedTree(randomBinaryTree());
@@ -17,7 +16,7 @@ public class TaG {
 	}
 
 	private static void buildOrder(Graph g) {
-		
+
 	}
 
 	/*
@@ -69,7 +68,9 @@ public class TaG {
 		s.append("End node: " + end.name);
 		s.append(System.lineSeparator());
 		s.append(GraphFunctions.routeBetweenNodesDFS(directed, start, end) == GraphFunctions
-				.routeBetweenNodesBFS(directed, start, end) ? "Route exists!" : "No route connecting them!");
+				.routeBetweenNodesBFS(directed, start, end)
+				&& GraphFunctions.routeBetweenNodesDFS(directed, start, end) == true ? "Route exists!"
+						: "No route connecting them!");
 		System.out.println(s.toString());
 	}
 
@@ -119,7 +120,7 @@ public class TaG {
 	}
 
 	private static Graph makeGraph(boolean directed) {
-		Graph g = new Graph();
+		Graph g = new Graph(directed);
 		g.generateRandomGraphNodes(randomSize());
 		g.connectRandomGraphNodes(directed);
 		g.printAdjacencyList();

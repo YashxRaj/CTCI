@@ -2,14 +2,14 @@ package treesAndGraphs;
 
 import stacksAndQueues.Queue;
 import treesAndGraphs.Graph.GraphNode;
-import treesAndGraphs.Graph.GraphNode.state;
+import treesAndGraphs.Graph.state;
 
 public class GraphFunctions {
 
-	public static boolean routeBetweenNodesBFS(Graph g, Graph.GraphNode current, Graph.GraphNode target) {
+	public static boolean routeBetweenNodesBFS(Graph g, GraphNode current, GraphNode target) {
 		if (current == target)
 			return true;
-		stacksAndQueues.Queue<Graph.GraphNode> q = new Queue<Graph.GraphNode>();
+		stacksAndQueues.Queue<GraphNode> q = new Queue<GraphNode>();
 		for (GraphNode n : g.listOfNodes)
 			n.state = state.unvisited;
 		current.state = state.visiting;
@@ -33,7 +33,7 @@ public class GraphFunctions {
 		return false;
 	}
 
-	public static boolean routeBetweenNodesDFS(Graph g, Graph.GraphNode start, Graph.GraphNode end) {
+	public static boolean routeBetweenNodesDFS(Graph g, GraphNode start, GraphNode end) {
 		if (start == null || end == null)
 			return false;
 		start.state = state.visited;
@@ -49,10 +49,8 @@ public class GraphFunctions {
 	}
 
 	public static boolean buildOrder(int[] projects, int[] dependencies) {
-		Graph g = new Graph();
+		Graph g = new Graph(false);
 		int nameInt = 65;
-		GraphNode x = new GraphNode(Character.toString((char) nameInt));
-		// x.children[]
 		
 		return false;
 	}
