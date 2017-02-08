@@ -30,6 +30,8 @@ public class TaG {
 		for (int i = 0; i < projects.size(); i++) {
 			System.out.print(projects.get(i) + " : ");
 			input = s.nextLine();
+			if(input == null)
+				input = "-";
 			split = input.split("\\s+");
 			dependencies.addElement(new Vector<String>());
 			for (int j = 0; j < split.length; j++)

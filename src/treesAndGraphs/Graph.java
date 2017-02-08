@@ -41,14 +41,10 @@ public class Graph {
 	}
 
 	public boolean connectGraphNodes(GraphNode gn, GraphNode gn2) {
-		if (!(listOfNodes.contains(gn) && listOfNodes.contains(gn2)))
-			return false;
-		else {
-			gn.children.addElement(gn2);
-			if (!directed)
-				gn2.children.addElement(gn);
-			return true;
-		}
+		gn.children.addElement(gn2);
+		if (!directed)
+			gn2.children.addElement(gn);
+		return true;
 	}
 
 	public Vector<GraphNode> getAdjacent(GraphNode gn) {
@@ -103,12 +99,17 @@ public class Graph {
 				s.append("-");
 				s.append(System.lineSeparator());
 				continue;
+			} else {
+				for (GraphNode child : n.children) {
+					if (child == null) {
+						System.out.println(n.name + " - issue");
+						continue;
+					}
+					s.append(child.name + " ");
+					i++;
+				}
+				s.append(System.lineSeparator());
 			}
-			for (GraphNode child : n.children) {
-				s.append(child.name + " ");
-				i++;
-			}
-			s.append(System.lineSeparator());
 		}
 		System.out.println(s.toString());
 	}

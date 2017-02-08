@@ -1,5 +1,7 @@
 package treesAndGraphs;
 
+import java.util.Vector;
+
 import stacksAndQueues.Queue;
 import treesAndGraphs.Graph.GraphNode;
 import treesAndGraphs.Graph.state;
@@ -48,10 +50,14 @@ public class GraphFunctions {
 		return false;
 	}
 
-	public static boolean buildOrder(int[] projects, int[] dependencies) {
-		Graph g = new Graph(false);
-		int nameInt = 65;
-		
+	public static boolean buildOrder(Vector<String> projects, Vector<Vector<String>> dependencies) {
+		Graph g = new Graph(true);
+		for (String s : projects)
+			g.createGraphNode(s);
+		for (int i = 0; i < g.listOfNodes.size(); i++)
+			for (String s : dependencies.get(i))
+				System.out.println(g.connectGraphNodes(g.listOfNodes.get(i), g.getGraphNodeByName(s)));
+		g.printAdjacencyList();
 		return false;
 	}
 }
