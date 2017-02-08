@@ -1,22 +1,41 @@
 package treesAndGraphs;
 
+import java.util.Scanner;
 import java.util.Vector;
 import treesAndGraphs.Graph.GraphNode;
 
 public class TaG {
 
 	public static void main(String[] args) {
-		routeBetweenNodes(makeGraph(true));
+		// routeBetweenNodes(makeGraph(true));
 		// sortedArrayToBST(makeSortedArray(randomSize()));
 		// listOfDepths(randomBST());
 		// checkBalancedTree(randomBinaryTree());
 		// checkBinaryTreeIsBST(randomBinaryTree());
 		// successor(randomBST()); // Incomplete
-		// buildOrder(makeGraph(true));
+		buildOrder();
 	}
 
-	private static void buildOrder(Graph g) {
-
+	private static void buildOrder() {
+		int nameInt = 65, size = randomSize() + 2;
+		Vector<String> projects = new Vector<String>();
+		Vector<Vector<String>> dependencies = new Vector<Vector<String>>();
+		Scanner s = new Scanner(System.in);
+		System.out.println("Enter Project:");
+		String input = s.nextLine();
+		String[] split = input.split("\\s+");
+		for (int i = 0; i < split.length; i++)
+			projects.addElement(split[i]);
+		System.out.println("Enter Dependencies:");
+		for (int i = 0; i < projects.size(); i++) {
+			System.out.print(projects.get(i) + " : ");
+			input = s.nextLine();
+			split = input.split("\\s+");
+			dependencies.addElement(new Vector<String>());
+			for (int j = 0; j < split.length; j++)
+				dependencies.get(i).add(split[j]);
+		}
+		GraphFunctions.buildOrder(projects, dependencies);
 	}
 
 	/*

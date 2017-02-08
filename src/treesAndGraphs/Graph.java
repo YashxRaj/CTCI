@@ -10,13 +10,19 @@ public class Graph {
 	public class GraphNode {
 
 		public String name;
-		Vector<GraphNode> children = new Vector<GraphNode>();
+		Vector<GraphNode> children;
 		public state state;
 
 		public GraphNode(String name) {
 			super();
 			this.name = name;
 			this.children = new Vector<GraphNode>();
+		}
+
+		public GraphNode(String name, Vector<GraphNode> children) {
+			super();
+			this.name = name;
+			this.children = children;
 		}
 	}
 
@@ -81,6 +87,13 @@ public class Graph {
 		return e == i ? randomGraphNode(i) : listOfNodes.get(e);
 	}
 
+	public void printAllNodes() {
+		StringBuffer s = new StringBuffer();
+		for (GraphNode n : listOfNodes)
+			s.append(n.name + " ");
+		System.out.println(s.toString());
+	}
+
 	public void printAdjacencyList() {
 		StringBuffer s = new StringBuffer();
 		for (GraphNode n : listOfNodes) {
@@ -98,5 +111,12 @@ public class Graph {
 			s.append(System.lineSeparator());
 		}
 		System.out.println(s.toString());
+	}
+
+	public GraphNode getGraphNodeByName(String name) {
+		for (GraphNode gn : listOfNodes)
+			if (gn.name == name)
+				return gn;
+		return null;
 	}
 }
