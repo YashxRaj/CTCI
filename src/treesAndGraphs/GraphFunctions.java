@@ -1,5 +1,6 @@
 package treesAndGraphs;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 import stacksAndQueues.Queue;
@@ -54,7 +55,6 @@ public class GraphFunctions {
 
 	public static boolean buildOrder(Vector<String> projects, Vector<Vector<String>> dependencies) {
 		Graph g = new Graph(true);
-		Queue<GraphNode> q = new Queue<GraphNode>();
 		for (String s : projects)
 			g.createGraphNode(s);
 		for (int i = 0; i < g.nodes.size(); i++)
@@ -63,23 +63,22 @@ public class GraphFunctions {
 					continue;
 				g.connectGraphNodes(g.nodes.get(i), g.getGraphNodeByName(s));
 			}
-		do {
-			for (GraphNode gn : g.nodes) {
-				if (g.getAdjacent(gn) == null) {
-					q.enqueue(gn);
-					g.nodes.remove(gn);
-					for (GraphNode gn2 : g.nodes) {
-						// if (g.connections.get(gn2) == null)
-						g.connections.get(gn2).remove(gn.name);
-						if (g.connections.get(gn2).isEmpty())
-							g.connections.remove(gn2);
-					}
-
-				}
-			}
-		} while (!g.connections.isEmpty());
 		g.printAdjacencyList();
-		System.out.println(q);
+		for (int i = 0; i < g.nodes.size(); i++)
+			removeDependecy(g, g.nodes.get(i));
+		g.printAdjacencyList();
 		return false;
+	}
+
+	private static void removeDependecy(Graph g, GraphNode x) {
+		for (String s : g.getAdjacent(x)) {
+			GraphNode temp = g.getGraphNodeByName(s);
+			if (g.getAdjacent(temp) != null)
+				removeDependecy(g, temp);
+			if (g.getAdjacent(temp) == null) {
+				g.nodes.remove(temp);
+				g.connections.remove(temp);
+			}
+		}
 	}
 }
