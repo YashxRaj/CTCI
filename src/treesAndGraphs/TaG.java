@@ -2,7 +2,6 @@ package treesAndGraphs;
 
 import java.util.Scanner;
 import java.util.Vector;
-import treesAndGraphs.Graph.GraphNode;
 
 public class TaG {
 
@@ -30,8 +29,8 @@ public class TaG {
 		for (int i = 0; i < projects.size(); i++) {
 			System.out.print(projects.get(i) + " : ");
 			input = s.nextLine();
-			if(input == null)
-				input = "-";
+			if (input == null)
+				input = " - ";
 			split = input.split("\\s+");
 			dependencies.addElement(new Vector<String>());
 			for (int j = 0; j < split.length; j++)
@@ -132,12 +131,12 @@ public class TaG {
 	}
 
 	public static GraphNode randomGraphNode(Graph g) {
-		return g.listOfNodes.get((int) (Math.random() * (g.listOfNodes.size() - 1)));
+		return g.nodes.get((int) (Math.random() * (g.nodes.size() - 1)));
 	}
 
 	public static GraphNode randomGraphNodeOtherThan(Graph g, GraphNode n) {
-		int randomInt = (int) (Math.random() * (g.listOfNodes.size() - 1));
-		return g.listOfNodes.get(randomInt) == n ? randomGraphNodeOtherThan(g, n) : g.listOfNodes.get(randomInt);
+		int randomInt = (int) (Math.random() * (g.nodes.size() - 1));
+		return g.nodes.get(randomInt) == n ? randomGraphNodeOtherThan(g, n) : g.nodes.get(randomInt);
 	}
 
 	private static Graph makeGraph(boolean directed) {
