@@ -54,6 +54,33 @@ public class GraphFunctions {
 	}
 
 	public static boolean buildOrder(Vector<String> projects, Vector<Vector<String>> dependencies) {
+		Graph g = buildGraph(projects, dependencies);
+		ArrayList<GraphNode> buildOrder = new ArrayList<GraphNode>();
+		while (buildOrder.size() != g.nodes.size()) {
+			// queueIndependents
+			for (GraphNode x : g.nodes)
+				if (g.connections.get(x) == null)
+					if (!buildOrder.contains(x))
+						buildOrder.add(x);
+			// removeDependencies
+			for (GraphNode x : g.nodes) {
+				if (g.connections.get(x) == null)
+					continue;
+				for (int i = 0; i < g.connections.get(x).size(); i++)
+					if (buildOrder.contains(g.getGraphNodeByName(g.connections.get(x).get(i))))
+						g.connections.get(x).remove(i);
+				if (g.connections.get(x).isEmpty())
+					g.connections.put(x, null);
+			}
+		}
+		System.out.println("Build Order:");
+		for (GraphNode x : buildOrder)
+			System.out.print(x.name + " ");
+		System.out.println();
+		return true;
+	}
+
+	private static Graph buildGraph(Vector<String> projects, Vector<Vector<String>> dependencies) {
 		Graph g = new Graph(true);
 		for (String s : projects)
 			g.createGraphNode(s);
@@ -64,21 +91,6 @@ public class GraphFunctions {
 				g.connectGraphNodes(g.nodes.get(i), g.getGraphNodeByName(s));
 			}
 		g.printAdjacencyList();
-		for (int i = 0; i < g.nodes.size(); i++)
-			removeDependecy(g, g.nodes.get(i));
-		g.printAdjacencyList();
-		return false;
-	}
-
-	private static void removeDependecy(Graph g, GraphNode x) {
-		for (String s : g.getAdjacent(x)) {
-			GraphNode temp = g.getGraphNodeByName(s);
-			if (g.getAdjacent(temp) != null)
-				removeDependecy(g, temp);
-			if (g.getAdjacent(temp) == null) {
-				g.nodes.remove(temp);
-				g.connections.remove(temp);
-			}
-		}
+		return g;
 	}
 }

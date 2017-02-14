@@ -12,23 +12,22 @@ public class TaG {
 		// checkBalancedTree(randomBinaryTree());
 		// checkBinaryTreeIsBST(randomBinaryTree());
 		// successor(randomBST()); // Incomplete
-		buildOrder();
+		// buildOrder();
+		
 	}
 
 	private static void buildOrder() {
-		int nameInt = 65, size = randomSize() + 2;
 		Vector<String> projects = new Vector<String>();
 		Vector<Vector<String>> dependencies = new Vector<Vector<String>>();
 		Scanner s = new Scanner(System.in);
 		System.out.println("Enter Project:");
-		String input = s.nextLine();
-		String[] split = input.split("\\s+");
+		String[] split = s.nextLine().split("\\s+");
 		for (int i = 0; i < split.length; i++)
 			projects.addElement(split[i]);
 		System.out.println("Enter Dependencies:");
 		for (int i = 0; i < projects.size(); i++) {
 			System.out.print(projects.get(i) + " : ");
-			input = s.nextLine();
+			String input = s.nextLine();
 			if (input == null)
 				input = " - ";
 			split = input.split("\\s+");
@@ -36,6 +35,7 @@ public class TaG {
 			for (int j = 0; j < split.length; j++)
 				dependencies.get(i).add(split[j]);
 		}
+		s.close();
 		GraphFunctions.buildOrder(projects, dependencies);
 	}
 
