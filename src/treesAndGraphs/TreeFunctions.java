@@ -305,7 +305,27 @@ public class TreeFunctions {
 	}
 
 	public static TreeNode commonAncestorOf(TreeNode one, TreeNode two, TreeNode root) {
-		
-		return root;
+		if (one == two)
+			return one;
+		Vector<TreeNode> inOrder = TreeFunctions.traversal(root, "in");
+		int commonAncestorLoc = commonAncestorOfHelper(inOrder, one, two, root);
+		if (commonAncestorLoc == -1)
+			System.out.println("Error!");
+		return inOrder.elementAt(commonAncestorLoc);
+	}
+
+	private static int commonAncestorOfHelper(Vector<TreeNode> inOrder, TreeNode one, TreeNode two, TreeNode root) {
+		int oneLoc = inOrder.indexOf(one), twoLoc = inOrder.indexOf(two), rootLoc = 0, maxI = height(root);
+		for (int i = 0; i < maxI; i++) {
+			rootLoc = inOrder.indexOf(root);
+			if (oneLoc == rootLoc || twoLoc == rootLoc || (oneLoc < rootLoc && twoLoc > rootLoc)
+					|| (twoLoc < rootLoc && oneLoc > rootLoc))
+				return rootLoc;
+			else if (oneLoc < rootLoc && twoLoc < rootLoc)
+				root = root.getLeft();
+			else if (oneLoc > rootLoc && twoLoc > rootLoc)
+				root = root.getRight();
+		}
+		return -1;
 	}
 }

@@ -20,11 +20,13 @@ public class TaG {
 		TreeFunctions.print(root);
 		TreeNode one = randomTreeNode(root);
 		TreeNode two = randomTreeNodeOtherThan(one, root);
+		System.out.println("One: " + one.getData());
+		System.out.println("Two: " + two.getData());
 		TreeNode ancestor = TreeFunctions.commonAncestorOf(one, two, root);
 		if (ancestor == null)
 			System.out.println("Common Ancestor not found.");
 		else
-			System.out.println(ancestor.getData());
+			System.out.println("Ancestor: " + ancestor.getData());
 	}
 
 	private static TreeNode randomTreeNodeOtherThan(TreeNode one, TreeNode root) {
@@ -140,7 +142,7 @@ public class TaG {
 	}
 
 	private static int randomSize() {
-		return 3 + (int) (Math.random() * 5);
+		return 7 + (int) (Math.random() * 5);
 	}
 
 	private static TreeNode randomTreeNode(TreeNode root) {
