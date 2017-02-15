@@ -13,7 +13,25 @@ public class TaG {
 		// checkBinaryTreeIsBST(randomBinaryTree());
 		// successor(randomBST()); // Incomplete
 		// buildOrder();
-		
+		firstCommonAncestor(randomBinaryTree());
+	}
+
+	private static void firstCommonAncestor(TreeNode root) {
+		TreeFunctions.print(root);
+		TreeNode one = randomTreeNode(root);
+		TreeNode two = randomTreeNodeOtherThan(one, root);
+		TreeNode ancestor = TreeFunctions.commonAncestorOf(one, two, root);
+		if (ancestor == null)
+			System.out.println("Common Ancestor not found.");
+		else
+			System.out.println(ancestor.getData());
+	}
+
+	private static TreeNode randomTreeNodeOtherThan(TreeNode one, TreeNode root) {
+		Vector<TreeNode> v = TreeFunctions.traversal(root, "in");
+		TreeNode two = v.get((int) (Math.random() * v.size() - 1));
+		return one == two ? randomTreeNodeOtherThan(one, root) : two;
+
 	}
 
 	private static void buildOrder() {

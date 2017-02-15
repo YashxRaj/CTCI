@@ -303,4 +303,9 @@ public class TreeFunctions {
 		else
 			return (checkBST(n.getLeft(), min, value(n) - 1) && checkBST(n.getRight(), value(n), max));
 	}
+
+	public static TreeNode commonAncestorOf(TreeNode one, TreeNode two, TreeNode root) {
+		
+		return root;
+	}
 }
