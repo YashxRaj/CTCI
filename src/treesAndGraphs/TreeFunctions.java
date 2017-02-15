@@ -309,8 +309,6 @@ public class TreeFunctions {
 			return one;
 		Vector<TreeNode> inOrder = TreeFunctions.traversal(root, "in");
 		int commonAncestorLoc = commonAncestorOfHelper(inOrder, one, two, root);
-		if (commonAncestorLoc == -1)
-			System.out.println("Error!");
 		return inOrder.elementAt(commonAncestorLoc);
 	}
 

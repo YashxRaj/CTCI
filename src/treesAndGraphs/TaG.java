@@ -13,10 +13,11 @@ public class TaG {
 		// checkBinaryTreeIsBST(randomBinaryTree());
 		// successor(randomBST()); // Incomplete
 		// buildOrder();
-		firstCommonAncestor(randomBinaryTree());
+		// firstCommonAncestor(randomBinaryTree());
 	}
 
 	private static void firstCommonAncestor(TreeNode root) {
+		// Possible to solve this given only 2 Traversals of the tree.
 		TreeFunctions.print(root);
 		TreeNode one = randomTreeNode(root);
 		TreeNode two = randomTreeNodeOtherThan(one, root);
