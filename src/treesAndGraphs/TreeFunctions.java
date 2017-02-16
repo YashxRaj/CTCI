@@ -1,6 +1,7 @@
 package treesAndGraphs;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
 
@@ -325,5 +326,46 @@ public class TreeFunctions {
 				root = root.getRight();
 		}
 		return -1;
+	}
+
+	public static ArrayList<LinkedList<TreeNode>> bstToArrays(TreeNode node) {
+		ArrayList<LinkedList<TreeNode>> seq = new ArrayList<LinkedList<TreeNode>>();
+		if (node == null) {
+			seq.add(new LinkedList<TreeNode>());
+			return seq;
+		}
+		LinkedList<TreeNode> prefix = new LinkedList<TreeNode>();
+		prefix.add(node.getLeft());
+		ArrayList<LinkedList<TreeNode>> leftSeq = bstToArrays(node.getLeft());
+		ArrayList<LinkedList<TreeNode>> rightSeq = bstToArrays(node.getRight());
+		for (LinkedList<TreeNode> left : leftSeq)
+			for (LinkedList<TreeNode> right : rightSeq) {
+				ArrayList<LinkedList<TreeNode>> weaved = new ArrayList<LinkedList<TreeNode>>();
+				weaveLists(left, right, weaved, prefix);
+				seq.addAll(weaved);
+			}
+		return seq;
+	}
+
+	private static void weaveLists(LinkedList<TreeNode> first, LinkedList<TreeNode> second,
+			ArrayList<LinkedList<TreeNode>> results, LinkedList<TreeNode> prefix) {
+		if (first.size() == 0 || second.size() == 0) {
+			LinkedList<TreeNode> result = (LinkedList<TreeNode>) prefix.clone();
+			result.addAll(first);
+			result.addAll(second);
+			results.add(result);
+			return;
+		}
+		TreeNode headFirst = first.removeFirst();
+		prefix.addLast(headFirst);
+		weaveLists(first, second, results, prefix);
+		prefix.removeLast();
+		first.addFirst(headFirst);
+		
+		TreeNode headSecond = second.removeFirst();
+		prefix.addLast(headSecond);
+		weaveLists(first, second, results, prefix);
+		prefix.removeLast();
+		second.addFirst(headSecond);
 	}
 }

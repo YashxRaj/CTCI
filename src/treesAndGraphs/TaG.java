@@ -1,5 +1,7 @@
 package treesAndGraphs;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -14,6 +16,16 @@ public class TaG {
 		// successor(randomBST()); // Incomplete
 		// buildOrder();
 		// firstCommonAncestor(randomBinaryTree());
+		bstToSortedArray(sortedArrayToBST(makeSortedArray(randomSize())));
+	}
+
+	private static void bstToSortedArray(TreeNode root) {
+		ArrayList<LinkedList<TreeNode>> seq = TreeFunctions.bstToArrays(root);
+		for (LinkedList<TreeNode> x : seq) {
+			for (TreeNode t : x)
+				System.out.print(t.getData() + " ");
+			System.out.println();
+		}
 	}
 
 	private static void firstCommonAncestor(TreeNode root) {
@@ -115,9 +127,11 @@ public class TaG {
 		System.out.println(s.toString());
 	}
 
-	private static void sortedArrayToBST(int[] a) {
+	private static TreeNode sortedArrayToBST(int[] a) {
 		printArray(a);
-		TreeFunctions.print(TreeFunctions.createMinimalBST(a));
+		TreeNode root = TreeFunctions.createMinimalBST(a);
+		TreeFunctions.print(root);
+		return root;
 	}
 
 	private static void printArray(int[] a) {
