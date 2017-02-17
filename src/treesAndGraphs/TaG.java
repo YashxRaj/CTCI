@@ -16,7 +16,34 @@ public class TaG {
 		// successor(randomBST()); // Incomplete
 		// buildOrder();
 		// firstCommonAncestor(randomBinaryTree());
-		bstToSortedArray(sortedArrayToBST(makeSortedArray(randomSize())));
+		bstToSortedArray(randomBST());
+		// checkSubTree(randomBinaryTree());
+		// test();
+	}
+
+	private static void test() {
+		TreeNode root = randomBST();
+		TreeFunctions.print(root);
+		printTreeNodeVector(TreeFunctions.traversal(root, "in"));
+		TreeNode random = randomTreeNode(root);
+		TreeFunctions.print(random);
+		printTreeNodeVector(TreeFunctions.traversal(random, "in"));
+	}
+
+	private static void printTreeNodeVector(Vector<TreeNode> x) {
+		for (TreeNode t : x)
+			System.out.print(t.getData() + " ");
+		System.out.println();
+	}
+
+	private static void checkSubTree(TreeNode root) {
+		TreeNode subTreeNode = randomTreeNode(root);
+		TreeFunctions.print(root);
+		TreeFunctions.print(subTreeNode);
+		if (TreeFunctions.checkSubTree(root, subTreeNode))
+			System.out.println("SubTree is contained in the Binary Tree.");
+		else
+			System.out.println("SubTree is not contained in the Binary Tree.");
 	}
 
 	private static void bstToSortedArray(TreeNode root) {
@@ -157,7 +184,7 @@ public class TaG {
 	}
 
 	private static int randomSize() {
-		return 7 + (int) (Math.random() * 5);
+		return 15 + (int) (Math.random() * 10);
 	}
 
 	private static TreeNode randomTreeNode(TreeNode root) {

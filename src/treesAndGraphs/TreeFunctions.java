@@ -361,11 +361,28 @@ public class TreeFunctions {
 		weaveLists(first, second, results, prefix);
 		prefix.removeLast();
 		first.addFirst(headFirst);
-		
+
 		TreeNode headSecond = second.removeFirst();
 		prefix.addLast(headSecond);
 		weaveLists(first, second, results, prefix);
 		prefix.removeLast();
 		second.addFirst(headSecond);
+	}
+
+	public static boolean checkSubTree(TreeNode root, TreeNode subTreeNode) {
+		if (traversal(subTreeNode, "in").equals(traversal(findNode(root, subTreeNode), "in")))
+			return true;
+		else
+			return false;
+	}
+
+	private static TreeNode findNode(TreeNode root, TreeNode subTreeNode) {
+		if (root != null) {
+			findNode(root.getLeft(), subTreeNode);
+			if (root == subTreeNode)
+				return root;
+			findNode(root.getRight(), subTreeNode);
+		}
+		return null;
 	}
 }
