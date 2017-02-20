@@ -5,39 +5,20 @@ public class CustomTreeNode {
 	private String data;
 	private CustomTreeNode left;
 	private CustomTreeNode right;
-	private int leftCount;
-	private int rightCount;
-
-	public int getLeftCount() {
-		return leftCount;
-	}
-
-	public void setLeftCount(int leftCount) {
-		this.leftCount = leftCount;
-	}
-
-	public int getRightCount() {
-		return rightCount;
-	}
-
-	public void setRightCount(int rightCount) {
-		this.rightCount = rightCount;
-	}
+	private int size = 0;
 
 	public CustomTreeNode() {
 		data = null;
 		left = null;
 		right = null;
-		leftCount = 0;
-		rightCount = 0;
+		size = 1;
 	}
 
 	public CustomTreeNode(String data) {
 		this.data = data;
 		left = null;
 		right = null;
-		leftCount = 0;
-		rightCount = 0;
+		size = 1;
 	}
 
 	public String getData() {
@@ -62,5 +43,44 @@ public class CustomTreeNode {
 
 	public void setRight(CustomTreeNode right) {
 		this.right = right;
+	}
+
+	public void insertInOrder(int d) {
+		if (d <= Integer.parseInt(this.data)) {
+			if (left == null)
+				left = new CustomTreeNode(Integer.toString(d));
+			else
+				left.insertInOrder(d);
+		} else {
+			if (right == null)
+				right = new CustomTreeNode(Integer.toString(d));
+			else
+				right.insertInOrder(d);
+		}
+		size++;
+	}
+
+	public int size() {
+		return size;
+	}
+
+	public CustomTreeNode find(int d) {
+		if (d == Integer.parseInt(data))
+			return this;
+		else if (d <= Integer.parseInt(data))
+			return left != null ? left.find(d) : null;
+		else if (d > Integer.parseInt(data))
+			return right != null ? right.find(d) : null;
+		return null;
+	}
+
+	public CustomTreeNode getIthNode(int i) {
+		int leftSize = left == null ? 0 : left.size;
+		if (i < leftSize)
+			return left.getIthNode(i);
+		else if (i == leftSize)
+			return this;
+		else
+			return right.getIthNode(i - (leftSize + 1));
 	}
 }

@@ -23,13 +23,7 @@ public class TaG {
 	}
 
 	private static void tree() {
-		CustomTree t = new CustomTree();
-		int a = 5;
-		t.setRoot(a);
-		CustomTreeNode insertedNode = t.insert(a, null);
-		boolean find = t.find(a);
-		CustomTreeNode deletedNode = t.delete(a);
-		CustomTreeNode randomNode = t.randomNode();
+		
 	}
 
 	private static void test() {
