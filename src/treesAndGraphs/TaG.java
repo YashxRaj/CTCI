@@ -16,21 +16,27 @@ public class TaG {
 		// successor(randomBST()); // Incomplete
 		// buildOrder();
 		// firstCommonAncestor(randomBinaryTree());
-		bstToSortedArray(randomBST());
+		// bstToSortedArray(randomBST());
 		// checkSubTree(randomBinaryTree());
 		// test();
+		
 	}
 
 	private static void test() {
 		TreeNode root = randomBST();
 		TreeFunctions.print(root);
-		printTreeNodeVector(TreeFunctions.traversal(root, "in"));
+		printTreeNodeVector(TreeFunctions.traversal(root, "in"), "In Order Traverasal");
+		printTreeNodeVector(TreeFunctions.traversal(root, "pre"), "Pre Order Traverasal");
+		printTreeNodeVector(TreeFunctions.traversal(root, "post"), "Post Order Traverasal");
 		TreeNode random = randomTreeNode(root);
 		TreeFunctions.print(random);
-		printTreeNodeVector(TreeFunctions.traversal(random, "in"));
+		printTreeNodeVector(TreeFunctions.traversal(random, "in"), "In Order Traversal");
+		printTreeNodeVector(TreeFunctions.traversal(random, "pre"), "Pre Order Traversal");
+		printTreeNodeVector(TreeFunctions.traversal(random, "post"), "Post Order Traversal");
 	}
 
-	private static void printTreeNodeVector(Vector<TreeNode> x) {
+	private static void printTreeNodeVector(Vector<TreeNode> x, String msg) {
+		System.out.println(msg);
 		for (TreeNode t : x)
 			System.out.print(t.getData() + " ");
 		System.out.println();
@@ -40,7 +46,7 @@ public class TaG {
 		TreeNode subTreeNode = randomTreeNode(root);
 		TreeFunctions.print(root);
 		TreeFunctions.print(subTreeNode);
-		if (TreeFunctions.checkSubTree(root, subTreeNode))
+		if (TreeFunctions.checkSubTree2(root, subTreeNode))
 			System.out.println("SubTree is contained in the Binary Tree.");
 		else
 			System.out.println("SubTree is not contained in the Binary Tree.");
@@ -184,7 +190,7 @@ public class TaG {
 	}
 
 	private static int randomSize() {
-		return 15 + (int) (Math.random() * 10);
+		return 10 + (int) (Math.random() * 10);
 	}
 
 	private static TreeNode randomTreeNode(TreeNode root) {

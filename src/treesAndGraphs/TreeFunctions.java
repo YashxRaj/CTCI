@@ -370,19 +370,40 @@ public class TreeFunctions {
 	}
 
 	public static boolean checkSubTree(TreeNode root, TreeNode subTreeNode) {
-		if (traversal(subTreeNode, "in").equals(traversal(findNode(root, subTreeNode), "in")))
+		if (subTreeNode == null)
+			return true;
+		StringBuilder s1 = new StringBuilder(), s2 = new StringBuilder();
+		Vector<TreeNode> rootTree = traversal(root, "pre"), subTree = traversal(subTreeNode, "pre");
+		for (TreeNode x : rootTree)
+			s1.append(x.getData() + ",");
+		for (TreeNode x : subTree)
+			s2.append(x.getData() + ",");
+		if (s1.toString().contains(s2.toString()) || s1.toString().equals(s2.toString()))
 			return true;
 		else
 			return false;
 	}
 
-	private static TreeNode findNode(TreeNode root, TreeNode subTreeNode) {
-		if (root != null) {
-			findNode(root.getLeft(), subTreeNode);
-			if (root == subTreeNode)
-				return root;
-			findNode(root.getRight(), subTreeNode);
-		}
-		return null;
+	public static boolean checkSubTree2(TreeNode root, TreeNode subTreeNode) {
+		if (subTreeNode == null)
+			return true;
+		return isSubTree(root, subTreeNode);
+	}
+
+	private static boolean isSubTree(TreeNode r1, TreeNode r2) {
+		if (r1 == null)
+			return false;
+		else if (r1.getData().equals(r2.getData()) && matchTree(r1, r2))
+			return true;
+		return isSubTree(r1.getLeft(), r2) || isSubTree(r1.getRight(), r2);
+	}
+
+	private static boolean matchTree(TreeNode r1, TreeNode r2) {
+		if (r1 == null && r2 == null)
+			return true;
+		else if (r1 == null || r2 == null || r1.getData() != r2.getData())
+			return false;
+		else
+			return matchTree(r1.getLeft(), r2.getLeft()) && matchTree(r1.getRight(), r2.getRight());
 	}
 }
