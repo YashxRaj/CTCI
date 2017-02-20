@@ -8,6 +8,7 @@ import java.util.Vector;
 public class TaG {
 
 	public static void main(String[] args) {
+		// test();
 		// routeBetweenNodes(makeGraph(true));
 		// sortedArrayToBST(makeSortedArray(randomSize()));
 		// listOfDepths(randomBST());
@@ -17,13 +18,20 @@ public class TaG {
 		// buildOrder();
 		// firstCommonAncestor(randomBinaryTree());
 		// bstToSortedArray(randomBST());
-		// checkSubTree(randomBinaryTree());
-		// test();
-		tree();
+		// checkSubTree(randomBinaryTree()); // review
+		// tree(); // review
+		pathsWithSum(randomBinaryTree());
+	}
+
+	private static void pathsWithSum(TreeNode root) {
+		int sum = (int) (Math.random() * 400);
+		Vector<Vector<TreeNode>> paths = TreeFunctions.pathsWithSum(sum);
+		for (Vector<TreeNode> path : paths)
+			printTreeNodeVector(path, "Path: ");
 	}
 
 	private static void tree() {
-		
+
 	}
 
 	private static void test() {
@@ -50,7 +58,8 @@ public class TaG {
 		TreeNode subTreeNode = randomTreeNode(root);
 		TreeFunctions.print(root);
 		TreeFunctions.print(subTreeNode);
-		if (TreeFunctions.checkSubTree2(root, subTreeNode))
+		if (TreeFunctions.checkSubTree2(root, subTreeNode) == TreeFunctions.checkSubTree(root, subTreeNode)
+				&& TreeFunctions.checkSubTree2(root, subTreeNode) == true)
 			System.out.println("SubTree is contained in the Binary Tree.");
 		else
 			System.out.println("SubTree is not contained in the Binary Tree.");

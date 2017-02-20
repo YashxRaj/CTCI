@@ -407,4 +407,9 @@ public class TreeFunctions {
 			return matchTree(r1.getLeft(), r2.getLeft()) && matchTree(r1.getRight(), r2.getRight());
 	}
 
+	public static Vector<Vector<TreeNode>> pathsWithSum(int sum) {
+		
+		return null;
+	}
+
 }
