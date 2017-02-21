@@ -1,6 +1,7 @@
 package treesAndGraphs;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
@@ -409,8 +410,18 @@ public class TreeFunctions {
 	public static Vector<Vector<TreeNode>> pathsWithSum(TreeNode root, int sum) {
 		print(root);
 		System.out.println("Sum: " + sum);
-
+		HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+		addToMap(root, map);
+		
 		return null;
+	}
+
+	private static void addToMap(TreeNode node, HashMap<Integer, Integer> map) {
+		if (node != null) {
+			addToMap(node.getLeft(), map);
+			map.put(node.hashCode(), Integer.parseInt(node.getData()));
+			addToMap(node.getRight(), map);
+		}
 	}
 
 	public static int countPathsWithSum(TreeNode root, int sum) {
