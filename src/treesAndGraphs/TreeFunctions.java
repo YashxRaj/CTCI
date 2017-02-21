@@ -309,8 +309,7 @@ public class TreeFunctions {
 		if (one == two)
 			return one;
 		Vector<TreeNode> inOrder = TreeFunctions.traversal(root, "in");
-		int commonAncestorLoc = commonAncestorOfHelper(inOrder, one, two, root);
-		return inOrder.elementAt(commonAncestorLoc);
+		return inOrder.elementAt(commonAncestorOfHelper(inOrder, one, two, root));
 	}
 
 	private static int commonAncestorOfHelper(Vector<TreeNode> inOrder, TreeNode one, TreeNode two, TreeNode root) {
@@ -375,25 +374,25 @@ public class TreeFunctions {
 		StringBuilder s1 = new StringBuilder(), s2 = new StringBuilder();
 		Vector<TreeNode> rootTree = traversal(root, "pre"), subTree = traversal(subTreeNode, "pre");
 		for (TreeNode x : rootTree)
-			s1.append(x.getData() + ",");
+			s1.append(x.getData() + "-");
 		for (TreeNode x : subTree)
-			s2.append(x.getData() + ",");
-		if (s1.toString().contains(s2.toString()) || s1.toString().equals(s2.toString()))
+			s2.append(x.getData() + "-");
+		if (s1.toString().contains(s2.toString()))
 			return true;
 		else
 			return false;
 	}
 
-	public static boolean checkSubTree2(TreeNode root, TreeNode subTreeNode) {
-		if (subTreeNode == null)
+	public static boolean checkSubTree2(TreeNode root, TreeNode subTreeRoot) {
+		if (subTreeRoot == null)
 			return true;
-		return isSubTree(root, subTreeNode);
+		return isSubTree(root, subTreeRoot);
 	}
 
 	private static boolean isSubTree(TreeNode r1, TreeNode r2) {
 		if (r1 == null)
 			return false;
-		else if (r1.getData().equals(r2.getData()) && matchTree(r1, r2))
+		if (r1.getData().equals(r2.getData()) && matchTree(r1, r2))
 			return true;
 		return isSubTree(r1.getLeft(), r2) || isSubTree(r1.getRight(), r2);
 	}
@@ -407,9 +406,32 @@ public class TreeFunctions {
 			return matchTree(r1.getLeft(), r2.getLeft()) && matchTree(r1.getRight(), r2.getRight());
 	}
 
-	public static Vector<Vector<TreeNode>> pathsWithSum(int sum) {
-		
+	public static Vector<Vector<TreeNode>> pathsWithSum(TreeNode root, int sum) {
+		print(root);
+		System.out.println("Sum: " + sum);
+
 		return null;
+	}
+
+	public static int countPathsWithSum(TreeNode root, int sum) {
+		if (root == null)
+			return 0;
+		int pathsFromRoot = countPathsWithSumFromNode(root, sum, 0);
+		int pathsOnLeft = countPathsWithSum(root.getLeft(), sum);
+		int pathsOnRight = countPathsWithSum(root.getRight(), sum);
+		return pathsFromRoot + pathsOnLeft + pathsOnRight;
+	}
+
+	private static int countPathsWithSumFromNode(TreeNode node, int sum, int currentSum) {
+		if (node == null)
+			return 0;
+		currentSum += Integer.parseInt(node.getData());
+		int totalPaths = 0;
+		if (currentSum == sum)
+			totalPaths++;
+		totalPaths += countPathsWithSumFromNode(node.getLeft(), sum, currentSum);
+		totalPaths += countPathsWithSumFromNode(node.getRight(), sum, currentSum);
+		return totalPaths;
 	}
 
 }

@@ -18,39 +18,25 @@ public class TaG {
 		// buildOrder();
 		// firstCommonAncestor(randomBinaryTree());
 		// bstToSortedArray(randomBST());
-		// checkSubTree(randomBinaryTree()); // review
-		// tree(); // review
+		// checkSubTree(randomBinaryTree());
 		pathsWithSum(randomBinaryTree());
+	}
+
+	private static void tree() {
+		// test this.
 	}
 
 	private static void pathsWithSum(TreeNode root) {
 		int sum = (int) (Math.random() * 400);
-		Vector<Vector<TreeNode>> paths = TreeFunctions.pathsWithSum(sum);
-		for (Vector<TreeNode> path : paths)
+		System.out.println("Number of paths: " + TreeFunctions.countPathsWithSum(root, sum));
+		for (Vector<TreeNode> path : TreeFunctions.pathsWithSum(root, sum))
 			printTreeNodeVector(path, "Path: ");
 	}
 
-	private static void tree() {
-
-	}
-
-	private static void test() {
-		TreeNode root = randomBST();
-		TreeFunctions.print(root);
-		printTreeNodeVector(TreeFunctions.traversal(root, "in"), "In Order Traverasal");
-		printTreeNodeVector(TreeFunctions.traversal(root, "pre"), "Pre Order Traverasal");
-		printTreeNodeVector(TreeFunctions.traversal(root, "post"), "Post Order Traverasal");
-		TreeNode random = randomTreeNode(root);
-		TreeFunctions.print(random);
-		printTreeNodeVector(TreeFunctions.traversal(random, "in"), "In Order Traversal");
-		printTreeNodeVector(TreeFunctions.traversal(random, "pre"), "Pre Order Traversal");
-		printTreeNodeVector(TreeFunctions.traversal(random, "post"), "Post Order Traversal");
-	}
-
 	private static void printTreeNodeVector(Vector<TreeNode> x, String msg) {
-		System.out.println(msg);
+		System.out.print(msg);
 		for (TreeNode t : x)
-			System.out.print(t.getData() + " ");
+			System.out.print(t.getData() + "-");
 		System.out.println();
 	}
 
@@ -92,7 +78,6 @@ public class TaG {
 		Vector<TreeNode> v = TreeFunctions.traversal(root, "in");
 		TreeNode two = v.get((int) (Math.random() * v.size() - 1));
 		return one == two ? randomTreeNodeOtherThan(one, root) : two;
-
 	}
 
 	private static void buildOrder() {
