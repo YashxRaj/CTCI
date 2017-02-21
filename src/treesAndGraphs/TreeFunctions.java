@@ -407,23 +407,6 @@ public class TreeFunctions {
 			return matchTree(r1.getLeft(), r2.getLeft()) && matchTree(r1.getRight(), r2.getRight());
 	}
 
-	public static Vector<Vector<TreeNode>> pathsWithSum(TreeNode root, int sum) {
-		print(root);
-		System.out.println("Sum: " + sum);
-		HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
-		addToMap(root, map);
-		
-		return null;
-	}
-
-	private static void addToMap(TreeNode node, HashMap<Integer, Integer> map) {
-		if (node != null) {
-			addToMap(node.getLeft(), map);
-			map.put(node.hashCode(), Integer.parseInt(node.getData()));
-			addToMap(node.getRight(), map);
-		}
-	}
-
 	public static int countPathsWithSum(TreeNode root, int sum) {
 		if (root == null)
 			return 0;
@@ -443,6 +426,34 @@ public class TreeFunctions {
 		totalPaths += countPathsWithSumFromNode(node.getLeft(), sum, currentSum);
 		totalPaths += countPathsWithSumFromNode(node.getRight(), sum, currentSum);
 		return totalPaths;
+	}
+
+	public static Vector<Vector<TreeNode>> paths(TreeNode root, int sum) {
+		Vector<Vector<TreeNode>> paths = new Vector<Vector<TreeNode>>();
+		Vector<TreeNode> path = null;
+		int currentSum = 0;
+		paths = findPath(paths, path, root, sum, currentSum);
+		return paths;
+	}
+
+	private static Vector<Vector<TreeNode>> findPath(Vector<Vector<TreeNode>> paths, Vector<TreeNode> path,
+			TreeNode node, int sum, int currentSum) {
+		if (node == null)
+			return null;
+		if (path == null)
+			path = new Vector<TreeNode>();
+		path.addElement(node);
+		currentSum += value(node);
+		if (currentSum == sum) {
+			paths.addElement(path);
+			if (node.getLeft() != null || node.getRight() != null) {
+				findPath(paths, path, node.getLeft(), sum, currentSum);
+				findPath(paths, path, node.getRight(), sum, currentSum);
+			}
+		}
+		findPath(paths, path, node.getLeft(), sum, currentSum);
+		findPath(paths, path, node.getRight(), sum, currentSum);
+		return paths;
 	}
 
 }

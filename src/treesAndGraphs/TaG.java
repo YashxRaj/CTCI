@@ -27,13 +27,13 @@ public class TaG {
 	}
 
 	private static void pathsWithSum(TreeNode root) {
-		int sum = (int) (Math.random() * 400);
+		int sum = (int) (Math.random() * 50);
 		System.out.println("Number of paths: " + TreeFunctions.countPathsWithSum(root, sum));
-		for (Vector<TreeNode> path : TreeFunctions.pathsWithSum(root, sum))
+		for (Vector<TreeNode> path : TreeFunctions.paths(root, sum))
 			printTreeNodeVector(path, "Path: ");
 	}
 
-	private static void printTreeNodeVector(Vector<TreeNode> x, String msg) {
+	static void printTreeNodeVector(Vector<TreeNode> x, String msg) {
 		System.out.print(msg);
 		for (TreeNode t : x)
 			System.out.print(t.getData() + "-");
@@ -175,7 +175,7 @@ public class TaG {
 	private static int[] makeArray(int size) {
 		int[] a = new int[size];
 		for (int i = 0; i < size; i++)
-			a[i] = (int) (Math.random() * 100);
+			a[i] = (int) (Math.random() * 10);
 		return a;
 	}
 
@@ -188,7 +188,7 @@ public class TaG {
 	}
 
 	private static int randomSize() {
-		return 10 + (int) (Math.random() * 10);
+		return 5 + (int) (Math.random() * 10);
 	}
 
 	private static TreeNode randomTreeNode(TreeNode root) {
