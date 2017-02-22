@@ -28,16 +28,17 @@ public class TaG {
 
 	private static void pathsWithSum(TreeNode root) {
 		int sum = (int) (Math.random() * 50);
+		TreeFunctions.print(root);
+		System.out.println("Sum: "+sum);
 		System.out.println("Number of paths: " + TreeFunctions.countPathsWithSum(root, sum));
-		for (Vector<TreeNode> path : TreeFunctions.paths(root, sum))
-			printTreeNodeVector(path, "Path: ");
+		TreeFunctions.paths(root, sum);
 	}
 
 	static void printTreeNodeVector(Vector<TreeNode> x, String msg) {
-		System.out.print(msg);
+		System.out.print(msg+" START->");
 		for (TreeNode t : x)
-			System.out.print(t.getData() + "-");
-		System.out.println();
+			System.out.print(t.getData() + "->");
+		System.out.println("END");
 	}
 
 	private static void checkSubTree(TreeNode root) {

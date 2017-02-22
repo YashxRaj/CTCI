@@ -419,7 +419,7 @@ public class TreeFunctions {
 	private static int countPathsWithSumFromNode(TreeNode node, int sum, int currentSum) {
 		if (node == null)
 			return 0;
-		currentSum += Integer.parseInt(node.getData());
+		currentSum += value(node);
 		int totalPaths = 0;
 		if (currentSum == sum)
 			totalPaths++;
@@ -428,32 +428,31 @@ public class TreeFunctions {
 		return totalPaths;
 	}
 
-	public static Vector<Vector<TreeNode>> paths(TreeNode root, int sum) {
-		Vector<Vector<TreeNode>> paths = new Vector<Vector<TreeNode>>();
+	public static void paths(TreeNode root, int sum) {
+		// Vector<Vector<TreeNode>> paths = new Vector<Vector<TreeNode>>();
 		Vector<TreeNode> path = null;
 		int currentSum = 0;
-		paths = findPath(paths, path, root, sum, currentSum);
-		return paths;
+		findPaths(path, root, sum, currentSum);
 	}
 
-	private static Vector<Vector<TreeNode>> findPath(Vector<Vector<TreeNode>> paths, Vector<TreeNode> path,
-			TreeNode node, int sum, int currentSum) {
-		if (node == null)
-			return null;
-		if (path == null)
+	public static void findPaths(Vector<TreeNode> path, TreeNode rootNode, int sum, int currentSum) {
+		if (rootNode != null) {
 			path = new Vector<TreeNode>();
-		path.addElement(node);
-		currentSum += value(node);
-		if (currentSum == sum) {
-			paths.addElement(path);
-			if (node.getLeft() != null || node.getRight() != null) {
-				findPath(paths, path, node.getLeft(), sum, currentSum);
-				findPath(paths, path, node.getRight(), sum, currentSum);
-			}
+			findPath(path, rootNode, sum, currentSum);
+			findPaths(path, rootNode.getLeft(), sum, currentSum);
+			findPaths(path, rootNode.getRight(), sum, currentSum);
 		}
-		findPath(paths, path, node.getLeft(), sum, currentSum);
-		findPath(paths, path, node.getRight(), sum, currentSum);
-		return paths;
 	}
 
+	private static void findPath(Vector<TreeNode> path, TreeNode node, int sum, int currentSum) {
+		if (node != null) {
+			path.addElement(node);
+			currentSum += value(node);
+			if (currentSum == sum)
+				TaG.printTreeNodeVector(path, "The Path:");
+			findPath(path, node.getLeft(), sum, currentSum);
+			findPath(path, node.getRight(), sum, currentSum);
+			path.removeElementAt(path.size()-1);
+		}
+	}
 }
