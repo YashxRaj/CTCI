@@ -407,12 +407,14 @@ public class TreeFunctions {
 			return matchTree(r1.getLeft(), r2.getLeft()) && matchTree(r1.getRight(), r2.getRight());
 	}
 
-	public static int countPathsWithSum(TreeNode root, int sum) {
+	public static int countAndPrintPathsWithSum(TreeNode root, int sum) {
 		if (root == null)
 			return 0;
 		int pathsFromRoot = countPathsWithSumFromNode(root, sum, 0);
-		int pathsOnLeft = countPathsWithSum(root.getLeft(), sum);
-		int pathsOnRight = countPathsWithSum(root.getRight(), sum);
+		int pathsOnLeft = countAndPrintPathsWithSum(root.getLeft(), sum);
+		int pathsOnRight = countAndPrintPathsWithSum(root.getRight(), sum);
+		for (Vector<TreeNode> path : TreeFunctions.paths(root, sum))
+			TaG.printTreeNodeVector(path, "Path: ");
 		return pathsFromRoot + pathsOnLeft + pathsOnRight;
 	}
 
@@ -431,31 +433,29 @@ public class TreeFunctions {
 	public static Vector<Vector<TreeNode>> paths(TreeNode root, int sum) {
 		Vector<Vector<TreeNode>> paths = new Vector<Vector<TreeNode>>();
 		Vector<TreeNode> path = null;
-		int currentSum = 0;
-		findPaths(paths, path, root, sum, currentSum);
-		return paths;
+		return pathsForAllNodes(root, 0, paths, path, sum);
 	}
 
-	public static Vector<Vector<TreeNode>> findPaths(Vector<Vector<TreeNode>> paths, Vector<TreeNode> path,
-			TreeNode rootNode, int sum, int currentSum) {
+	public static Vector<Vector<TreeNode>> pathsForAllNodes(TreeNode rootNode, int currentSum,
+			Vector<Vector<TreeNode>> paths, Vector<TreeNode> path, int sum) {
 		if (rootNode != null) {
 			path = new Vector<TreeNode>();
-			findPath(paths, path, rootNode, sum, currentSum);
-			paths = findPaths(paths, path, rootNode.getLeft(), sum, currentSum);
-			paths = findPaths(paths, path, rootNode.getRight(), sum, currentSum);
+			paths = pathsForThisNode(rootNode, currentSum, paths, path, sum);
+			paths = pathsForAllNodes(rootNode.getLeft(), currentSum, paths, path, sum);
+			paths = pathsForAllNodes(rootNode.getRight(), currentSum, paths, path, sum);
 		}
 		return paths;
 	}
 
-	private static Vector<Vector<TreeNode>> findPath(Vector<Vector<TreeNode>> paths, Vector<TreeNode> path,
-			TreeNode node, int sum, int currentSum) {
+	private static Vector<Vector<TreeNode>> pathsForThisNode(TreeNode node, int currentSum,
+			Vector<Vector<TreeNode>> paths, Vector<TreeNode> path, int sum) {
 		if (node != null) {
 			path.addElement(node);
 			currentSum += value(node);
 			if (currentSum == sum)
 				paths.add((Vector<TreeNode>) path.clone());
-			paths = findPath(paths, path, node.getLeft(), sum, currentSum);
-			paths = findPath(paths, path, node.getRight(), sum, currentSum);
+			paths = pathsForThisNode(node.getLeft(), currentSum, paths, path, sum);
+			paths = pathsForThisNode(node.getRight(), currentSum, paths, path, sum);
 			path.removeElementAt(path.size() - 1);
 		}
 		return paths;

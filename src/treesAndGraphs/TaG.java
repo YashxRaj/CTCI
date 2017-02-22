@@ -8,7 +8,6 @@ import java.util.Vector;
 public class TaG {
 
 	public static void main(String[] args) {
-		// test();
 		// routeBetweenNodes(makeGraph(true));
 		// sortedArrayToBST(makeSortedArray(randomSize()));
 		// listOfDepths(randomBST());
@@ -19,7 +18,7 @@ public class TaG {
 		// firstCommonAncestor(randomBinaryTree());
 		// bstToSortedArray(randomBST());
 		// checkSubTree(randomBinaryTree());
-		pathsWithSum(randomBinaryTree());
+		// pathsWithSum(randomBinaryTree());
 	}
 
 	private static void tree() {
@@ -29,14 +28,12 @@ public class TaG {
 	private static void pathsWithSum(TreeNode root) {
 		int sum = (int) (Math.random() * 50);
 		TreeFunctions.print(root);
-		System.out.println("Sum: "+sum);
-		System.out.println("Number of paths: " + TreeFunctions.countPathsWithSum(root, sum));
-		for (Vector<TreeNode> path : TreeFunctions.paths(root, sum))
-			printTreeNodeVector(path, "Path: ");
+		System.out.println("Sum: " + sum);
+		System.out.println("Number of paths: " + TreeFunctions.countAndPrintPathsWithSum(root, sum));
 	}
 
 	static void printTreeNodeVector(Vector<TreeNode> x, String msg) {
-		System.out.print(msg+" START->");
+		System.out.print(msg + " START->");
 		for (TreeNode t : x)
 			System.out.print(t.getData() + "->");
 		System.out.println("END");
