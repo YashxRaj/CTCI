@@ -31,7 +31,8 @@ public class TaG {
 		TreeFunctions.print(root);
 		System.out.println("Sum: "+sum);
 		System.out.println("Number of paths: " + TreeFunctions.countPathsWithSum(root, sum));
-		TreeFunctions.paths(root, sum);
+		for (Vector<TreeNode> path : TreeFunctions.paths(root, sum))
+			printTreeNodeVector(path, "Path: ");
 	}
 
 	static void printTreeNodeVector(Vector<TreeNode> x, String msg) {

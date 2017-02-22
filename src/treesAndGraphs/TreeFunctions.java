@@ -428,31 +428,38 @@ public class TreeFunctions {
 		return totalPaths;
 	}
 
-	public static void paths(TreeNode root, int sum) {
-		// Vector<Vector<TreeNode>> paths = new Vector<Vector<TreeNode>>();
+	public static Vector<Vector<TreeNode>> paths(TreeNode root, int sum) {
+		Vector<Vector<TreeNode>> paths = new Vector<Vector<TreeNode>>();
 		Vector<TreeNode> path = null;
 		int currentSum = 0;
-		findPaths(path, root, sum, currentSum);
+		findPaths(paths, path, root, sum, currentSum);
+		return paths;
 	}
 
-	public static void findPaths(Vector<TreeNode> path, TreeNode rootNode, int sum, int currentSum) {
+	public static Vector<Vector<TreeNode>> findPaths(Vector<Vector<TreeNode>> paths, Vector<TreeNode> path,
+			TreeNode rootNode, int sum, int currentSum) {
 		if (rootNode != null) {
 			path = new Vector<TreeNode>();
-			findPath(path, rootNode, sum, currentSum);
-			findPaths(path, rootNode.getLeft(), sum, currentSum);
-			findPaths(path, rootNode.getRight(), sum, currentSum);
+			findPath(paths, path, rootNode, sum, currentSum);
+			paths = findPaths(paths, path, rootNode.getLeft(), sum, currentSum);
+			paths = findPaths(paths, path, rootNode.getRight(), sum, currentSum);
 		}
+		return paths;
 	}
 
-	private static void findPath(Vector<TreeNode> path, TreeNode node, int sum, int currentSum) {
+	private static Vector<Vector<TreeNode>> findPath(Vector<Vector<TreeNode>> paths, Vector<TreeNode> path,
+			TreeNode node, int sum, int currentSum) {
 		if (node != null) {
 			path.addElement(node);
 			currentSum += value(node);
-			if (currentSum == sum)
+			if (currentSum == sum) {
+				paths.add(path);
 				TaG.printTreeNodeVector(path, "The Path:");
-			findPath(path, node.getLeft(), sum, currentSum);
-			findPath(path, node.getRight(), sum, currentSum);
-			path.removeElementAt(path.size()-1);
+			}
+			paths = findPath(paths, path, node.getLeft(), sum, currentSum);
+			paths = findPath(paths, path, node.getRight(), sum, currentSum);
+			path.removeElementAt(path.size() - 1);
 		}
+		return paths;
 	}
 }
