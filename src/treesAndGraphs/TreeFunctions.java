@@ -452,10 +452,8 @@ public class TreeFunctions {
 		if (node != null) {
 			path.addElement(node);
 			currentSum += value(node);
-			if (currentSum == sum) {
-				paths.add(path);
-				TaG.printTreeNodeVector(path, "The Path:");
-			}
+			if (currentSum == sum)
+				paths.add((Vector<TreeNode>) path.clone());
 			paths = findPath(paths, path, node.getLeft(), sum, currentSum);
 			paths = findPath(paths, path, node.getRight(), sum, currentSum);
 			path.removeElementAt(path.size() - 1);
