@@ -1,14 +1,19 @@
 package ctci;
 
+import java.util.HashMap;
+
 public class test2 {
 
 	public static void main(String[] args) {
-		String a = "yash";
-		String b = "yash";
-		if (a.contains(b))
-			System.out.println("a contains b.");
-		if (a.equals("y" + b))
-			System.out.println("a equals a+b.");
+		int a = 80;
+		HashMap<Integer, Integer> m = new HashMap<Integer, Integer>();
+		System.out.println(Integer.toBinaryString(a));
+		System.out.println(Integer.toHexString(a));
+		System.out.println(Integer.toOctalString(a));
+		System.out.println(Integer.toString(a));
+		System.out.println(Integer.toString(a, 2));
+		System.out.println(Integer.toString(a, 8));
+		System.out.println(Integer.toString(a, 16));
+		System.out.println(Integer.toString(a, 64));
 	}
-
 }
