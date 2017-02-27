@@ -1,9 +1,9 @@
-package ctci;
+package bitManipulation;
 
-public class test2 {
+public class bM {
 
 	public static void main(String[] args) {
-
+		
 	}
 
 	private static int getBit(int num, int i) {
@@ -29,4 +29,5 @@ public class test2 {
 	private static int updateBit(int num, int i, boolean bitIs1) {
 		return num & (~(1 << i)) | ((bitIs1 ? 1 : 0) << i);
 	}
+
 }
