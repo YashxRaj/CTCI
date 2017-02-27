@@ -2,10 +2,6 @@ package bitManipulation;
 
 public class bitManipulations {
 
-	public static void insertion() {
-		
-	}
-
 	private static int getBit(int num, int i) {
 		return ((num & (1 << i)) != 0) == false ? 0 : 1;
 	}
@@ -27,6 +23,6 @@ public class bitManipulations {
 	}
 
 	private static int updateBit(int num, int i, boolean bitIs1) {
-		return num & (~(1 << i)) | ((bitIs1 ? 1 : 0) << i);
+		return (num & ~(1 << i)) | ((bitIs1 ? 1 : 0) << i);
 	}
 }
