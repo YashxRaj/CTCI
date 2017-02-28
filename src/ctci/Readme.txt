@@ -88,8 +88,14 @@ MinHeap:
 |										|}											|
 -------------------------------------------------------------------------------------
 			
-				
-				
+HOW TO MEASURE FUNCTION EFFICIENCY:
+-----------------------------------
+long startTime = System.nanoTime();
+long endTime = System.nanoTime();
+functionToMeasure();
+long durationInNano = (endTime - startTime);
+double durationInMicro = durationInNano / 1000;
+System.out.println("Duration: " + durationInMicro);
 
 
 
