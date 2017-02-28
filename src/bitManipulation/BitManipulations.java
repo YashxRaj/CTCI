@@ -11,7 +11,37 @@ public class BitManipulations {
 	}
 
 	private static void binaryToString(Scanner s) {
-		System.out.println("Enter");
+		double random = generateRandom((int) (Math.random() * 50));
+		System.out.print("Random Number: " + random + " - " + convertDecimalToBinary(random));
+	}
+
+	private static double generateRandom(int count) {
+		double random = 0.0, temp = 0.5;
+		for (int i = 0; i < count; i++) {
+			if (chance())
+				random += temp;
+			temp /= 2;
+		}
+		return random;
+	}
+
+	private static boolean chance() {
+		return (Math.random()) > 0.5 ? false : true;
+	}
+
+	private static String convertDecimalToBinary(double random) {
+		if (random > 1 || random <= 0)
+			return "ERROR";
+		StringBuilder binary = new StringBuilder();
+		binary.append(".");
+		while (random > 0) {
+			if (binary.length() >= 32)
+				return "ERROR";
+			double r = random * 2;
+			binary.append(r < 1 ? 0 : 1);
+			random = r < 1 ? r : r - 1;
+		}
+		return binary.toString();
 	}
 
 	private static void insertion(Scanner s) {
