@@ -7,7 +7,21 @@ public class BitManipulations {
 	public static void main(String[] args) {
 		Scanner s = new Scanner(System.in);
 		// insertion(s);
-		binaryToString(s);
+		// binaryToString(s);
+		// flipBitToWin((int) (Math.random() * 3000));
+	}
+
+	private static void flipBitToWin(int theInt) {
+		System.out.println("The Int   : " + theInt);
+		String binary = Integer.toBinaryString(theInt);
+		System.out.println("In Binary : " + binary);
+		int longer = 0, longest = 0;
+		for (int i = 0; i < binary.length(); i++) {
+			longer = getBit(theInt, i) == 0 ? 0 : longer + 1;
+			if (longer > longest)
+				longest = longer;
+		}
+		System.out.println("Longest sequence of 1's: " + longest);
 	}
 
 	private static void binaryToString(Scanner s) {
