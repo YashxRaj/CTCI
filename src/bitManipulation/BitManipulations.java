@@ -16,42 +16,20 @@ public class BitManipulations {
 		// insertion(s);
 		// binaryToString(s);
 		// flipBitToWin((int) (Math.random() * 3000)); - incomplete
-		nextNumber((int) (Math.random() * 3000));
+		// nextNumber((int) (Math.random() * 3000));
+		
 	}
 
 	private static void nextNumber(int num) {
-		String binary = Integer.toBinaryString(num);
-		int nextSmallest = nextSmallest(num, binary.length());
-		int nextLargest = nextLargest(num, binary.length());
-		System.out.println("The number   : " + num + " - " + binary);
-		System.out.println("Next smallest: " + nextSmallest + " - " + Integer.toBinaryString(nextSmallest));
+		int nextSmallest = 0, nextLargest = 0;
+		for (int i = 0, j = 0; i < Integer.toBinaryString(num).length(); i++)
+			if (getBit(num, i)) {
+				nextLargest += (int) Math.pow(2, Integer.toBinaryString(num).length() - j);
+				nextSmallest += (int) Math.pow(2, j++);
+			}
+		System.out.println("The number   : " + num + " - " + Integer.toBinaryString(num));
 		System.out.println("Next largest : " + nextLargest + " - " + Integer.toBinaryString(nextLargest));
-	}
-
-	private static int nextLargest(int num, int length) {
-		int n = clearBit(num, findFirst1(num, length));
-		n = setBit(n, findFirst0(num, length));
-		return n;
-	}
-
-	private static int nextSmallest(int num, int length) {
-		int n = setBit(num, findFirst0(num, length));
-		n = clearBit(n, findFirst1(num, length));
-		return n;
-	}
-
-	private static int findFirst1(int num, int length) {
-		for (int i = 0; i < length; i++)
-			if (getBit(num, i))
-				return i;
-		return length;
-	}
-
-	private static int findFirst0(int num, int length) {
-		for (int i = 0; i < length; i++)
-			if (!getBit(num, i))
-				return i;
-		return length;
+		System.out.println("Next smallest: " + nextSmallest + " - " + Integer.toBinaryString(nextSmallest));
 	}
 
 	private static void flipBitToWin(int n) {
