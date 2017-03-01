@@ -15,9 +15,9 @@ public class BitManipulations {
 		Scanner s = new Scanner(System.in);
 		// insertion(s);
 		// binaryToString(s);
-		// flipBitToWin((int) (Math.random() * 3000)); - incomplete
+		flipBitToWin((int) (Math.random() * 3000));
 		// nextNumber((int) (Math.random() * 3000));
-		
+
 	}
 
 	private static void nextNumber(int num) {
@@ -33,54 +33,24 @@ public class BitManipulations {
 	}
 
 	private static void flipBitToWin(int n) {
-		System.out.println("The Int   : " + n);
 		String binary = Integer.toBinaryString(n);
+		System.out.println("The Int   : " + n);
 		System.out.println("In Binary : " + binary);
 		System.out.println("Longest: ");
-		/*
-		 * This code will give you the longest set of 1's in the binary.
-		 * int longer = 0, longest = 0;
-		 * for (int i = 0; i < binary.length(); i++) {
-		 * longer = getBit(theInt, i) == 0 ? 0 : longer + 1;
-		 * if (longer > longest)
-		 * longest = longer;
-		 * }
-		 * System.out.println("Longest sequence of 1's: " + longest);
-		 */
-		/*
-		 * private static ArrayList<Integer> getAlternatingSequences(int n) {
-		 * ArrayList<Integer> sequences = new ArrayList<Integer>();
-		 * int searchingFor = 0, counter = 0;
-		 * for (int i = 0; i < Integer.toBinaryString(n).length(); i++) {
-		 * if ((n & 1) != searchingFor) {
-		 * sequences.add(counter);
-		 * searchingFor = n & 1;
-		 * counter = 0;
-		 * }
-		 * counter++;
-		 * n >>>= 1;
-		 * }
-		 * sequences.add(counter);
-		 * return sequences;
-		 * }
-		 * 
-		 * private static int findLongestSequence(ArrayList<Integer> seq) {
-		 * int seqMax = 1;
-		 * for (int i = 0; i < seq.size(); i++) {
-		 * int seq0 = seq.get(i), seqThis = 0;
-		 * int seq1R = (i - 1) >= 0 ? seq.get(i - 1) : 0, seq1L = (i + 1) <
-		 * seq.size() ? seq.get(i + 1) : 0;
-		 * if (seq0 == 1)
-		 * seqThis = seq1L + 1 + seq1R;
-		 * if (seq0 > 1)
-		 * seqThis = 1 + Math.max(seq1R, seq1L);
-		 * else if (seq0 == 0)
-		 * seqThis = Math.max(seq1R, seq1L);
-		 * seqMax = Math.max(seqThis, seqMax);
-		 * }
-		 * return seqMax;
-		 * }
-		 */
+		int[] seq = new int[binary.length()];
+		for (int i = 0, length = 0; i < binary.length(); i++)
+			seq[i] = (length = getBit(n, i) ? length + 1 : 0);
+		treesAndGraphs.TaG.printArray(seq);
+		for (int i = 0; i < binary.length(); i++)
+			if (seq[i] != 0) {
+				int k = i;
+				while (seq[i] != 0 && i < binary.length())
+					i++;
+				for (int j = k; j < i - 1; j++)
+					seq[j] = seq[i - 1];
+			}
+		treesAndGraphs.TaG.printArray(seq);
+
 	}
 
 	private static void binaryToString(Scanner s) {
@@ -118,14 +88,16 @@ public class BitManipulations {
 	}
 
 	private static void insertion(Scanner s) {
-		// System.out.print("Number to insert into: ");
-		// int n = Integer.parseInt(s.next(), 2);
-		// System.out.print("Number to insert: ");
-		// int m = Integer.parseInt(s.next(), 2);
-		// System.out.print("Enter the starting point: ");
-		// int j = s.nextInt();
-		// System.out.print("Enter the ending point: ");
-		// int i = s.nextInt();
+		/*
+		 * System.out.print("Number to insert into: ");
+		 * int n = Integer.parseInt(s.next(), 2);
+		 * System.out.print("Number to insert: ");
+		 * int m = Integer.parseInt(s.next(), 2);
+		 * System.out.print("Enter the starting point: ");
+		 * int j = s.nextInt();
+		 * System.out.print("Enter the ending point: ");
+		 * int i = s.nextInt();
+		 */
 		int n = Integer.parseInt("10000000000", 2), m = Integer.parseInt("10011", 2), j = 6, i = 2;
 		System.out.println("Insertion: " + Integer.toBinaryString((n & ((~0 << (j + 1)) | ((1 << i) - 1))) | (m << i)));
 	}
@@ -155,3 +127,47 @@ public class BitManipulations {
 	}
 
 }
+/*
+ * This code will give you the longest set of 1's in the binary.
+ * int longer = 0, longest = 0;
+ * for (int i = 0; i < binary.length(); i++) {
+ * longer = getBit(theInt, i) == 0 ? 0 : longer + 1;
+ * if (longer > longest)
+ * longest = longer;
+ * }
+ * System.out.println("Longest sequence of 1's: " + longest);
+ */
+/*
+ * private static ArrayList<Integer> getAlternatingSequences(int n) {
+ * ArrayList<Integer> sequences = new ArrayList<Integer>();
+ * int searchingFor = 0, counter = 0;
+ * for (int i = 0; i < Integer.toBinaryString(n).length(); i++) {
+ * if ((n & 1) != searchingFor) {
+ * sequences.add(counter);
+ * searchingFor = n & 1;
+ * counter = 0;
+ * }
+ * counter++;
+ * n >>>= 1;
+ * }
+ * sequences.add(counter);
+ * return sequences;
+ * }
+ * 
+ * private static int findLongestSequence(ArrayList<Integer> seq) {
+ * int seqMax = 1;
+ * for (int i = 0; i < seq.size(); i++) {
+ * int seq0 = seq.get(i), seqThis = 0;
+ * int seq1R = (i - 1) >= 0 ? seq.get(i - 1) : 0, seq1L = (i + 1) <
+ * seq.size() ? seq.get(i + 1) : 0;
+ * if (seq0 == 1)
+ * seqThis = seq1L + 1 + seq1R;
+ * if (seq0 > 1)
+ * seqThis = 1 + Math.max(seq1R, seq1L);
+ * else if (seq0 == 0)
+ * seqThis = Math.max(seq1R, seq1L);
+ * seqMax = Math.max(seqThis, seqMax);
+ * }
+ * return seqMax;
+ * }
+ */
