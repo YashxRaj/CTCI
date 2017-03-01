@@ -17,7 +17,39 @@ public class BitManipulations {
 		// binaryToString(s);
 		// flipBitToWin((int) (Math.random() * 3000)); - motherfucker.
 		// nextNumber((int) (Math.random() * 3000));
+		// (n&(n-1)==0) - Checks if n is a power of 2 or 0.
+		conversion((int) (Math.random() * 3000), (int) (Math.random() * 3000));
+	}
 
+	private static void conversion(int a, int b) {
+		int ctr = 0;
+		padAndPrint(a, b);
+		for (int c = a ^ b; c != 0; c = c & (c - 1))
+			ctr++;
+		System.out.println("Number of bits needed to change a to b: " + ctr);
+	}
+
+	private static void padAndPrint(int a, int b) {
+		String strA = Integer.toBinaryString(a), strB = Integer.toBinaryString(b);
+		int l = strA.length() - strB.length();
+		if (l != 0) {
+			char zero = '0';
+			StringBuilder s = new StringBuilder();
+			for (int i = 0; i < Math.abs(l); i++)
+				s.append(zero);
+			if (l < 0)
+				strA = s.toString() + strA;
+			else
+				strB = s.toString() + strB;
+		}
+		print(strA, strB,a,b);
+	}
+
+	private static void print(String strA, String strB, int a, int b) {
+		System.out.print(strA + " - ");
+		System.out.println(a);
+		System.out.print(strB + " - ");
+		System.out.println(b);
 	}
 
 	private static void nextNumber(int num) {
@@ -38,7 +70,7 @@ public class BitManipulations {
 		System.out.println("In Binary : " + binary);
 		System.out.println("Longest: ");
 		int[] seq = new int[binary.length()];
-		
+
 	}
 
 	private static void binaryToString(Scanner s) {
