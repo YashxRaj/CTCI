@@ -15,7 +15,7 @@ public class BitManipulations {
 		Scanner s = new Scanner(System.in);
 		// insertion(s);
 		// binaryToString(s);
-		flipBitToWin((int) (Math.random() * 3000));
+		// flipBitToWin((int) (Math.random() * 3000)); - motherfucker.
 		// nextNumber((int) (Math.random() * 3000));
 
 	}
@@ -38,19 +38,7 @@ public class BitManipulations {
 		System.out.println("In Binary : " + binary);
 		System.out.println("Longest: ");
 		int[] seq = new int[binary.length()];
-		for (int i = 0, length = 0; i < binary.length(); i++)
-			seq[i] = (length = getBit(n, i) ? length + 1 : 0);
-		treesAndGraphs.TaG.printArray(seq);
-		for (int i = 0; i < binary.length(); i++)
-			if (seq[i] != 0) {
-				int k = i;
-				while (seq[i] != 0 && i < binary.length())
-					i++;
-				for (int j = k; j < i - 1; j++)
-					seq[j] = seq[i - 1];
-			}
-		treesAndGraphs.TaG.printArray(seq);
-
+		
 	}
 
 	private static void binaryToString(Scanner s) {
@@ -170,4 +158,24 @@ public class BitManipulations {
  * }
  * return seqMax;
  * }
+ */
+/*
+ * for (int i = 0, length = 0; i < binary.length(); i++)
+ * seq[i] = (length = getBit(n, i) ? length + 1 : 0);
+ * treesAndGraphs.TaG.printArray(seq);
+ * for (int i = 0; i < binary.length(); i++)
+ * if (seq[i] != 0) {
+ * int k = i;
+ * while (i < binary.length() && seq[i] != 0)
+ * i++;
+ * for (int j = k; j < i - 1; j++)
+ * seq[j] = seq[i - 1];
+ * }
+ * // 333?
+ * int max = 0;
+ * for (int i = 0; i < binary.length() - 2; i++)
+ * if (seq[i] != 0)
+ * max = (seq[i + 2] != 0) && (seq[i] + seq[i + 2] + 1 > max) ? (seq[i]
+ * + seq[i + 2] + 1) : max;
+ * System.out.println(max);
  */
