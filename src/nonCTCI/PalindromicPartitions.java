@@ -14,31 +14,42 @@ public class PalindromicPartitions {
 
 	private static void palindromePartitions(String str) {
 		char[] c = str.toCharArray();
-		for (char x : c)
-			System.out.print(x + " ");
-		System.out.println(); // Printing all characters.
+		printAllChars(c);
 		for (int i = 1; i < c.length - 1; i++) {
-			StringBuilder s = new StringBuilder();
-			if (c[i] == c[i - 1]) {
-			
-			} else if (c[i - 1] == c[i + 1]) {
+			if (c[i - 1] == c[i + 1]) {
 				int j = 1;
 				while (i + j < c.length && c[i + j] == c[i - j])
 					j++;
-				print(c, i, j);
-			} else {
-				
-			}
+				printPalindrome(c, i, j);
+			} else if (c[i - 1] == c[i])
+				printMirror(c, i);
 		}
 	}
 
-	private static void print(char[] c, int i, int j) {
+	private static void printAllChars(char[] c) {
+		for (char x : c)
+			System.out.print(x + " ");
+		System.out.println();
+	}
+
+	private static void printMirror(char[] c, int i) {
+		StringBuilder s = new StringBuilder();
+		s.append(c[i - 1]);
+		s.append(c[i]);
+		s.append(" ");
+		System.out.println(s.toString());
+	}
+
+	private static void printPalindrome(char[] c, int i, int j) {
 		StringBuilder s = new StringBuilder();
 		String str = c[i] + "";
 		for (int k = 1; k < j; k++) {
-			s.append(c[i - j]);
+			s.append(c[i - k]);
 			s.append(str);
-			s.append(c[i + j]);
+			s.append(c[i + k]);
+			str = s.toString();
+			System.out.println(str);
+			s.delete(0, s.length());
 		}
 	}
 }
