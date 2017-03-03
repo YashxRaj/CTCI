@@ -20,20 +20,13 @@ public class PalindromicPartitions {
 		for (int i = 1; i < c.length - 1; i++) {
 			StringBuilder s = new StringBuilder();
 			if (c[i] == c[i - 1]) {
-				if (c[i - 1] != c[i + 1]) {
-					s.append(c[i]);
-					s.append(c[i - 1]);
-					System.out.println(s.toString());
-				} else {
-					int j = 1;
-					while (i + j < c.length && c[i + j] == c[i - j])
-						j++;
-					print(c, i, j);
-				}
+			} else if (false) {
+				// write code to check for i-1 with i+1
 			} else {
-				s.append(c[i]);
-				s.append(" ");
-				System.out.println(s.toString());
+				int j = 1;
+				while (i + j < c.length && c[i + j] == c[i - j])
+					j++;
+				print(c, i, j);
 			}
 		}
 	}
@@ -42,9 +35,9 @@ public class PalindromicPartitions {
 		StringBuilder s = new StringBuilder();
 		String str = c[i] + "";
 		for (int k = 1; k < j; k++) {
-			s.append(c[i-j]);
+			s.append(c[i - j]);
 			s.append(str);
-			s.append(c[i+j]);
+			s.append(c[i + j]);
 		}
 	}
 }
