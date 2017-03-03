@@ -20,13 +20,14 @@ public class PalindromicPartitions {
 		for (int i = 1; i < c.length - 1; i++) {
 			StringBuilder s = new StringBuilder();
 			if (c[i] == c[i - 1]) {
-			} else if (false) {
-				// write code to check for i-1 with i+1
-			} else {
+			
+			} else if (c[i - 1] == c[i + 1]) {
 				int j = 1;
 				while (i + j < c.length && c[i + j] == c[i - j])
 					j++;
 				print(c, i, j);
+			} else {
+				
 			}
 		}
 	}
