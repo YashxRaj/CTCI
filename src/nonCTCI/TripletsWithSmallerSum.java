@@ -7,47 +7,42 @@ import java.util.Vector;
 public class TripletsWithSmallerSum {
 	// http://www.geeksforgeeks.org/count-triplets-with-sum-smaller-that-a-given-value/
 	public static void main(String[] args) {
-		System.out.println("Array size: 10. Enter Elements: ");
-		int[] data = new int[10];
 		Scanner s = new Scanner(System.in);
-		for (int i = 0; i < 10; i++)
+		System.out.println("Enter number of elements: ");
+		int n = s.nextInt();
+		System.out.println("Array size: " + n + ". Enter Elements: ");
+		int[] data = new int[n];
+		for (int i = 0; i < n; i++)
 			data[i] = s.nextInt();
 		System.out.print("Enter sum: ");
 		int sum = s.nextInt();
+		s.close();
+		System.out.println("Simple Solution: " + tripletsCountSimple(data, sum));
+		System.out.println("Efficient Solution: " + tripletsCountEfficient(data, sum));
+	}
+
+	private static int tripletsCountSimple(int[] data, int sum) {
+		int count = 0;
+		for (int i = 0; i < data.length - 2; i++)
+			for (int j = i + 1; j < data.length - 1; j++)
+				for (int k = j + 1; k < data.length; k++)
+					if (data[i] + data[j] + data[k] < sum)
+						count++;
+		return count;
+	}
+
+	private static int tripletsCountEfficient(int[] data, int sum) {
+		int count = 0;
 		Arrays.sort(data);
-		Vector<Vector<Integer>> triplets = generateTriplets(data, sum);
-		printTriplets(triplets);
-	}
-
-	private static void printTriplets(Vector<Vector<Integer>> triplets) {
-
-	}
-
-	/*
-	 * 1) Sort the input array in increasing order.
-	 * 2) Initialize result as 0.
-	 * 3) Run a loop from i = 0 to n-2. An iteration of this loop finds all
-	 * triplets with arr[i] as first element.
-	 * a) Initialize other two elements as corner elements of subarray
-	 * arr[i+1..n-1], i.e., j = i+1 and k = n-1
-	 * b) Move j and k toward each other until they meet, i.e., while (j < k)
-	 * (i) if (arr[i] + arr[j] + arr[k] >= sum), then do k--
-	 * 
-	 * Else for current i and j, there can (k-j) possible third elements that
-	 * satisfy the constraint.
-	 * (ii) Else Do ans += (k - j) followed by j++
-	 */
-	private static Vector<Vector<Integer>> generateTriplets(int[] data, int sum) {
-		Vector<Vector<Integer>> triplets = new Vector<Vector<Integer>>();
-		Vector<Integer> triplet = new Vector<Integer>();
-		for (int i = 0; i < data.length - 2; i++) {
-			int s = sum;
-			s -= data[i];
-			if (s > 0) {
-
+		for (int i = 0; i < data.length - 2; i++)
+			for (int j = i + 1, k = data.length - 1; j < k;) {
+				if (data[i] + data[j] + data[k] >= sum)
+					k--;
+				else {
+					count += (k - j);
+					j++;
+				}
 			}
-		}
-		return triplets;
+		return count;
 	}
-
 }
