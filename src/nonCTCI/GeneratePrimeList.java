@@ -1,6 +1,10 @@
 package nonCTCI;
 
 public class GeneratePrimeList {
+	/*
+	 * 1 optimization: only use odd numbers in the array, reduces space
+	 * usage by half.
+	 */
 	public static void main(String args[]) {
 		// Driver code
 		sieveOfEratosthenes(100);
