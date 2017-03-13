@@ -36,8 +36,8 @@ public class LL {
 		Node two = null;
 		if (chance()) {
 			two = randomNodeBetweenLL(one, randomNodeNumberBetweenLL(one));
-			if(chance())
-				two = maybePadded(two,one.size() - two.size());
+			if (chance())
+				two = maybePadded(two, one.size() - two.size());
 		} else
 			two = MakeLL(randomLength());
 		LL7.checkIntersection(one, two);
@@ -111,7 +111,7 @@ public class LL {
 		System.out.println();
 	}
 
-	private static Node MakeLL(int len) {
+	public static Node MakeLL(int len) {
 		Node head = new Node((int) (Math.random() * 10));
 		for (int i = 0; i < len; i++)
 			head.AppendToTail((int) (Math.random() * 10));
@@ -142,7 +142,7 @@ public class LL {
 		return 2 + (int) (Math.random() * (head.size() - 3));
 	}
 
-	private static int randomLength() {
+	public static int randomLength() {
 		return (4 + ((int) (Math.random() * 5)));
 	}
 }
