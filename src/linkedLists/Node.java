@@ -8,6 +8,12 @@ public class Node {
 		data = d;
 	}
 
+	public Node(int data, Node next) {
+		super();
+		this.next = next;
+		this.data = data;
+	}
+
 	void AppendToTail(int d) {
 		Node end = new Node(d);
 		Node n = this;
@@ -45,4 +51,10 @@ public class Node {
 		}
 		return l;
 	}
+
+	@Override
+	public Node clone() throws CloneNotSupportedException {
+		return new Node(this.data, this.next);
+	}
+
 }

@@ -5,23 +5,18 @@ import linkedLists.Node;
 
 public class ReverseLL {
 
-	public static void main(String[] args) {
-		Node head = LL.MakeLL(LL.randomLength());
-		LL.printLL(reverseLinkedList(head), "Reverse:");
+	public static void main(String[] args) throws CloneNotSupportedException {
+		LL.printLL(reverseLinkedList(LL.MakeLL(LL.randomLength())), "Reverse:");
 	}
 
-	private static Node reverseLinkedList(Node head) {
-		Node previous = null, current = head;
+	private static Node reverseLinkedList(Node head) throws CloneNotSupportedException {
+		Node previous = null, current = head.clone();
 		while (current != null) {
-			Node temp = current;
+			Node temp = current.clone();
 			current.next = previous;
 			previous = current;
-			if (temp.next != null)
-				current = temp.next;
-			else
-				break;
+			current = temp.next;
 		}
-		return current;
+		return previous;
 	}
-
 }
