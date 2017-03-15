@@ -3,27 +3,28 @@ package nonCTCI;
 import java.util.Arrays;
 
 public class BinarySearch {
-
-	public static void main(String[] args) {
-		// Driver Code
-		int[] a = new int[15];
-		for (int i = 0; i < a.length; i++)
-			a[i] = (int) (Math.random() * a.length);
-
-		for (int i = 0; i < a.length; i++)
-			System.out.print(a[i] + " ");
-		System.out.println();
-
-		Arrays.sort(a);
-
-		int key = (int) (Math.random() * a.length);
-		for (int i = 0; i < a.length; i++)
-			System.out.print(a[i] + " ");
-		System.out.println();
-
-		System.out.println(binarySearch(a[key], a) + " for key: " + key);
-	}
-
+	// http://quiz.geeksforgeeks.org/binary-search/
+	/*
+	 * public static void main(String[] args) {
+	 * // Driver Code
+	 * int[] a = new int[15];
+	 * for (int i = 0; i < a.length; i++)
+	 * a[i] = (int) (Math.random() * a.length);
+	 * 
+	 * for (int i = 0; i < a.length; i++)
+	 * System.out.print(a[i] + " ");
+	 * System.out.println();
+	 * 
+	 * Arrays.sort(a);
+	 * 
+	 * int key = (int) (Math.random() * a.length);
+	 * for (int i = 0; i < a.length; i++)
+	 * System.out.print(a[i] + " ");
+	 * System.out.println();
+	 * 
+	 * System.out.println(binarySearch(a[key], a) + " for key: " + key);
+	 * }
+	 */
 	public static boolean binarySearch(int key, int[] a) {
 		int min = 0, max = a.length - 1;
 		return binarySearch(key, a, min, max);
