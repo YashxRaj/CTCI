@@ -6,7 +6,7 @@ public class LL {
 
 	public static void main(String[] args) {
 		// LL1(MakeLL(randomLength()));
-		// LL2(MakeLL(randomLength()));
+		LL2(MakeLL(randomLength()));
 		// LL3(MakeLL(randomLength()));
 		// LL4(MakeLL(randomLength()));
 		// LL5(MakeLL(randomLength()), MakeLL(randomLength()));
