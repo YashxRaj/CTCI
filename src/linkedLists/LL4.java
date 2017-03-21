@@ -3,8 +3,9 @@ package linkedLists;
 public class LL4 {
 
 	public static Node partition(Node n, int x) {
-		Node head = n, tail = n, next = n.next;
+		Node head = n, tail = n;
 		while (n != null) {
+			Node next = n.next;
 			if (n.data < x) {
 				n.next = head;
 				head = n;
@@ -17,5 +18,14 @@ public class LL4 {
 		tail.next = null;
 		return head;
 	}
-	
+
+	public static Node partitionSimple(Node n, int x) {
+		Node head = null, tail = null;
+		while (n != null) {
+			Node next = n.next;
+			if (n.data < x) {
+				
+			}
+		}
+	}
 }

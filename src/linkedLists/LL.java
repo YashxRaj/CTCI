@@ -6,9 +6,9 @@ public class LL {
 
 	public static void main(String[] args) {
 		// LL1(MakeLL(randomLength()));
-		LL2(MakeLL(randomLength()));
+		// LL2(MakeLL(randomLength()));
 		// LL3(MakeLL(randomLength()));
-		// LL4(MakeLL(randomLength()));
+		LL4(MakeLL(randomLength()));
 		// LL5(MakeLL(randomLength()), MakeLL(randomLength()));
 		// LL6(MakeLL(randomLength()));
 		// LL7(MakeLL(randomLength()));
@@ -61,10 +61,11 @@ public class LL {
 	}
 
 	private static void LL4(Node head) {
+		Scanner s = new Scanner(System.in);
 		System.out.print("Enter partition value x: ");
-		int x = new Scanner(System.in).nextInt();
-		head = LL4.partition(head, x);
+		head = LL4.partition(head, s.nextInt());
 		printLL(head, "Partitioned linked list:");
+		s.close();
 	}
 
 	private static void LL3(Node head) {
@@ -74,8 +75,10 @@ public class LL {
 	}
 
 	private static void LL2(Node head) {
+		Scanner s = new Scanner(System.in);
 		System.out.print("Enter k for k-th to last element: ");
-		LL2.kthToLastElement(head, new Scanner(System.in).nextInt());
+		LL2.kthToLastElement(head, s.nextInt());
+		s.close();
 	}
 
 	private static void LL1(Node head) {
