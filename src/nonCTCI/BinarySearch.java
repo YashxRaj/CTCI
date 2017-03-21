@@ -26,20 +26,17 @@ public class BinarySearch {
 	 * }
 	 */
 	public static boolean binarySearch(int key, int[] a) {
-		int min = 0, max = a.length - 1;
-		return binarySearch(key, a, min, max);
-		/*
-		 * int mid = (min + max) / 2;
-		 * for (int i = 0; i < Math.log(a.length) / Math.log(2); i++) {
-		 * if (key == a[mid])
-		 * return true;
-		 * else if (key > a[mid])
-		 * min = mid + 1;
-		 * else if (key < a[mid])
-		 * max = mid - 1;
-		 * }
-		 * return false;
-		 */
+		int min = 0, max = a.length - 1, mid;
+		for (int i = 0; i <= Math.log(a.length) / Math.log(2); i++) {
+			mid = (min + max) / 2;
+			if (key == a[mid])
+				return true;
+			else if (key > a[mid])
+				min = mid + 1;
+			else if (key < a[mid])
+				max = mid - 1;
+		}
+		return false;
 	}
 
 	private static boolean binarySearch(int key, int[] a, int min, int max) {
