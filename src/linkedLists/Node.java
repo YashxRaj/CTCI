@@ -14,7 +14,7 @@ public class Node {
 		this.data = data;
 	}
 
-	void AppendToTail(int d) {
+	public void AppendToTail(int d) {
 		Node end = new Node(d);
 		Node n = this;
 		while (n.next != null)

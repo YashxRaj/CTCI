@@ -8,7 +8,7 @@ public class LL {
 		// LL1(MakeLL(randomLength()));
 		// LL2(MakeLL(randomLength()));
 		// LL3(MakeLL(randomLength()));
-		LL4(MakeLL(randomLength()));
+		// LL4(MakeLL(randomLength()));
 		// LL5(MakeLL(randomLength()), MakeLL(randomLength()));
 		// LL6(MakeLL(randomLength()));
 		// LL7(MakeLL(randomLength()));
@@ -86,7 +86,7 @@ public class LL {
 		LL1.removeDuplicates(head);
 	}
 
-	private static boolean chance() {
+	public static boolean chance() {
 		Boolean chance = true;
 		if (Math.random() > 0.5)
 			chance = false;

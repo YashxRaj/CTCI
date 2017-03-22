@@ -18,14 +18,4 @@ public class LL4 {
 		tail.next = null;
 		return head;
 	}
-
-	public static Node partitionSimple(Node n, int x) {
-		Node head = null, tail = null;
-		while (n != null) {
-			Node next = n.next;
-			if (n.data < x) {
-				
-			}
-		}
-	}
 }
