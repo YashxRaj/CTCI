@@ -9,7 +9,7 @@ public class ShapeDetection {
 	static double[][] points;
 	static HashMap<double[], Character> names;
 	static HashMap<Character, double[]> revertNames;
-
+	static HashMap<String, Double> mappedLengths;
 	// Will require add points, remove points, update points functions.
 	// Remove main.
 	// Add constructor.
@@ -21,11 +21,11 @@ public class ShapeDetection {
 		lengths = calculateLengths();
 		printNames();
 		printLengths();
-		detectSquare();
+		distanceBetween(revertNames.get('A'), revertNames.get('B'));
 	}
 
-	public static void detectSquare() {
-		
+	private static void distanceBetween(double[] x, double[] y) {
+
 	}
 
 	private static HashMap<Character, double[]> setPoints() {
@@ -83,9 +83,12 @@ public class ShapeDetection {
 			for (int j = 0; j < points.length; j++) {
 				if (i == j)
 					continue;
-				if (lengths[i][j] == 0.0)
+				if (lengths[i][j] == 0.0) {
 					lengths[i][j] = Math.sqrt(Math.pow(Math.abs(points[i][0] - points[j][0]), 2)
 							+ Math.pow(Math.abs(points[i][1] - points[j][1]), 2));
+					mappedLengths.put(names.get(points[i]) + "" + names.get(points[j]), lengths[i][j]);
+					mappedLengths.put(names.get(points[j]) + "" + names.get(points[i]), lengths[i][j]);
+				}
 				lengths[j][i] = lengths[i][j];
 			}
 		return lengths;
