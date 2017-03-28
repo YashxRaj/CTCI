@@ -16,6 +16,11 @@ public class ShapeDetection {
 		setNumberAndGetPoints();
 		setAndPrintNamesOfPoints();
 		calculateAndPrintEdges();
+		detectSquares();
+	}
+
+	private static void detectSquares() {
+		
 	}
 
 	public static double sizeOfEdge(char x, char y) {
@@ -67,9 +72,7 @@ public class ShapeDetection {
 		for (Double d : reverseEdges.keySet()) {
 			s.append(df.format(d));
 			s.append(" - ");
-			String x = reverseEdges.get(d);
-			for (int i = 0; i < x.length(); i += 2)
-				s.append(x.substring(i, i + 2));
+			s.append(reverseEdges.get(d));
 			s.append(System.lineSeparator());
 		}
 		System.out.println(s.toString());
