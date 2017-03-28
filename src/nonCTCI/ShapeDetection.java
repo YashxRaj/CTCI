@@ -3,50 +3,24 @@ package nonCTCI;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.Vector;
 
 public class ShapeDetection {
 	static double[][] lengths;
 	static double[][] points;
 	static HashMap<double[], Character> reverseNamedPoints;
 	static HashMap<Character, double[]> namedPoints;
-	static HashMap<String, Double> mappedLengths;
-
-	// Will require add points, remove points, update points functions.
-	// Remove main.
-	// Add constructor.
-	ShapeDetection() {
-	}
+	static HashMap<String, Double> edges;
+	static HashMap<Double, String> reverseEdges;
 
 	public static void main(String[] args) {
 		setNumberAndGetPoints();
 		setAndPrintNamesOfPoints();
 		calculateAndPrintEdges();
-		detectSquares();
 	}
 
-	private static double distanceBetween(char x, char y) {
-		return mappedLengths.get(x + y + "");
-	}
-
-	private static void detectSquares() {
-
-		StringBuffer s = new StringBuffer();
-		for (String x : mappedLengths.keySet())
-			for (String y : mappedLengths.keySet())
-				if (!x.equals(y) && mappedLengths.get(x) == mappedLengths.get(y))
-					s.append(x + y + "");
-		char[] ch = s.toString().toCharArray();
-		HashMap<Character, Integer> check = new HashMap<Character, Integer>();
-		for (int i = 0; i < ch.length - 1; i++)
-			check.put(ch[i], check.get(ch[i]) + 1);
-		boolean p = false;
-		System.out.println(ch.length);
-		for (int i = 1; i < ch.length; i += 2)
-			if (check.containsValue(i))
-				p = true;
-		System.out.println(p == false ? " is a square." : "No squares found.");
+	public static double sizeOfEdge(char x, char y) {
+		String str = x + "" + y, revStr = y + "" + x;
+		return edges.containsKey(str) ? edges.get(str) : edges.get(revStr);
 	}
 
 	private static void setAndPrintNamesOfPoints() {
@@ -57,10 +31,11 @@ public class ShapeDetection {
 			reverseNamedPoints.put(points[i], (char) x++);
 		// Printing Names.
 		StringBuffer s = new StringBuffer();
+		DecimalFormat df = new DecimalFormat("#.##");
 		s.append("Point - Name");
 		s.append(System.lineSeparator());
 		for (int i = 0; i < points.length; i++) {
-			s.append(points[i][0] + "," + points[i][1] + " - ");
+			s.append("[" + df.format(points[i][0]) + "," + df.format(points[i][1]) + "]" + " - ");
 			s.append(reverseNamedPoints.get(points[i]));
 			s.append(System.lineSeparator());
 		}
@@ -68,31 +43,33 @@ public class ShapeDetection {
 	}
 
 	private static void calculateAndPrintEdges() {
-		// Calculating lengths of edges.
-		mappedLengths = new HashMap<String, Double>();
+		// Calculating edges and reverseEdges.
+		edges = new HashMap<String, Double>();
+		reverseEdges = new HashMap<Double, String>();
 		for (int i = 0; i < points.length; i++)
 			for (int j = 0; j < points.length; j++) {
 				char x = reverseNamedPoints.get(points[i]), y = reverseNamedPoints.get(points[j]);
-				if (!mappedLengths.containsKey(x + y + "") && !mappedLengths.containsKey(y + x + "")) {
+				String str = x + "" + y, revStr = y + "" + x;
+				if (x == y || edges.containsKey(revStr))
+					continue;
+				if (x != y && !edges.containsKey(str)) {
 					double temp = Math.sqrt(Math.pow(Math.abs(points[i][0] - points[j][0]), 2)
 							+ Math.pow(Math.abs(points[i][1] - points[j][1]), 2));
-					mappedLengths.put(x + y + "", temp);
-					mappedLengths.put(y + x + "", temp);
+					edges.put(str, temp);
+					reverseEdges.put(temp, reverseEdges.containsKey(temp) ? reverseEdges.get(temp) + "," + str : str);
 				}
 			}
-		// Printing lengths.
+		// Printing edges.
 		StringBuffer s = new StringBuffer();
 		DecimalFormat df = new DecimalFormat("0.00");
-		s.append("Points and their lengths:");
+		s.append("Length - Edges");
 		s.append(System.lineSeparator());
-		s.append(System.lineSeparator());
-		for (int i = 0; i < points.length - 1; i++) {
-			for (int j = i + 1; j < points.length; j++) {
-				char x = reverseNamedPoints.get(points[i]), y = reverseNamedPoints.get(points[j]);
-				s.append(x + " : " + y + " - ");
-				s.append(df.format(mappedLengths.get(x + y + "")));
-				s.append(System.lineSeparator());
-			}
+		for (Double d : reverseEdges.keySet()) {
+			s.append(df.format(d));
+			s.append(" - ");
+			String x = reverseEdges.get(d);
+			for (int i = 0; i < x.length(); i += 2)
+				s.append(x.substring(i, i + 2));
 			s.append(System.lineSeparator());
 		}
 		System.out.println(s.toString());
