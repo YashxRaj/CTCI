@@ -19,7 +19,7 @@ public class ShapeDetection {
 		detectSquares();
 	}
 
-	private static void detectSquares() {
+	public static void detectSquares() {
 		
 	}
 
