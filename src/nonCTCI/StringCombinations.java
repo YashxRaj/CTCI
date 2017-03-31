@@ -3,22 +3,22 @@ package nonCTCI;
 import java.util.HashSet;
 import java.util.Scanner;
 
-public class StringCombinationsGenerator {
+public class StringCombinations {
 	public static void main(String[] args) {
 		// Driver Code
 		Scanner s = new Scanner(System.in);
 		System.out.print("Enter the string: ");
 		String str = s.nextLine();
 		System.out.print("N: " + str.length() + "\nR: ");
-		generateStrings(str.toCharArray(), str.toCharArray().length, s.nextInt());
+		print(nCr(str.toCharArray(), str.toCharArray().length, s.nextInt()));
 		s.close();
 	}
 
-	public static void generateStrings(char[] baseSet, int n, int r) {
-		print(combinationUtil(baseSet, new char[r], 0, n - 1, 0, r, new HashSet<String>()));
+	public static HashSet<String> nCr(char[] baseSet, int n, int r) {
+		return generate(baseSet, new char[r], 0, n - 1, 0, r, new HashSet<String>());
 	}
 
-	private static HashSet<String> combinationUtil(char[] a, char[] c, int strt, int end, int indx, int r,
+	private static HashSet<String> generate(char[] a, char[] c, int strt, int end, int indx, int r,
 			HashSet<String> set) {
 		if (indx == r) {
 			StringBuilder s = new StringBuilder();
@@ -29,7 +29,7 @@ public class StringCombinationsGenerator {
 		}
 		for (int i = strt; i <= end && end - i + 1 >= r - indx; i++) {
 			c[indx] = a[i];
-			combinationUtil(a, c, i + 1, end, indx + 1, r, set);
+			generate(a, c, i + 1, end, indx + 1, r, set);
 		}
 		return set;
 	}
