@@ -14,9 +14,11 @@ public class StringCombinations {
 		s.close();
 	}
 
-	public static char[] hashSetToCharArray(HashSet<Character> set) {
+	public static char[] hashSetToCharacterArray(HashSet<Character> set) {
 		char[] c = new char[set.size()];
-		
+		int i = 0;
+		for (Character ch : set)
+			c[i++] = ch;
 		return c;
 	}
 

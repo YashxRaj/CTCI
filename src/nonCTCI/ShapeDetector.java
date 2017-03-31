@@ -23,8 +23,7 @@ public class ShapeDetector {
 					if (xMap.get(z).equals(xMap.get(y)) && !y.equals(z))
 						xKeys.add(z);
 				if (xKeys.size() >= 2) {
-					StringCombinations.nCr(StringCombinations.hashSetToCharArray(xKeys), xKeys.size(), 2);
-
+					
 				}
 			}
 		}
