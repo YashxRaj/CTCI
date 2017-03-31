@@ -14,17 +14,23 @@ public class StringCombinations {
 		s.close();
 	}
 
-	public static HashSet<String> nCr(char[] baseSet, int n, int r) {
-		return generate(baseSet, new char[r], 0, n - 1, 0, r, new HashSet<String>());
+	public static char[] hashSetToCharArray(HashSet<Character> set) {
+		char[] c = new char[set.size()];
+		
+		return c;
 	}
 
-	private static HashSet<String> generate(char[] a, char[] c, int strt, int end, int indx, int r,
-			HashSet<String> set) {
+	public static HashSet<char[]> nCr(char[] baseSet, int n, int r) {
+		return generate(baseSet, new char[r], 0, n - 1, 0, r, new HashSet<char[]>());
+	}
+
+	private static HashSet<char[]> generate(char[] a, char[] c, int strt, int end, int indx, int r,
+			HashSet<char[]> set) {
 		if (indx == r) {
 			StringBuilder s = new StringBuilder();
 			for (int j = 0; j < r; j++)
 				s.append(c[j]);
-			set.add(s.toString());
+			set.add(s.toString().toCharArray());
 			return set;
 		}
 		for (int i = strt; i <= end && end - i + 1 >= r - indx; i++) {
@@ -34,11 +40,11 @@ public class StringCombinations {
 		return set;
 	}
 
-	public static void print(HashSet<String> set) {
+	public static void print(HashSet<char[]> set) {
 		StringBuilder s = new StringBuilder();
 		s.append("Size: " + set.size() + System.lineSeparator());
-		for (String c : set)
-			s.append(c + System.lineSeparator());
+		for (char[] c : set)
+			s.append(c.toString() + System.lineSeparator());
 		System.out.println(s.toString());
 	}
 }
