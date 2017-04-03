@@ -9,23 +9,41 @@ import java.util.Scanner;
 public class ShapeDetector {
 
 	public static void main(String[] args) {
-		HashMap<Character, HashMap<Character, Double>> edges = edgeCalculations(getPoints());
-		detectSquares(edges);
+		HashMap<double[], Character> points = getPoints();
+		HashMap<Character, double[]> pointsLookup = getPointsLookup(points);
+		HashMap<Character, HashMap<Character, Double>> edges = edgeCalculations(points);
+		detectSquares(edges, pointsLookup);
 	}
 
-	public static void detectSquares(HashMap<Character, HashMap<Character, Double>> edges) {
+	private static HashMap<Character, double[]> getPointsLookup(HashMap<double[], Character> points) {
+		HashMap<Character, double[]> pointsLookup = new HashMap<Character, double[]>();
+		for (double[] d : points.keySet()) {
+			pointsLookup.put(points.get(d), d);
+		return pointsLookup;
+	}
+
+	public static void detectSquares(HashMap<Character, HashMap<Character, Double>> edges,
+			HashMap<Character, double[]> pointsLookup) {
 		for (Character x : edges.keySet()) {
 			HashMap<Character, Double> xMap = edges.get(x);
-			HashSet<Character> xKeys = new HashSet<Character>();
+			HashSet<Character> xSides = new HashSet<Character>();
+			Character xDiagonal = null;
 			for (Character y : xMap.keySet()) {
-				xKeys.add(y);
-				for (Character z : xMap.keySet())
+				xSides.add(y);
+				for (Character z : xMap.keySet()) {
 					if (xMap.get(z).equals(xMap.get(y)) && !y.equals(z))
-						xKeys.add(z);
-				if (xKeys.size() >= 2) {
-					
+						xSides.add(z);
+					if (xMap.get(z).equals((xMap.get(y)) * Math.sqrt(2)))
+						xDiagonal = z;
+				}
+				if (xSides.size() == 2 && xDiagonal != null) {
+					for (Character side : xSides) {
+						HashMap<Character, Double> sMap = edges.get(side);
+						sMap.get(xDiagonal);
+					}
 				}
 			}
+			xSides.removeAll(xSides);
 		}
 		return;
 	}
