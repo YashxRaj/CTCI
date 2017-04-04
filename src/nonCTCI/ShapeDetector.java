@@ -19,6 +19,7 @@ public class ShapeDetector {
 		HashMap<Character, double[]> pointsLookup = new HashMap<Character, double[]>();
 		for (double[] d : points.keySet()) {
 			pointsLookup.put(points.get(d), d);
+		}
 		return pointsLookup;
 	}
 
