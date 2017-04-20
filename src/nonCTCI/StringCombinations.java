@@ -45,8 +45,13 @@ public class StringCombinations {
 	public static void print(HashSet<char[]> set) {
 		StringBuilder s = new StringBuilder();
 		s.append("Size: " + set.size() + System.lineSeparator());
-		for (char[] c : set)
-			s.append(c.toString() + System.lineSeparator());
+		int counter = 0;
+		for (char[] c : set) {
+			counter++;
+			s.append(String.valueOf(c) + " ");
+			if (counter % 5 == 0)
+				s.append(System.lineSeparator());
+		}
 		System.out.println(s.toString());
 	}
 }
