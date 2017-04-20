@@ -13,6 +13,7 @@ public class OptimalStrategyGame {
 		System.out.println(print(denomenations));
 		Deque<Integer> coinPouch = fillCoins(denomenations, s);
 		System.out.println(peekInto(coinPouch));
+		
 		s.close();
 	}
 
@@ -28,12 +29,10 @@ public class OptimalStrategyGame {
 	private static Deque<Integer> fillCoins(HashSet<Integer> denomenations, Scanner s) {
 		System.out.print("Enter coins: ");
 		Deque<Integer> coinPouch = new ArrayDeque<Integer>();
-		String digits = "\\d+", maybeCoin = s.nextLine();
-		Integer coin = null;
-		while (maybeCoin.matches(digits)) {
-			coin = Integer.parseInt(maybeCoin);
-			if (isDenomenation(denomenations, coin)) {
-				coinPouch.add(coin);
+		String maybeCoin = s.nextLine();
+		while (maybeCoin.matches("\\d+")) {
+			if (isDenomenation(denomenations, Integer.parseInt(maybeCoin))) {
+				coinPouch.add(Integer.parseInt(maybeCoin));
 				System.out.print("Coin Added. Next Coin: ");
 			} else
 				System.out.print("Coins must be valid denomenation. Re-enter: ");
@@ -46,8 +45,8 @@ public class OptimalStrategyGame {
 	private static HashSet<Integer> getDenomenations(Scanner s) {
 		System.out.println("Enter the denomenations of the coins:");
 		HashSet<Integer> denomenations = new HashSet<Integer>();
-		String digits = "\\d+", coin = s.nextLine();
-		while (coin.matches(digits)) {
+		String coin = s.nextLine();
+		while (coin.matches("\\d+")) {
 			denomenations.add(Integer.parseInt(coin));
 			coin = s.nextLine();
 		}
