@@ -1,9 +1,13 @@
 package nonCTCI;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class OptimalStrategyGame {
 	// http://www.geeksforgeeks.org/dynamic-programming-set-31-optimal-strategy-for-a-game/
@@ -13,9 +17,38 @@ public class OptimalStrategyGame {
 		HashSet<Integer> denomenations = getDenomenations(s);
 		System.out.println(print(denomenations));
 		Deque<Integer> coinPouch = fillCoins(denomenations, s);
-		System.out.println(peekInto(coinPouch));
-		
 		s.close();
+		if (coinPouch.size() % 2 != 0) {
+			System.out.println(peekInto(coinPouch));
+			System.out.println(optimalPath(coinPouch));
+		}
+	}
+
+	/*
+	 * F(i, j) = Max(Vi + min(F(i+2, j), F(i+1, j-1) ), Vj + min(F(i+1, j-1),
+	 * F(i, j-2) ))
+	 * Base Cases: F(i, j) = Vi If j == i , max(Vi, Vj) If j == i+1
+	 */
+	private static String optimalPath(Deque<Integer> coinPouch) {
+		ArrayList<String> paths = new ArrayList<String>();
+		paths.add("");
+		for (int j = 0; j < Math.pow(2, coinPouch.size() / 2); j++) {
+			int pSize = paths.size();
+			for (int i = 0; i < pSize; i++) {
+				String temp = paths.get(i);
+				paths.add(temp + "," + coinPouch.removeLast());
+				paths.add(temp + "," + coinPouch.removeFirst());
+			}
+		}
+		printStrings(paths);
+		return null;
+	}
+
+	private static void printStrings(ArrayList<String> paths) {
+		StringBuilder s = new StringBuilder();
+		for (String path : paths)
+			s.append(path + System.lineSeparator());
+		System.out.println(s.toString());
 	}
 
 	private static String peekInto(Deque<Integer> coinPouch) {
@@ -28,10 +61,11 @@ public class OptimalStrategyGame {
 	}
 
 	private static Deque<Integer> fillCoins(HashSet<Integer> denomenations, Scanner s) {
-		System.out.print("Enter coins: ");
+		System.out.print("Note: Enter even number of coins. Enter coins: ");
 		Deque<Integer> coinPouch = new ArrayDeque<Integer>();
 		String maybeCoin = s.nextLine();
-		while (maybeCoin.matches("\\d+")) {
+		Pattern pattern = Pattern.compile("\\d+");
+		while (pattern.matcher(maybeCoin).matches()) {
 			if (denomenations.contains(Integer.parseInt(maybeCoin))) {
 				coinPouch.add(Integer.parseInt(maybeCoin));
 				System.out.print("Coin Added. Next Coin: ");
@@ -45,10 +79,11 @@ public class OptimalStrategyGame {
 	private static HashSet<Integer> getDenomenations(Scanner s) {
 		System.out.println("Enter the denomenations of the coins:");
 		HashSet<Integer> denomenations = new HashSet<Integer>();
-		String coin = s.nextLine();
-		while (coin.matches("\\d+")) {
-			denomenations.add(Integer.parseInt(coin));
-			coin = s.nextLine();
+		Pattern pattern = Pattern.compile("\\d+");
+		String maybeCoin = s.nextLine();
+		while (pattern.matcher(maybeCoin).matches()) {
+			denomenations.add(Integer.parseInt(maybeCoin));
+			maybeCoin = s.nextLine();
 		}
 		return denomenations;
 	}
@@ -61,5 +96,4 @@ public class OptimalStrategyGame {
 		return s.toString();
 	}
 
-	
 }
