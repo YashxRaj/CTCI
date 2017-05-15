@@ -2,10 +2,7 @@ package nonCTCI;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Deque;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -16,9 +13,9 @@ public class OptimalStrategyGame {
 		Scanner s = new Scanner(System.in);
 		HashSet<Integer> denomenations = getDenomenations(s);
 		System.out.println(print(denomenations));
-		Deque<Integer> coinPouch = fillCoins(denomenations, s);
+		ArrayDeque<Integer> coinPouch = fillCoins(denomenations, s);
 		s.close();
-		if (coinPouch.size() % 2 != 0) {
+		if (coinPouch.size() % 2 == 0) {
 			System.out.println(peekInto(coinPouch));
 			System.out.println(optimalPath(coinPouch));
 		}
@@ -29,15 +26,19 @@ public class OptimalStrategyGame {
 	 * F(i, j-2) ))
 	 * Base Cases: F(i, j) = Vi If j == i , max(Vi, Vj) If j == i+1
 	 */
-	private static String optimalPath(Deque<Integer> coinPouch) {
+	private static String optimalPath(ArrayDeque<Integer> coinPouch) {
+		peekInto(coinPouch);
 		ArrayList<String> paths = new ArrayList<String>();
 		paths.add("");
-		for (int j = 0; j < Math.pow(2, coinPouch.size() / 2); j++) {
+		Double limit = Math.pow(2, coinPouch.size() / 2);
+		for (int j = 0; j < limit; j++) {
 			int pSize = paths.size();
 			for (int i = 0; i < pSize; i++) {
 				String temp = paths.get(i);
-				paths.add(temp + "," + coinPouch.removeLast());
-				paths.add(temp + "," + coinPouch.removeFirst());
+				paths.add(temp + Integer.toString(coinPouch.peekLast()));
+				paths.add(temp + Integer.toString(coinPouch.peekFirst()));
+				coinPouch.removeFirst();
+				coinPouch.removeLast();
 			}
 		}
 		printStrings(paths);
@@ -51,7 +52,7 @@ public class OptimalStrategyGame {
 		System.out.println(s.toString());
 	}
 
-	private static String peekInto(Deque<Integer> coinPouch) {
+	private static String peekInto(ArrayDeque<Integer> coinPouch) {
 		StringBuilder s = new StringBuilder();
 		s.append("Coins in pouch:" + System.lineSeparator() + "|");
 		for (Integer coin : coinPouch)
@@ -60,9 +61,9 @@ public class OptimalStrategyGame {
 		return s.toString();
 	}
 
-	private static Deque<Integer> fillCoins(HashSet<Integer> denomenations, Scanner s) {
+	private static ArrayDeque<Integer> fillCoins(HashSet<Integer> denomenations, Scanner s) {
 		System.out.print("Note: Enter even number of coins. Enter coins: ");
-		Deque<Integer> coinPouch = new ArrayDeque<Integer>();
+		ArrayDeque<Integer> coinPouch = new ArrayDeque<Integer>();
 		String maybeCoin = s.nextLine();
 		Pattern pattern = Pattern.compile("\\d+");
 		while (pattern.matcher(maybeCoin).matches()) {
@@ -73,6 +74,7 @@ public class OptimalStrategyGame {
 				System.out.print("Coins must be valid denomenation. Re-enter: ");
 			maybeCoin = s.nextLine();
 		}
+		System.out.println("Coin Pouch size: " + coinPouch.size());
 		return coinPouch;
 	}
 
