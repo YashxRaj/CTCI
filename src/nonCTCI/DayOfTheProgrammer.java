@@ -1,10 +1,9 @@
-package ctci;
+package nonCTCI;
 
 import java.util.HashMap;
 import java.util.Scanner;
-import java.util.Vector;
 
-public class test3 {
+public class DayOfTheProgrammer {
 	private static String solve(int year) {
 		return dotP(year, fillMonths(year, year < 1918 ? 1 : year == 1918 ? 2 : 3));
 	}
@@ -15,8 +14,8 @@ public class test3 {
 			if (dotp >= months.get(i)) dotp -= months.get(i);
 			else break;
 		}
-		i = dotp == 0 ? i - 1 : i;
-		dotp = dotp == 0 ? months.get(i) : dotp;
+		i=dotp==0?i-1:i;
+		dotp=dotp==0?months.get(i):dotp;
 		return (dotp<10?"0"+dotp:Integer.toString(dotp))+"."+(i<10?"0"+i:Integer.toString(i))+"."+year;
 	}
 
