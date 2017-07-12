@@ -10,6 +10,7 @@ public class PalindromicPartitions {
 		String str = s.nextLine();
 		System.out.println("Palindromes: ");
 		palindromePartitions(str);
+		s.close();
 	}
 
 	private static void palindromePartitions(String str) {

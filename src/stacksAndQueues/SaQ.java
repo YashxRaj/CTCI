@@ -66,6 +66,7 @@ public class SaQ {
 			System.out.println("[" + x + "]" + " <- " + sos.popAt(x));
 		}
 		sos.print();
+		s.close();
 	}
 
 	private static void StackWithMin() {
@@ -95,6 +96,7 @@ public class SaQ {
 				System.out.println("[" + k + "]" + " <- " + stack.pop(k));
 		}
 		stack.printAllStacks();
+		s.close();
 	}
 
 	private static int randomNumberBetweenZeroAnd(int range) {

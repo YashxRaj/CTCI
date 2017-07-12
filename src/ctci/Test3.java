@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.Vector;
 
-public class test3 {
+public class Test3 {
 	private static String solve(int year) {
 		return dotP(year, fillMonths(year, year < 1918 ? 1 : year == 1918 ? 2 : 3));
 	}

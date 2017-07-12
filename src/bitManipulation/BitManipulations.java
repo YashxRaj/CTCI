@@ -19,6 +19,7 @@ public class BitManipulations {
 		// nextNumber((int) (Math.random() * 3000));
 		// (n&(n-1)==0) - Checks if n is a power of 2 or 0.
 		// conversion((int) (Math.random() * 3000), (int) (Math.random() * 3000));
+		s.close();
 	}
 
 	private static void conversion(int a, int b) {
