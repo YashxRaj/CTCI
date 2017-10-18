@@ -38,7 +38,7 @@ public class KadanesAlgorithm {
 		int maxCurrent = testCase.get(0), maxGlobal = testCase.get(0);
 		for (int i = 1; i < testCase.size(); i++) {
 			maxCurrent = Math.max(testCase.get(i) + maxCurrent, testCase.get(i));
-			maxGlobal = maxCurrent > maxGlobal ? maxCurrent : maxGlobal;
+			maxGlobal = Math.max(maxCurrent, maxGlobal);
 		}
 		return maxGlobal;
 	}
