@@ -11,7 +11,7 @@ public class TaG {
 		// routeBetweenNodes(makeGraph(true));
 		// sortedArrayToBST(makeSortedArray(randomSize()));
 		// listOfDepths(randomBST());
-		// checkBalancedTree(randomBinaryTree());
+		checkBalancedTree(randomBinaryTree());
 		// checkBinaryTreeIsBST(randomBinaryTree());
 		// successor(randomBST()); // Incomplete
 		// buildOrder();
