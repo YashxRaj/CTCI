@@ -8,7 +8,7 @@ public class AnagramSubstringSearch {
 		Scanner s = new Scanner(System.in);
 		String text = s.nextLine().trim(), pat = s.nextLine().trim();
 		s.close();
-		Integer[] indices = searchRabinKarpAlgorithm(text.toCharArray(), pat.toCharArray());
+		Integer[] indices = searchAnagrams(text.toCharArray(), pat.toCharArray());
 		for (int index : indices)
 			System.out.println("Found at Index " + index);
 	}
@@ -32,7 +32,7 @@ public class AnagramSubstringSearch {
 	}
 
 	// My twist on Rabin-Karp Algorithm to make it simpler.
-	private static Integer[] searchRabinKarpAlgorithm(char[] txt, char[] pattern) {
+	private static Integer[] searchAnagrams(char[] txt, char[] pattern) {
 		char[] buffer = new char[pattern.length];
 		Vector<Integer> indices = new Vector<Integer>();
 		HashMap<Character, Integer> patternMap = new HashMap<Character, Integer>();
@@ -49,6 +49,15 @@ public class AnagramSubstringSearch {
 				indices.add(i);
 			if (i != txt.length - buffer.length)
 				shiftAndUpdateMap(buffer, txt[buffer.length + i], bufferMap);
+		}
+		return indices.toArray(new Integer[indices.size()]);
+	}
+
+	private static Integer[] searchString(char[] txt, char[] pat) {
+		Vector<Integer> indices = new Vector<Integer>();
+		char[] buffer = new char[pat.length];
+		for (int i = 0; i < txt.length; i++) {
+			
 		}
 		return indices.toArray(new Integer[indices.size()]);
 	}
