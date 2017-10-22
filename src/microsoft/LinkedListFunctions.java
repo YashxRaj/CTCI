@@ -22,7 +22,7 @@ public class LinkedListFunctions {
 		System.out.println("Count: " + ctr);
 	}
 
-	private static LinkedListNode ReverseLinkedList(LinkedListNode head) {
+	public static LinkedListNode ReverseLinkedList(LinkedListNode head) {
 		LinkedListNode current = head, previous = null, temp = null;
 		while (current != null) {
 			temp = previous;
@@ -33,7 +33,7 @@ public class LinkedListFunctions {
 		return previous;
 	}
 
-	private static void printLinkedList(LinkedListNode head) {
+	public static void printLinkedList(LinkedListNode head) {
 		LinkedListNode root = head;
 		while (root != null) {
 			System.out.print(root.data + " ");
@@ -42,7 +42,7 @@ public class LinkedListFunctions {
 		System.out.println();
 	}
 
-	private static LinkedListNode generateLinkedList(int n) {
+	public static LinkedListNode generateLinkedList(int n) {
 		LinkedListNode head = new LinkedListNode((int) (Math.random() * 50)), root = head;
 		for (int i = 0; i < n; i++) {
 			LinkedListNode temp = new LinkedListNode((int) (Math.random() * 50));
