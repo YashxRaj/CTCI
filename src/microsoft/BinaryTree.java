@@ -1,6 +1,7 @@
 package microsoft;
 
 import java.util.List;
+import java.util.Stack;
 import java.util.Vector;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -48,8 +49,61 @@ public class BinaryTree {
 		System.out.println();
 		// printTree(buildComepleteBinaryTreeFromPreorderAndPostOrder(pre,post));
 		// rootToLeaves(root);
-		System.out.println("Reverse Recursive InOrder Traversal");
-		reverseInorderRecursive(root);
+		// System.out.println("Reverse Recursive InOrder Traversal");
+		// reverseInorderRecursive(root);
+		printLeaves(getLeaves(root));
+	}
+
+	public static boolean sameLeaves(Node root1, Node root2) {
+		Stack<Node> s1 = new Stack<Node>();
+		Stack<Node> s2 = new Stack<Node>();
+
+		s1.add(root1);
+		s2.add(root2);
+
+		while (!s1.isEmpty() || !s2.isEmpty()) {
+			Node current1 = s1.pop();
+			Node current2 = s2.pop();
+			
+			if (current1 != null && current1.left == null && current1.right == null)
+				s1.add(current1);
+			if (current2 != null && current2.left == null && current2.right == null)
+				s2.add(current2);
+
+			if (current1.left != null)
+				s1.add(current1.left);
+			if (current1.right != null)
+				s1.add(current1.right);
+
+			if (current2.left != null)
+				s2.add(current2.left);
+			if (current2.right != null)
+				s2.add(current2.right);
+			
+			
+		}
+		return true;
+	}
+
+	private static void printLeaves(Vector<Node> leaves) {
+		for (Node leaf : leaves)
+			System.out.println(leaf.data + " ");
+		System.out.println();
+	}
+
+	public static Vector<Node> getLeaves(Node root) {
+		return getLeaves(root, new Vector<Node>());
+	}
+
+	// Prints only the leaves in the tree.
+	private static Vector<Node> getLeaves(Node root, Vector<Node> v) {
+		if (root == null)
+			return null;
+		if (root.left == null && root.right == null)
+			v.add(root);
+		getLeaves(root.left, v);
+		getLeaves(root.right, v);
+		return v;
 	}
 
 	public static void buildInOrderSuccessors(Node root) {
