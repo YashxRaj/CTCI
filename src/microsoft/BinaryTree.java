@@ -52,14 +52,11 @@ public class BinaryTree {
 		// System.out.println("Reverse Recursive InOrder Traversal");
 		// reverseInorderRecursive(root);
 		// printLeaves(getLeaves(root));
-		// connectNextRightNodesSameLevel(root);
+		// connectNodesSameLevel(root);
 		// getLevelVectors(root);
-		
+
 	}
 
-	
-	
-	
 	/**
 	 * Forbidden code.
 	 * Do not use this, otherwise what is the point of being clever about it?
@@ -94,7 +91,7 @@ public class BinaryTree {
 		return height;
 	}
 
-	public static void connectNextRightNodesSameLevel(Node root) {
+	public static void connectNodesSameLevel(Node root) {
 		int height = height(root);
 		System.out.println("Height of tree: " + height);
 		Vector<Node> levelVector = null;
@@ -255,10 +252,13 @@ public class BinaryTree {
 	}
 
 	/**
-	 * Similar to calculating height of tree. if(root == null) return -1; int lh
-	 * = height(root.left); int rh = height(root.right); return 1 +
-	 * Math.max(lh,rh);
-	 * 
+	 * Similar to calculating height of tree.
+	 * if(root == null)
+	 * 		return -1;
+	 * int lh = height(root.left);
+	 * int rh = height(root.right);
+	 * return 1 +Math.max(lh,rh);
+	 *
 	 * O(n)
 	 */
 	private static int longestPath(Node root, int pathCount) {
