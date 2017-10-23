@@ -4,6 +4,7 @@ public class Node<E> {
 	protected E data;
 	protected Node<E> left, right;
 	protected Node<E> inOrderSuccessor;
+	protected Node<E> nextRight;
 
 	public Node() {
 		this.left = null;

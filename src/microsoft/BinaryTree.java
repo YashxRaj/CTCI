@@ -15,72 +15,147 @@ public class BinaryTree {
 		System.out.print("InOrder Recursive Traversal:\n");
 		inOrderRecursive(root);
 		/**
-		System.out.print("\nPreOrder Recursive Traversal:\n");
-		preOrderRecursive(root);
-		
-		System.out.println("\nPostOrder Recursive Traversal:");
-		postOrderRecursive(root);
-		*/
+		 * System.out.print("\nPreOrder Recursive Traversal:\n");
+		 * preOrderRecursive(root);
+		 * 
+		 * System.out.println("\nPostOrder Recursive Traversal:");
+		 * postOrderRecursive(root);
+		 */
 		char[] pre = { 'a', 'b', 'd', 'e', 'c', 'f', 'g' };
 		char[] in = { 'd', 'b', 'e', 'a', 'f', 'c', 'g' };
 		char[] post = { 'd', 'e', 'b', 'f', 'g', 'c', 'a' };
-		/**		
-		
-		System.out.println("\nMorris Iterative Traversal:");
-		morrisTraversal(root, "pre");
-		morrisTraversal(root, "in");
-		
-		System.out.println("\nLevel Order Recursive Traversal:");
-		levelOrderTraversal(root);
-		
-		System.out.println("\nReverse Level Order Recursive Traversal:");
-		reverseLevelOrderTraversal(root);
-		Node root2 = buildTreeInPre(in, pre, 0, in.length-1, 0);
-		Node root3 = buildFullBinaryTree(pre, post, 0, pre.length-1,
-		pre.length, 0);
-		printTree(root2);
-		printTree(root3);
-		
-		LinkedListNode head = LinkedListFunctions.generateLinkedList(10);
-		LinkedListFunctions.printLinkedList(head);
-		buildCompleteBinaryTreeFromLinkedList(head);
-		
-		*/
+		/**
+		 * 
+		 * System.out.println("\nMorris Iterative Traversal:");
+		 * morrisTraversal(root, "pre");
+		 * morrisTraversal(root, "in");
+		 * 
+		 * System.out.println("\nLevel Order Recursive Traversal:");
+		 * levelOrderTraversal(root);
+		 * 
+		 * System.out.println("\nReverse Level Order Recursive Traversal:");
+		 * reverseLevelOrderTraversal(root);
+		 * 
+		 * Node root2 = buildTreeInPre(in,pre, 0, in.length-1, 0);
+		 * Node root3 = buildFullBinaryTree(pre, post,0, pre.length-1, pre.length, 0);
+		 * printTree(root2);
+		 * printTree(root3);
+		 * 
+		 * LinkedListNode head = LinkedListFunctions.generateLinkedList(10);
+		 * LinkedListFunctions.printLinkedList(head);
+		 * buildCompleteBinaryTreeFromLinkedList(head);
+		 * 
+		 */
 		System.out.println();
 		// printTree(buildComepleteBinaryTreeFromPreorderAndPostOrder(pre,post));
 		// rootToLeaves(root);
 		// System.out.println("Reverse Recursive InOrder Traversal");
 		// reverseInorderRecursive(root);
-		printLeaves(getLeaves(root));
+		// printLeaves(getLeaves(root));
+		// connectNextRightNodesSameLevel(root);
+		// getLevelVectors(root);
+		
+	}
+
+	
+	
+	
+	/**
+	 * Forbidden code.
+	 * Do not use this, otherwise what is the point of being clever about it?
+	 */
+	public static Vector<Vector<Node>> getLevelVectors(Node root) {
+		int height = height(root);
+		// Must initialize before using otherwise what are we getting from called function?
+		Vector<Vector<Node>> levelVectors = new Vector<Vector<Node>>(height);
+		for (int i = 0; i <= height; i++)
+			levelVectors.add(new Vector<Node>());
+
+		getLevelVectors(root, levelVectors, height);
+
+		System.out.println("Printing each level:");
+		for (int i = height; i >= 0; i--)
+			printVector(levelVectors.get(i));
+		return levelVectors;
+	}
+
+	private static void printVector(Vector<Node> vector) {
+		for (Node n : vector)
+			System.out.print(n.data + " ");
+		System.out.println();
+	}
+
+	private static int getLevelVectors(Node root, Vector<Vector<Node>> levelVectors, int height) {
+		if (root == null)
+			return 0;
+		levelVectors.get(height).add(root);
+		getLevelVectors(root.left, levelVectors, height - 1);
+		getLevelVectors(root.right, levelVectors, height - 1);
+		return height;
+	}
+
+	public static void connectNextRightNodesSameLevel(Node root) {
+		int height = height(root);
+		System.out.println("Height of tree: " + height);
+		Vector<Node> levelVector = null;
+
+		for (int i = 0; i <= height; i++) {
+			levelVector = getLevelVector(root, i, new Vector<Node>());
+			for (int j = 0; j < levelVector.size(); j++)
+				levelVector.get(j).nextRight = j == (levelVector.size() - 1) ? null : levelVector.get(j + 1);
+			/**
+			System.out.println("Proof:");
+			for (Node n : levelVector)
+				System.out.print(n.data + " -> " + ((n.nextRight == null) ? "null " : (n.nextRight.data + "|")));
+			System.out.println();
+			*/
+		}
+	}
+
+	private static Vector<Node> getLevelVector(Node root, int level, Vector<Node> levelVector) {
+		if (root == null)
+			return null;
+		if (level == 0)
+			levelVector.add(root);
+		getLevelVector(root.left, level - 1, levelVector);
+		getLevelVector(root.right, level - 1, levelVector);
+		return levelVector;
 	}
 
 	public static boolean sameLeaves(Node root1, Node root2) {
 		Stack<Node> s1 = new Stack<Node>();
 		Stack<Node> s2 = new Stack<Node>();
 
-		s1.add(root1);
-		s2.add(root2);
+		s1.push(root1);
+		s2.push(root2);
 
 		while (!s1.isEmpty() || !s2.isEmpty()) {
-			Node current1 = s1.pop();
-			Node current2 = s2.pop();
-			
-			if (current1 != null && current1.left == null && current1.right == null)
-				s1.add(current1);
-			if (current2 != null && current2.left == null && current2.right == null)
-				s2.add(current2);
+			if (s1.isEmpty() || s2.isEmpty())
+				return false;
 
-			if (current1.left != null)
-				s1.add(current1.left);
-			if (current1.right != null)
-				s1.add(current1.right);
+			// Finds next leaf node in the tree.
+			Node temp1 = s1.pop();
+			while (temp1 != null && !(temp1.left == null && temp1.right == null)) {
+				if (temp1.left != null)
+					s1.push(temp1.left);
+				if (temp1.right != null)
+					s1.push(temp1.right);
+				temp1 = s1.pop();
+			}
+			// Finds next leaf node in the tree.
+			Node temp2 = s2.pop();
+			while (temp2 != null && !(temp2.left == null && temp2.right == null)) {
+				if (temp2.left != null)
+					s1.push(temp2.left);
+				if (temp2.right != null)
+					s1.push(temp2.right);
+				temp2 = s2.pop();
+			}
 
-			if (current2.left != null)
-				s2.add(current2.left);
-			if (current2.right != null)
-				s2.add(current2.right);
-			
-			
+			if ((temp1 == null && temp2 != null) || (temp2 == null && temp1 != null))
+				return false;
+			else if (temp1 != null && temp2 != null && temp1.data != temp2.data)
+				return false;
 		}
 		return true;
 	}
@@ -180,22 +255,19 @@ public class BinaryTree {
 	}
 
 	/**
-	 * 	Similar to calculating height of tree.
-	 * 	if(root == null)
-	 * 		return -1;
-	 * 	int lh = height(root.left);
-	 * 	int rh = height(root.right);
-	 * 	return 1 + Math.max(lh,rh);
+	 * Similar to calculating height of tree. if(root == null) return -1; int lh
+	 * = height(root.left); int rh = height(root.right); return 1 +
+	 * Math.max(lh,rh);
 	 * 
-	 * 	O(n)
+	 * O(n)
 	 */
-	private static int longestPath(Node root, int height) {
+	private static int longestPath(Node root, int pathCount) {
 		if (root == null)
 			return 0;
-		int lh = longestPath(root.left, height);
-		int rh = longestPath(root.right, height);
-		height = Math.max(1 + lh + rh, height);
-		return 1 + Math.max(lh, rh);
+		int leftHeight = longestPath(root.left, pathCount);
+		int rightHeight = longestPath(root.right, pathCount);
+		pathCount = Math.max(1 + leftHeight + rightHeight, pathCount);
+		return 1 + Math.max(leftHeight, rightHeight);
 	}
 
 	public static boolean isAVL(Node root) {
