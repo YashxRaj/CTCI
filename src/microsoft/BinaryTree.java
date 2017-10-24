@@ -62,21 +62,54 @@ public class BinaryTree {
 		s.close();
 		printNodesK(root, data);
 		*/
-		System.out.println("Foldable: " + isFoldable(root));
-		convertMirrorTree(root);
-		printTree(root);
+		System.out.println(maximumWidthInefficient(root));
 	}
-	
-	// Bolo jai mata di.
-	public static void convertMirrorTree(Node root) {
+
+	// Using level order traversal
+	public static int maximumWidthInefficient(Node root) {
+		int height = height(root), maxWidth = 0, width = 0;
+		for (int i = 0; i <= height; i++)
+			maxWidth = (width = getWidth(root, i)) > maxWidth ? width : maxWidth;
+		return maxWidth;
+	}
+
+	private static int getWidth(Node root, int height) {
 		if (root == null)
-			return;
+			return 0;
+		if (height == 1)
+			return 1;
+		return getWidth(root.left, height - 1) + getWidth(root.right, height - 1);
+	}
+
+	/**
+	private static Node mirror(Node root) {
+		if (root == null)
+			return null;
+	
+		Node left = mirror(root.left);
+		Node right = mirror(root.right);
+	
+		root.left = right;
+		root.right = left;
+	
+		return root;
+	}
+	*/
+	// GFG: Above. Me: below. Learning opportunity.
+	public static Node convertMirrorTree(Node root) {
+		if (root == null)
+			return null;
+
 		convertMirrorTree(root.left);
 		convertMirrorTree(root.right);
-		Node tempSwapOne = root.left == null ? null : root.left;
-		Node tempSwapTwo = root.right == null ? null : root.right;
-		root.left = tempSwapTwo;
-		root.right = tempSwapOne;
+
+		Node left = root.left;
+		Node right = root.right;
+
+		root.left = right;
+		root.right = left;
+
+		return root;
 	}
 
 	// Yeah, baby. - You won't find this on GFG.
@@ -537,7 +570,7 @@ public class BinaryTree {
 	}
 
 	public static int height(Node root) {
-		return root == null ? -1 : (Math.max(height(root.left), height(root.right)) + 1);
+		return root == null ? 0 : (Math.max(height(root.left), height(root.right)) + 1);
 	}
 
 	private static void levelOrderTraversal(Node root, int level) {
