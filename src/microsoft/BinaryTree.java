@@ -56,18 +56,44 @@ public class BinaryTree {
 		// printLeaves(getLeaves(root));
 		// connectNodesSameLevel(root);
 		// getLevelVectors(root);
-
+		/*
 		Scanner s = new Scanner(System.in);
 		int data = s.nextInt();
 		s.close();
 		printNodesK(root, data);
+		*/
+		System.out.println("Foldable: "+isFoldable(root));
 	}
-	// Work In Progress.
-	public static boolean isFoldable(Node root) {
-		if(root == null)
+	
+	// Yeah, baby.
+	private static boolean isFoldable(Node root) {
+		if (root == null || (root.left == null && root.right == null))
 			return true;
-		
-		return false;
+		LinkedList<Node> q = new LinkedList<Node>();
+		q.add(root.left);
+		q.add(root.right);
+		while (!q.isEmpty()) {
+			Node real = q.pop();
+			Node mirror = q.pop();
+
+			if ((real == null && mirror != null) || (real != null && mirror == null))
+				return false;
+			if ((real.left == null && mirror.right != null) || (real.right == null && mirror.left != null))
+				return false;
+
+			if (real.left != null && mirror.right != null) {
+				q.add(real.left);
+				q.add(mirror.right);
+			} else if ((real.left == null && mirror.right != null) || (real.left != null && mirror.right == null))
+				return false;
+
+			if (real.right != null && mirror.left != null) {
+				q.add(real.right);
+				q.add(mirror.left);
+			} else if ((real.right == null && mirror.left != null) || (real.right != null && mirror.left == null))
+				return false;
+		}
+		return true;
 	}
 
 	public static void printNodesK(Node root, int k) {
@@ -161,13 +187,12 @@ public class BinaryTree {
 		for (int i = 0; i <= height; i++) {
 			levelVector = getLevelVector(root, i, new Vector<Node>());
 			for (int j = 0; j < levelVector.size(); j++)
-				levelVector.get(j).nextRight = j == (levelVector.size() - 1) ? null : levelVector.get(j + 1);
-			/**
-			System.out.println("Proof:");
-			for (Node n : levelVector)
-				System.out.print(n.data + " -> " + ((n.nextRight == null) ? "null " : (n.nextRight.data + "|")));
-			System.out.println();
-			*/
+				levelVector.get(j).nextRight = j == (levelVector.size() - 1) ? null : levelVector.get(j + 1);/**
+																												System.out.println("Proof:");
+																												for (Node n : levelVector)
+																													System.out.print(n.data + " -> " + ((n.nextRight == null) ? "null " : (n.nextRight.data + "|")));
+																												System.out.println();
+																												*/
 		}
 	}
 
