@@ -62,11 +62,25 @@ public class BinaryTree {
 		s.close();
 		printNodesK(root, data);
 		*/
-		System.out.println("Foldable: "+isFoldable(root));
+		System.out.println("Foldable: " + isFoldable(root));
+		convertMirrorTree(root);
+		printTree(root);
 	}
 	
+	// Bolo jai mata di.
+	public static void convertMirrorTree(Node root) {
+		if (root == null)
+			return;
+		convertMirrorTree(root.left);
+		convertMirrorTree(root.right);
+		Node tempSwapOne = root.left == null ? null : root.left;
+		Node tempSwapTwo = root.right == null ? null : root.right;
+		root.left = tempSwapTwo;
+		root.right = tempSwapOne;
+	}
+
 	// Yeah, baby. - You won't find this on GFG.
-	private static boolean isFoldable(Node root) {
+	public static boolean isFoldable(Node root) {
 		if (root == null || (root.left == null && root.right == null))
 			return true;
 		LinkedList<Node> q = new LinkedList<Node>();
