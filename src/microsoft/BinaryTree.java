@@ -65,7 +65,7 @@ public class BinaryTree {
 		System.out.println("Foldable: "+isFoldable(root));
 	}
 	
-	// Yeah, baby.
+	// Yeah, baby. - You won't find this on GFG.
 	private static boolean isFoldable(Node root) {
 		if (root == null || (root.left == null && root.right == null))
 			return true;
