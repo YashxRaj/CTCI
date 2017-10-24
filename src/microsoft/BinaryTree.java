@@ -1,15 +1,17 @@
 package microsoft;
 
 import java.util.List;
+import java.util.Scanner;
 import java.util.Stack;
 import java.util.Vector;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class BinaryTree {
 
 	public static void main(String[] args) {
-		Node root = randomBinaryTree(randomArray(size()));
+		Node root = makeCharBinaryTree(randomCharArray(size()));
 		printTree(root);
 		// Do it in iterative.
 		System.out.print("InOrder Recursive Traversal:\n");
@@ -55,6 +57,66 @@ public class BinaryTree {
 		// connectNodesSameLevel(root);
 		// getLevelVectors(root);
 
+		Scanner s = new Scanner(System.in);
+		int data = s.nextInt();
+		s.close();
+		printNodesK(root, data);
+	}
+	// Work In Progress.
+	public static boolean isFoldable(Node root) {
+		if(root == null)
+			return true;
+		
+		return false;
+	}
+
+	public static void printNodesK(Node root, int k) {
+		if (root == null)
+			return;
+		if (k == 0)
+			System.out.print(root.data + " ");
+		printNodesK(root.left, k - 1);
+		printNodesK(root.right, k - 1);
+	}
+
+	public static Node makeCharBinaryTree(char[] ch) {
+		return makeCharBinaryTree(ch, 1);
+	}
+
+	private static Node makeCharBinaryTree(char[] ch, int index) {
+		Node root = null;
+		if (index < ch.length) {
+			root = new Node(ch[index - 1]);
+			root.left = makeCharBinaryTree(ch, index * 2);
+			root.right = makeCharBinaryTree(ch, index * 2 + 1);
+		}
+		return root;
+	}
+
+	public static boolean getLevelOfNode(Node root, Node key) {
+		return getLevelOfNode(root, key, 1);
+	}
+
+	private static boolean getLevelOfNode(Node root, Node key, int level) {
+		if (root == null)
+			return false;
+		if (root.data == key.data) {
+			System.out.println(level);
+			return true;
+		}
+		return getLevelOfNode(root.left, key, level + 1) || getLevelOfNode(root.right, key, level + 1);
+	}
+
+	public static boolean printAncestors(Node root, Node key) {
+		if (root == null)
+			return false;
+		if (root.data == key.data)
+			return true;
+		if (printAncestors(root.left, key) || printAncestors(root.right, key)) {
+			System.out.print(root.data + " ");
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -485,6 +547,14 @@ public class BinaryTree {
 		} else
 			return null;
 
+	}
+
+	public static char[] randomCharArray(int size) {
+		char[] ch = new char[size];
+		char a = 'A';
+		for (int i = 0; i < size; i++)
+			ch[i] = a++;
+		return ch;
 	}
 
 	public static int[] randomArray(int size) {
