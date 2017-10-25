@@ -14,9 +14,9 @@ public class BinaryTree {
 		Node root = makeCharBinaryTree(randomCharArray(size()));
 		printTree(root);
 		// Do it in iterative.
+		/**
 		System.out.print("InOrder Recursive Traversal:\n");
 		inOrderRecursive(root);
-		/**
 		 * System.out.print("\nPreOrder Recursive Traversal:\n");
 		 * preOrderRecursive(root);
 		 * 
@@ -62,7 +62,31 @@ public class BinaryTree {
 		s.close();
 		printNodesK(root, data);
 		*/
-		System.out.println(maximumWidthInefficient(root));
+		Node root2 = makeCharBinaryTree(randomCharArray(size()));
+		printTree(root2);
+		System.out.println(isSubTree(root,root2));
+		// System.out.println(maximumWidthInefficient(root));
+	}
+
+	// Can be optimized by finding height of root2, and avoiding that level down
+	// in root1.
+	public static boolean isSubTree(Node root1, Node root2) {
+		if (root1 == null && root2 == null)
+			return true;
+		else if (root1 != null && root2 == null)
+			return false;
+		if (root1.data == root2.data)
+			return isTreeCopy(root1, root2);
+		return isSubTree(root1.left, root2) || isSubTree(root1.right, root2);
+	}
+
+	private static boolean isTreeCopy(Node root1, Node root2) {
+		if(root1 == null && root2 == null)
+			return true;
+		else if((root1 != null && root2 == null) || (root1 == null && root2 != null))
+			return false;
+		System.out.println(root1.data + " - " + root2.data);
+		return root1.data == root2.data && isTreeCopy(root1.left, root2.left) && isTreeCopy(root1.right, root2.right);
 	}
 
 	// Using level order traversal
@@ -198,7 +222,8 @@ public class BinaryTree {
 	 */
 	public static Vector<Vector<Node>> getLevelVectors(Node root) {
 		int height = height(root);
-		// Must initialize before using otherwise what are we getting from called function?
+		// Must initialize before using otherwise what are we getting from
+		// called function?
 		Vector<Vector<Node>> levelVectors = new Vector<Vector<Node>>(height);
 		for (int i = 0; i <= height; i++)
 			levelVectors.add(new Vector<Node>());
@@ -234,12 +259,13 @@ public class BinaryTree {
 		for (int i = 0; i <= height; i++) {
 			levelVector = getLevelVector(root, i, new Vector<Node>());
 			for (int j = 0; j < levelVector.size(); j++)
-				levelVector.get(j).nextRight = j == (levelVector.size() - 1) ? null : levelVector.get(j + 1);/**
-																												System.out.println("Proof:");
-																												for (Node n : levelVector)
-																													System.out.print(n.data + " -> " + ((n.nextRight == null) ? "null " : (n.nextRight.data + "|")));
-																												System.out.println();
-																												*/
+				levelVector.get(j).nextRight = j == (levelVector.size() - 1) ? null : levelVector.get(j + 1);
+			/**
+			System.out.println("Proof:");
+			for (Node n : levelVector)
+				System.out.print(n.data + " -> " + ((n.nextRight == null) ? "null " : (n.nextRight.data + "|")));
+			System.out.println();
+			*/
 		}
 	}
 
