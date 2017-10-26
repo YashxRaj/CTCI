@@ -62,7 +62,96 @@ public class BinaryTree {
 		s.close();
 		printNodesK(root, data);
 		*/
-		System.out.println(maximumWidthInefficient(root));
+		// System.out.println(maximumWidthInefficient(root));
+		// System.out.println(maxmimumWidth(root));
+		// levelOrderTraversalIterative(root);
+		// doubleTree(root);
+		// printTree(root);
+		rootToLeavesI(root);
+	}
+
+	public static void rootToLeavesI(Node root) {
+		rootToLeavesR(root, new Vector<Node>());
+	}
+	// Incomplete.
+	public static void rootToLeavesR(Node root, Vector<Node> v) {
+		if (root == null)
+			return;
+		else
+			v.add(root);
+		if (root.left == null && root.right == null)
+			printVector(v);
+		rootToLeavesR(root.left, v);
+		rootToLeavesR(root.right, v);
+	}
+
+	// Stepwise approach: Deciding a traversal for using with algorithm is best.
+	public static void doubleTree(Node root) {
+		if (root == null)
+			return;
+		doubleTree(root.left);
+		doubleTree(root.right);
+		Node left = root.left, temp = new Node(root.data);
+		root.left = temp;
+		temp.left = left;
+	}
+
+	/**
+	 * An important lesson to learn with trees is to know iterative
+	 * and recursive for all types of traversals. This helps to 
+	 * optimize the approach when dealing with non traversal based questions.
+	 */
+
+	private static void levelOrderTraversalIterative(Node root) {
+		if (root == null)
+			return;
+		LinkedList<Node> q = new LinkedList<Node>();
+		q.add(root);
+		int i = 1;
+		while (!q.isEmpty()) {
+			int size = q.size();
+			if (size == 0)
+				break;
+			System.out.println("Level: " + i++);
+			while (size > 0) {
+				Node temp = q.pop();
+				System.out.print(temp.data + " ");
+				if (temp.left != null)
+					q.add(temp.left);
+				if (temp.right != null)
+					q.add(temp.right);
+				size--;
+			}
+			System.out.println();
+		}
+	}
+
+	// Find maximum width using queue for BFS
+	public static int maxmimumWidth(Node root) {
+		if (root == null)
+			return 0;
+
+		int counter = 0, maxCounter = 0;
+		LinkedList<Node> q = new LinkedList<Node>();
+		q.add(root);
+
+		while (!q.isEmpty()) {
+			int size = q.size();
+			if (size == 0)
+				break;
+			while (size > 0) {
+				Node temp = q.pop();
+				counter++;
+				if (temp.right != null)
+					q.add(temp.right);
+				if (temp.left != null)
+					q.add(temp.left);
+				size--;
+			}
+			maxCounter = counter > maxCounter ? counter : maxCounter;
+			counter = 0;
+		}
+		return maxCounter;
 	}
 
 	// Using level order traversal
