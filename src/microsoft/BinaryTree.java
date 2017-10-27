@@ -67,24 +67,26 @@ public class BinaryTree {
 		// levelOrderTraversalIterative(root);
 		// doubleTree(root);
 		// printTree(root);
-		rootToLeavesI(root);
+		// rootToLeavesI(root);
+		
+	}
+	/**
+	// Already written before, did this again to test myself.
+	public static void rootToLeavesI(Node root) {
+		System.out.println("Printing root to leaves.");
+		rootToLeavesR(root, new char[size(root)], 0);
 	}
 
-	public static void rootToLeavesI(Node root) {
-		rootToLeavesR(root, new Vector<Node>());
-	}
-	// Incomplete.
-	public static void rootToLeavesR(Node root, Vector<Node> v) {
+	public static void rootToLeavesR(Node root, char[] path, int index) {
 		if (root == null)
 			return;
-		else
-			v.add(root);
+		path[index++] = (char) root.data;
 		if (root.left == null && root.right == null)
-			printVector(v);
-		rootToLeavesR(root.left, v);
-		rootToLeavesR(root.right, v);
+			printCharArray(path, index);
+		rootToLeavesR(root.left, path, index);
+		rootToLeavesR(root.right, path, index);
 	}
-
+	 */
 	// Stepwise approach: Deciding a traversal for using with algorithm is best.
 	public static void doubleTree(Node root) {
 		if (root == null)
@@ -736,6 +738,12 @@ public class BinaryTree {
 			random = randomNumber();
 		} while (random == 0);
 		return random;
+	}
+	
+	private static void printCharArray(char[] path, int index) {
+		for (int i = 0; i < index; i++)
+			System.out.print(path[i] + " ");
+		System.out.println();
 	}
 
 	public static void printTree(Node root) {
