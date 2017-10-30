@@ -6,12 +6,13 @@ import java.util.Stack;
 import java.util.Vector;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class BinaryTree {
 
 	public static void main(String[] args) {
-		Node root = makeCharBinaryTree(randomCharArray(size()));
+		Node root = makeCharBinaryTree(randomCharArray(20));
 		printTree(root);
 		// Do it in iterative.
 		System.out.print("InOrder Recursive Traversal:\n");
@@ -68,15 +69,93 @@ public class BinaryTree {
 		// doubleTree(root);
 		// printTree(root);
 		// rootToLeavesI(root);
+		// printDiagonal(root);
+		// boundaryTraversal(root);
 		
 	}
+
+	
+	
+	// Prints all the boundary and leaf nodes.
+	public static void boundaryTraversal(Node root) {
+		System.out.println("Printing Tree Boundary: ");
+		printVector(boundaryTraversal(root, new Vector<Node>()));
+	}
+
+	public static boolean isLeaf(Node node) {
+		return node.left == null && node.right == null;
+	}
+
+	private static Vector<Node> boundaryTraversal(Node root, Vector<Node> v) {
+		if (root == null)
+			return null;
+		v.add(root);
+		Node left = root, right = root;
+
+		// Left
+		while (left != null && !isLeaf(left)) {
+			if (!v.contains(left))
+				v.add(left);
+			left = left.left;
+		}
+
+		// Alternatively, v.addAll(getLeaves(root)) - Recursive;
+		// Generalized DFS for trees.
+		LinkedList<Node> q = new LinkedList<Node>();
+		q.add(root);
+		while (!q.isEmpty()) {
+			Node current = q.pop();
+			if (current.right != null)
+				q.addFirst(current.right);
+			if (current.left != null)
+				q.addFirst(current.left);
+			if (isLeaf(current) && !v.contains(current))
+				v.add(current);
+		}
+
+		// Right - to be done in reverse.
+		Vector<Node> rightVector = new Vector<Node>();
+		while (right != null && !isLeaf(right)) {
+			if (!v.contains(right))
+				rightVector.add(right);
+			right = right.right;
+		}
+		for (int i = rightVector.size() - 1; i >= 0; i--)
+			v.add(rightVector.get(i));
+		return v;
+	}
+
+	public static void printDiagonal(Node root) {
+		HashMap<Integer, Vector<Node>> map = printDiagonal(root, 0, new HashMap<Integer, Vector<Node>>());
+		if (map.keySet() != null)
+			for (Integer x : map.keySet())
+				printVector(map.get(x));
+		else
+			System.out.println("Map is empty!");
+	}
+
+	private static HashMap<Integer, Vector<Node>> printDiagonal(Node root, int slope,
+			HashMap<Integer, Vector<Node>> map) {
+		if (root == null)
+			return null;
+		Vector<Node> k = map.get(slope);
+		if (k == null) {
+			k = new Vector<Node>();
+			map.put(slope, k);
+		}
+		k.add(root);
+		printDiagonal(root.left, slope + 1, map);
+		printDiagonal(root.right, slope, map);
+		return map;
+	}
+
 	/**
 	// Already written before, did this again to test myself.
 	public static void rootToLeavesI(Node root) {
 		System.out.println("Printing root to leaves.");
 		rootToLeavesR(root, new char[size(root)], 0);
 	}
-
+	
 	public static void rootToLeavesR(Node root, char[] path, int index) {
 		if (root == null)
 			return;
@@ -325,12 +404,13 @@ public class BinaryTree {
 		for (int i = 0; i <= height; i++) {
 			levelVector = getLevelVector(root, i, new Vector<Node>());
 			for (int j = 0; j < levelVector.size(); j++)
-				levelVector.get(j).nextRight = j == (levelVector.size() - 1) ? null : levelVector.get(j + 1);/**
-																												System.out.println("Proof:");
-																												for (Node n : levelVector)
-																													System.out.print(n.data + " -> " + ((n.nextRight == null) ? "null " : (n.nextRight.data + "|")));
-																												System.out.println();
-																												*/
+				levelVector.get(j).nextRight = j == (levelVector.size() - 1) ? null : levelVector.get(j + 1);
+			/**
+			System.out.println("Proof:");
+			for (Node n : levelVector)
+			System.out.print(n.data + " -> " + ((n.nextRight == null) ? "null " : (n.nextRight.data + "|")));
+			System.out.println();
+			*/
 		}
 	}
 
@@ -736,10 +816,10 @@ public class BinaryTree {
 		int random = 0;
 		do {
 			random = randomNumber();
-		} while (random == 0);
+		} while (random < 4);
 		return random;
 	}
-	
+
 	private static void printCharArray(char[] path, int index) {
 		for (int i = 0; i < index; i++)
 			System.out.print(path[i] + " ");
