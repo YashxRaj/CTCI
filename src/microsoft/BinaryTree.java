@@ -1,19 +1,17 @@
 package microsoft;
 
-import java.util.List;
-import java.util.Scanner;
-import java.util.Stack;
-import java.util.Vector;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Stack;
+import java.util.Vector;
 
 public class BinaryTree {
 
 	public static void main(String[] args) {
-		Node root = makeCharBinaryTree(randomCharArray(16));
+		Node root = makeStringBinaryTree(randomStringArray(16));
 		printTree(root);
 		// Do it in iterative.
 		System.out.print("InOrder Recursive Traversal:\n");
@@ -73,7 +71,46 @@ public class BinaryTree {
 		// printDiagonal(root);
 		// boundaryTraversal(root);
 		// verticalTraversal(root);
-		
+		perfectBTSpecificLevelOrderTraversal(root);
+	}
+
+	public static void perfectBTSpecificLevelOrderTraversal(Node root) {
+		if (root == null)
+			return;
+		else
+			System.out.print(root.data + " ");
+
+		LinkedList<Node> q = new LinkedList<Node>();
+		q.add(root.left);
+		q.add(root.right);
+		while (!q.isEmpty()) {
+			int size = q.size();
+			if (size == 0)
+				break;
+			while (size > 0) {
+				Node top = null, bottom = null;
+				if (q.peekFirst() != null) {
+					top = q.removeFirst();
+					size--;
+				}
+				if (q.peekLast() != null) {
+					bottom = q.removeLast();
+					size--;
+				}
+				System.out.print(top.data + " ");
+				if (top.left != null)
+					q.addFirst(top.left);
+				if (top.right != null)
+					q.add(top.right);
+				System.out.print(bottom.data + " ");
+				if (bottom.left != null)
+					q.add(bottom.left);
+				if (bottom.right != null)
+					q.add(bottom.right);
+			}
+		}
+		System.out.println();
+
 	}
 
 	public static void verticalTraversal(Node root) {
@@ -345,16 +382,30 @@ public class BinaryTree {
 		printNodesK(root.right, k - 1);
 	}
 
-	public static Node makeCharBinaryTree(char[] ch) {
+	public static Node<Character> makeCharBinaryTree(char[] ch) {
 		return makeCharBinaryTree(ch, 1);
 	}
 
-	private static Node makeCharBinaryTree(char[] ch, int index) {
-		Node root = null;
+	private static Node<Character> makeCharBinaryTree(char[] ch, int index) {
+		Node<Character> root = null;
 		if (index < ch.length) {
-			root = new Node(ch[index - 1]);
+			root = new Node<Character>(ch[index - 1]);
 			root.left = makeCharBinaryTree(ch, index * 2);
 			root.right = makeCharBinaryTree(ch, index * 2 + 1);
+		}
+		return root;
+	}
+
+	public static Node<String> makeStringBinaryTree(String[] s) {
+		return makeStringBinaryTree(s, 1);
+	}
+
+	private static Node<String> makeStringBinaryTree(String[] s, int index) {
+		Node<String> root = null;
+		if (index < s.length) {
+			root = new Node<String>(s[index - 1]);
+			root.left = makeStringBinaryTree(s, index * 2);
+			root.right = makeStringBinaryTree(s, index * 2 + 1);
 		}
 		return root;
 	}
@@ -427,14 +478,16 @@ public class BinaryTree {
 		for (int i = 0; i <= height; i++) {
 			levelVector = getLevelVector(root, i, new Vector<Node>());
 			for (int j = 0; j < levelVector.size(); j++)
-				levelVector.get(j).nextRight = j == (levelVector.size() - 1) ? null : levelVector.get(j + 1);/**
-																												System.out.println("Proof:");
-																												for (Node n : levelVector)
-																												System.out.print(n.data + " -> " + ((n.nextRight == null) ? "null " : (n.nextRight.data + "|")));
-																												System.out.println();
-																												*/
+				levelVector.get(j).nextRight = j == (levelVector.size() - 1) ? null : levelVector.get(j + 1);
 		}
 	}
+
+	/**
+	System.out.println("Proof:");
+	for (Node n : levelVector)
+	System.out.print(n.data + " -> " + ((n.nextRight == null) ? "null " : (n.nextRight.data + "|")));
+	System.out.println();
+	*/
 
 	private static Vector<Node> getLevelVector(Node root, int level, Vector<Node> levelVector) {
 		if (root == null)
@@ -826,6 +879,13 @@ public class BinaryTree {
 		int[] array = new int[size];
 		for (int i = 0; i < size; i++)
 			array[i] = randomNumber();
+		return array;
+	}
+
+	public static String[] randomStringArray(int size) {
+		String[] array = new String[size];
+		for (int i = 0; i < size; i++)
+			array[i] = Integer.toString(i);
 		return array;
 	}
 
