@@ -6,13 +6,14 @@ import java.util.Stack;
 import java.util.Vector;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 
 public class BinaryTree {
 
 	public static void main(String[] args) {
-		Node root = makeCharBinaryTree(randomCharArray(20));
+		Node root = makeCharBinaryTree(randomCharArray(16));
 		printTree(root);
 		// Do it in iterative.
 		System.out.print("InOrder Recursive Traversal:\n");
@@ -71,11 +72,33 @@ public class BinaryTree {
 		// rootToLeavesI(root);
 		// printDiagonal(root);
 		// boundaryTraversal(root);
+		// verticalTraversal(root);
 		
 	}
 
-	
-	
+	public static void verticalTraversal(Node root) {
+		System.out.println("Vertical Traversal: ");
+		HashMap<Integer, Vector<Node>> map = new HashMap<Integer, Vector<Node>>();
+		verticalTraversal(root, map, 0);
+		int min = Collections.min(map.keySet()), max = Collections.max(map.keySet());
+		for (int i = min, j = 1; i <= max && !map.get(i).isEmpty(); i++) {
+			System.out.print("Line: " + j++ + " - ");
+			printVector(map.get(i));
+		}
+	}
+
+	private static HashMap<Integer, Vector<Node>> verticalTraversal(Node root, HashMap<Integer, Vector<Node>> map,
+			int i) {
+		if (root == null)
+			return null;
+		if (!map.containsKey(i))
+			map.put(i, new Vector<Node>());
+		map.get(i).add(root);
+		verticalTraversal(root.left, map, i - 1);
+		verticalTraversal(root.right, map, i + 1);
+		return map;
+	}
+
 	// Prints all the boundary and leaf nodes.
 	public static void boundaryTraversal(Node root) {
 		System.out.println("Printing Tree Boundary: ");
@@ -404,13 +427,12 @@ public class BinaryTree {
 		for (int i = 0; i <= height; i++) {
 			levelVector = getLevelVector(root, i, new Vector<Node>());
 			for (int j = 0; j < levelVector.size(); j++)
-				levelVector.get(j).nextRight = j == (levelVector.size() - 1) ? null : levelVector.get(j + 1);
-			/**
-			System.out.println("Proof:");
-			for (Node n : levelVector)
-			System.out.print(n.data + " -> " + ((n.nextRight == null) ? "null " : (n.nextRight.data + "|")));
-			System.out.println();
-			*/
+				levelVector.get(j).nextRight = j == (levelVector.size() - 1) ? null : levelVector.get(j + 1);/**
+																												System.out.println("Proof:");
+																												for (Node n : levelVector)
+																												System.out.print(n.data + " -> " + ((n.nextRight == null) ? "null " : (n.nextRight.data + "|")));
+																												System.out.println();
+																												*/
 		}
 	}
 
