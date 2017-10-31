@@ -1,21 +1,21 @@
 package microsoft;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 import java.util.Vector;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Collections;
 
 public class BinaryTree {
 
 	public static void main(String[] args) {
-		Node root = makeStringBinaryTree(randomStringArray(16));
+		Node root = makeStringBinaryTree(randomStringArray(15));
 		printTree(root);
 		// Do it in iterative.
-		System.out.print("InOrder Recursive Traversal:\n");
-		inOrderRecursive(root);
+		// System.out.print("InOrder Recursive Traversal:\n");
+		// inOrderRecursive(root);
 		/**
 		 * System.out.print("\nPreOrder Recursive Traversal:\n");
 		 * preOrderRecursive(root);
@@ -71,9 +71,12 @@ public class BinaryTree {
 		// printDiagonal(root);
 		// boundaryTraversal(root);
 		// verticalTraversal(root);
-		perfectBTSpecificLevelOrderTraversal(root);
+		// perfectBTSpecificLevelOrderTraversal(root);
+		
+		
 	}
 
+	// Solved, but requires thorough understanding for follow up questions.
 	public static void perfectBTSpecificLevelOrderTraversal(Node root) {
 		if (root == null)
 			return;
@@ -83,30 +86,32 @@ public class BinaryTree {
 		LinkedList<Node> q = new LinkedList<Node>();
 		q.add(root.left);
 		q.add(root.right);
+
 		while (!q.isEmpty()) {
 			int size = q.size();
 			if (size == 0)
 				break;
 			while (size > 0) {
-				Node top = null, bottom = null;
+				Node left = null, right = null;
 				if (q.peekFirst() != null) {
-					top = q.removeFirst();
+					left = q.remove();
+					System.out.print(left.data + " ");
 					size--;
 				}
 				if (q.peekLast() != null) {
-					bottom = q.removeLast();
+					right = q.remove();
+					System.out.print(right.data + " ");
 					size--;
 				}
-				System.out.print(top.data + " ");
-				if (top.left != null)
-					q.addFirst(top.left);
-				if (top.right != null)
-					q.add(top.right);
-				System.out.print(bottom.data + " ");
-				if (bottom.left != null)
-					q.add(bottom.left);
-				if (bottom.right != null)
-					q.add(bottom.right);
+
+				if (left.left != null)
+					q.add(left.left);
+				if (right.right != null)
+					q.add(right.right);
+				if (left.right != null)
+					q.add(left.right);
+				if (right.left != null)
+					q.add(right.left);
 			}
 		}
 		System.out.println();
