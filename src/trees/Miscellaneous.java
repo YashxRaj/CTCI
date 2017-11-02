@@ -248,7 +248,7 @@ public class Miscellaneous {
 			return;
 		buffer[index++] = (int) root.data;
 		if (root.left == null && root.right == null)
-			HelperFunctions.printArray(buffer, index);
+			HelperFunctions.printIntArray(buffer, index);
 		rootToLeaves(root.left, buffer, index);
 		rootToLeaves(root.right, buffer, index);
 	}

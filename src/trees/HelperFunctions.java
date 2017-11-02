@@ -42,7 +42,7 @@ public class HelperFunctions {
 		return array;
 	}
 
-	protected static void printArray(int[] buffer, int index) {
+	protected static void printIntArray(int[] buffer, int index) {
 		for (int i = 0; i < index; i++)
 			System.out.print(buffer[i] + " ");
 		System.out.println();
