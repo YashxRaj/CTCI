@@ -8,15 +8,15 @@ import java.util.Vector;
 public class HelperFunctions {
 
 	protected static int randomNumber() {
-		int random = (int) (Math.random() * 10);
+		int random = (int) (Math.random() * 20);
 		return random;
 	}
 
-	protected static int size() {
+	protected static int randomTreeSize() {
 		int random = 0;
 		do {
 			random = randomNumber();
-		} while (random < 4);
+		} while (random < 8);
 		return random;
 	}
 
@@ -28,7 +28,7 @@ public class HelperFunctions {
 		return ch;
 	}
 
-	protected static int[] makeRandomArray(int size) {
+	protected static int[] makeIntArray(int size) {
 		int[] array = new int[size];
 		for (int i = 0; i < size; i++)
 			array[i] = randomNumber();
@@ -60,6 +60,7 @@ public class HelperFunctions {
 		System.out.println();
 	}
 
+	// Prints graphical tree to console.
 	protected static void printTree(Node root) {
 		List<List<String>> lines = new ArrayList<List<String>>();
 		List<Node> level = new ArrayList<Node>();

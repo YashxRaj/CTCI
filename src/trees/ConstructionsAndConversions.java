@@ -3,8 +3,27 @@ package trees;
 @SuppressWarnings({ "unused", "rawtypes", "unchecked" })
 public class ConstructionsAndConversions {
 
-	protected static void main(String[] args) {
+	public static void main(String[] args) {
+		
+//		System.out.println("\nString Tree:");
+//		int stringRootSize = HelperFunctions.randomTreeSize();
+//		String[] rootString = HelperFunctions.makeStringArray(stringRootSize);
+//		Node stringRoot = makeStringBinaryTree(rootString);
+//		HelperFunctions.printTree(stringRoot);
 
+//		System.out.println("\nCharacter Tree:");
+//		int charRootSize = HelperFunctions.randomTreeSize();
+//		char[] rootChar = HelperFunctions.makeCharArray(charRootSize);
+//		Node<Character> charRoot = makeCharBinaryTree(rootChar);
+//		HelperFunctions.printTree(charRoot);
+
+//		System.out.println("\nInteger Tree:");
+//		int intRootSize = HelperFunctions.randomTreeSize();
+//		int[] rootInt = HelperFunctions.makeIntArray(intRootSize);
+//		Node<Integer> intRoot = makeIntBinaryTree(rootInt);
+//		HelperFunctions.printTree(intRoot);
+		
+		// Code.
 	}
 
 	/**
@@ -39,10 +58,10 @@ public class ConstructionsAndConversions {
 	}
 
 	protected static void buildInOrderSuccessors(Node root) {
-		buildInOrderSuccessors(root, null);
+		constructInOrderSuccessors(root, null);
 	}
 
-	private static void buildInOrderSuccessors(Node root, Node inOrderSuccessor) {
+	private static void constructInOrderSuccessors(Node root, Node inOrderSuccessor) {
 		if (root == null)
 			return;
 		buildInOrderSuccessors(root.right);
@@ -79,15 +98,15 @@ public class ConstructionsAndConversions {
 		return root;
 	}
 
-	protected static Node randomBinaryTree(int[] a) {
-		return makeBinaryTree(a, 1);
+	protected static Node<Integer> makeIntBinaryTree(int[] a) {
+		return makeIntBinaryTree(a, 1);
 	}
 
-	private static Node makeBinaryTree(int[] a, int index) {
+	private static Node<Integer> makeIntBinaryTree(int[] a, int index) {
 		if (index < a.length) {
-			Node n = new Node(a[index - 1]);
-			n.left = makeBinaryTree(a, index * 2);
-			n.right = makeBinaryTree(a, index * 2 + 1);
+			Node<Integer> n = new Node(a[index - 1]);
+			n.left = makeIntBinaryTree(a, index * 2);
+			n.right = makeIntBinaryTree(a, index * 2 + 1);
 			return n;
 		} else
 			return null;

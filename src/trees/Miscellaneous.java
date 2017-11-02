@@ -221,7 +221,7 @@ public class Miscellaneous {
 	}
 
 	// Using level order traversal
-	public static int maximumWidthInefficient(Node root) {
+	public static int maximumWidthSlow(Node root) {
 		int height = height(root), maxWidth = 0, width = 0;
 		for (int i = 0; i <= height; i++)
 			maxWidth = (width = getWidth(root, i)) > maxWidth ? width : maxWidth;
@@ -236,6 +236,7 @@ public class Miscellaneous {
 		return getWidth(root.left, height - 1) + getWidth(root.right, height - 1);
 	}
 
+	// Prints all root to leaf paths.
 	public static void rootToLeaves(Node root) {
 		System.out.println("Printing root to leaf paths:");
 		int[] buffer = new int[size(root)];
@@ -252,6 +253,7 @@ public class Miscellaneous {
 		rootToLeaves(root.right, buffer, index);
 	}
 
+	// Returns count of leaf nodes in tree.
 	public static int countLeafNodes(Node root) {
 		if (root == null)
 			return 0;
@@ -282,6 +284,7 @@ public class Miscellaneous {
 
 	}
 
+	// Returns the length of the longest path
 	public static int longestPath(Node root) {
 		return longestPath(root, 0);
 	}
@@ -302,6 +305,7 @@ public class Miscellaneous {
 		return 1 + Math.max(leftHeight, rightHeight);
 	}
 
+	// Returns total number of nodes in the tree.
 	public static int size(Node root) {
 		return root == null ? 0 : (size(root.left) + 1 + size(root.right));
 	}
@@ -313,6 +317,7 @@ public class Miscellaneous {
 			return 1 + Math.max(height(root.left), height(root.right));
 	}
 
+	// AVL tree - difference between left subtree and right subtree <= 1
 	public static boolean isAVL(Node root) {
 		if (root == null)
 			return true;
