@@ -5,6 +5,7 @@ import trees.Miscellaneous;
 import java.util.Vector;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Stack;
 import java.util.Collections;
 
 @SuppressWarnings({ "unused", "rawtypes", "unchecked" })
@@ -19,7 +20,9 @@ public class Traversals {
 		// morrisInOrder(charRoot);
 		// morrisPreOrder(charRoot);
 
-		// inOrderRecursive(charRoot);
+		inOrderRecursive(charRoot);
+		System.out.println();
+		inOrderIterative(charRoot);
 		// reverseInorderRecursive(charRoot);
 
 		// preOrderRecursive(charRoot);
@@ -40,7 +43,6 @@ public class Traversals {
 
 		// TO DO:
 
-		// inOrderIterative(charRoot);
 		// preOrderIterative(charRoot);
 		// postOrderIterative(charRoot);
 
@@ -48,6 +50,30 @@ public class Traversals {
 		// reversePreorderIterative(charRoot);
 		// reversePostorderIterative(charRoot);
 
+	}
+
+	
+	
+	protected static void inOrderIterative(Node root) {
+		if (root == null)
+			return;
+		Stack<Node> stack = new Stack<Node>();
+		Node n = root;
+		while (n != null) {
+			stack.push(n);
+			n = n.left;
+		}
+		while (!stack.isEmpty()) {
+			n = stack.pop();
+			System.out.print(n.data + " ");
+			if (n.right != null) {
+				n = n.right;
+				while (n != null) {
+					stack.push(n);
+					n = n.left;
+				}
+			}
+		}
 	}
 
 	protected static void diagonal(Node root) {
