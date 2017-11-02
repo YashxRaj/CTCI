@@ -7,8 +7,48 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Collections;
 
-@SuppressWarnings({ "unused", "rawtypes" })
+@SuppressWarnings({ "unused", "rawtypes", "unchecked" })
 public class Traversals {
+
+	public static void main(String[] args) {
+		int charRootSize = HelperFunctions.randomTreeSize();
+		char[] rootChar = HelperFunctions.makeCharArray(charRootSize);
+		Node<Character> charRoot = ConstructionsAndConversions.makeCharBinaryTree(rootChar);
+		HelperFunctions.printTree(charRoot);
+
+		// morrisInOrder(charRoot);
+		// morrisPreOrder(charRoot);
+
+		// inOrderRecursive(charRoot);
+		// reverseInorderRecursive(charRoot);
+
+		// preOrderRecursive(charRoot);
+		// reversePreorderRecursive(charRoot);
+
+		// postOrderRecursive(charRoot);
+		// reversePostorderRecursive(charRoot);
+
+		// levelOrder(charRoot);
+		// reverseLevelOrder(charRoot);
+
+		// vertical(charRoot);
+		// boundary(charRoot);
+		// diagonal(charRoot);
+
+		// Requires a perfect Binary Tree
+		// perfectBinaryTreeSpecificLevelOrder(charRoot);
+
+		// TO DO:
+		
+		// inOrderIterative(charRoot);
+		// preOrderIterative(charRoot);
+		// postOrderIterative(charRoot);
+
+		// reverseInorderIterative(charRoot);
+		// reversePreorderIterative(charRoot);
+		// reversePostorderIterative(charRoot);
+
+	}
 
 	protected static void diagonal(Node root) {
 		HashMap<Integer, Vector<Node>> map = diagonal(root, 0, new HashMap<Integer, Vector<Node>>());
@@ -229,14 +269,14 @@ public class Traversals {
 	}
 
 	// Traverses tree iteratively to print PreOrder traversals.
-	protected static void morrisPreOrder(Node<Integer> node) {
-		System.out.println("PreOrder Traversal:");
+	protected static void morrisPreOrder(Node node) {
+		System.out.println("Morris PreOrder Traversal:");
 		while (node != null) {
 			if (node.left == null) {
 				System.out.print(node.data + " ");
 				node = node.right;
 			} else {
-				Node<Integer> current = node.left;
+				Node current = node.left;
 				while (current.right != null && current.right != node)
 					current = current.right;
 				if (current.right == node) {
@@ -253,14 +293,14 @@ public class Traversals {
 	}
 
 	// Traverses tree iteratively to print InOrder traversals.
-	protected static void morrisInOrder(Node<Integer> node) {
-		System.out.println("InOrder Traversal:");
+	protected static void morrisInOrder(Node node) {
+		System.out.println("Morris InOrder Traversal:");
 		while (node != null) {
 			if (node.left == null) {
 				System.out.print(node.data + " ");
 				node = node.right;
 			} else {
-				Node<Integer> current = node.left;
+				Node current = node.left;
 				while (current.right != null && current.right != node)
 					current = current.right;
 				if (current.right == node) {
@@ -272,7 +312,8 @@ public class Traversals {
 					node = node.left;
 				}
 			}
-			System.out.println();
 		}
+		System.out.println();
+
 	}
 }
