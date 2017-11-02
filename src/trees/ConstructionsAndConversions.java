@@ -27,36 +27,16 @@ public class ConstructionsAndConversions {
 
 		// HelperFunctions.printTree(convertMirrorTree(charRoot));
 		
+		
 	}
 
-	/**
-	private static Node mirror(Node root) {
-		if (root == null)
-			return null;
-	
-		Node left = mirror(root.left);
-		Node right = mirror(root.right);
-	
-		root.left = right;
-		root.right = left;
-	
-		return root;
-	}
-	*/
-	// GFG: Above. Me: below. Learning opportunity.
 	protected static Node convertMirrorTree(Node root) {
 		if (root == null)
 			return null;
-
-		convertMirrorTree(root.left);
-		convertMirrorTree(root.right);
-
-		Node left = root.left;
-		Node right = root.right;
-
+		Node left = convertMirrorTree(root.left);
+		Node right = convertMirrorTree(root.right);
 		root.left = right;
 		root.right = left;
-
 		return root;
 	}
 
