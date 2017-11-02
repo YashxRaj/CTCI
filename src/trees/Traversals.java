@@ -39,7 +39,7 @@ public class Traversals {
 		// perfectBinaryTreeSpecificLevelOrder(charRoot);
 
 		// TO DO:
-		
+
 		// inOrderIterative(charRoot);
 		// preOrderIterative(charRoot);
 		// postOrderIterative(charRoot);
@@ -182,7 +182,6 @@ public class Traversals {
 			}
 		}
 		System.out.println();
-
 	}
 
 	private static void levelOrderIterative(Node root) {
@@ -314,6 +313,5 @@ public class Traversals {
 			}
 		}
 		System.out.println();
-
 	}
 }

@@ -1,29 +1,32 @@
 package trees;
 
-@SuppressWarnings({ "unused", "rawtypes", "unchecked" })
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class ConstructionsAndConversions {
 
 	public static void main(String[] args) {
-		
-//		System.out.println("\nString Tree:");
-//		int stringRootSize = HelperFunctions.randomTreeSize();
-//		String[] rootString = HelperFunctions.makeStringArray(stringRootSize);
-//		Node stringRoot = makeStringBinaryTree(rootString);
-//		HelperFunctions.printTree(stringRoot);
 
-//		System.out.println("\nCharacter Tree:");
-//		int charRootSize = HelperFunctions.randomTreeSize();
-//		char[] rootChar = HelperFunctions.makeCharArray(charRootSize);
-//		Node<Character> charRoot = makeCharBinaryTree(rootChar);
-//		HelperFunctions.printTree(charRoot);
+		// System.out.println("\nString Tree:");
+		// int stringRootSize = HelperFunctions.randomTreeSize();
+		// String[] rootString = HelperFunctions.makeStringArray(stringRootSize);
+		// Node stringRoot = makeStringBinaryTree(rootString);
+		// HelperFunctions.printTree(stringRoot);
 
-//		System.out.println("\nInteger Tree:");
-//		int intRootSize = HelperFunctions.randomTreeSize();
-//		int[] rootInt = HelperFunctions.makeIntArray(intRootSize);
-//		Node<Integer> intRoot = makeIntBinaryTree(rootInt);
-//		HelperFunctions.printTree(intRoot);
+		// System.out.println("\nInteger Tree:");
+		// int intRootSize = HelperFunctions.randomTreeSize();
+		// int[] rootInt = HelperFunctions.makeIntArray(intRootSize);
+		// Node<Integer> intRoot = makeIntBinaryTree(rootInt);
+		// HelperFunctions.printTree(intRoot);
+
+		System.out.println("\nCharacter Tree:");
+		int charRootSize = HelperFunctions.randomTreeSize();
+		char[] rootChar = HelperFunctions.makeCharArray(charRootSize);
+		Node<Character> charRoot = makeCharBinaryTree(rootChar);
+		HelperFunctions.printTree(charRoot);
+
+		constructInOrderSuccessors(charRoot);
+
+		// HelperFunctions.printTree(convertMirrorTree(charRoot));
 		
-		// Code.
 	}
 
 	/**
@@ -57,17 +60,17 @@ public class ConstructionsAndConversions {
 		return root;
 	}
 
-	protected static void buildInOrderSuccessors(Node root) {
+	protected static void constructInOrderSuccessors(Node root) {
 		constructInOrderSuccessors(root, null);
 	}
 
 	private static void constructInOrderSuccessors(Node root, Node inOrderSuccessor) {
 		if (root == null)
 			return;
-		buildInOrderSuccessors(root.right);
+		constructInOrderSuccessors(root.right);
 		root.inOrderSuccessor = (Node) inOrderSuccessor;
 		inOrderSuccessor = root;
-		buildInOrderSuccessors(root.left);
+		constructInOrderSuccessors(root.left);
 	}
 
 	protected static Node<Character> makeCharBinaryTree(char[] ch) {
