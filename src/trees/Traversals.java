@@ -20,15 +20,18 @@ public class Traversals {
 		// morrisInOrder(charRoot);
 		// morrisPreOrder(charRoot);
 
-		inOrderRecursive(charRoot);
-		System.out.println();
-		inOrderIterative(charRoot);
+		// inOrderRecursive(charRoot);
+		// inOrderIterative(charRoot);
 		// reverseInorderRecursive(charRoot);
 
 		// preOrderRecursive(charRoot);
+		// preOrderIterative(charRoot);
+		// preOrderIterative2(charRoot);
 		// reversePreorderRecursive(charRoot);
 
 		// postOrderRecursive(charRoot);
+		// postOrderIterativeOneStack(charRoot);
+		// postOrderIterativeTwoStacks(charRoot);
 		// reversePostorderRecursive(charRoot);
 
 		// levelOrder(charRoot);
@@ -42,18 +45,114 @@ public class Traversals {
 		// perfectBinaryTreeSpecificLevelOrder(charRoot);
 
 		// TO DO:
-
-		// preOrderIterative(charRoot);
-		// postOrderIterative(charRoot);
-
 		// reverseInorderIterative(charRoot);
 		// reversePreorderIterative(charRoot);
 		// reversePostorderIterative(charRoot);
 
 	}
 
-	
-	
+	// Using 1 stack - Need to understand this thoroughly.
+	protected static void postOrderIterativeOneStack(Node<Character> root) {
+		if (root == null)
+			return;
+		Stack<Node> stack = new Stack<Node>();
+		Node n = root, prev = null;
+		stack.push(n);
+		while (!stack.isEmpty()) {
+			Node current = stack.peek();
+			if (prev == null || prev.left == current || prev.right == current) {
+				if (current.left != null)
+					stack.push(current.left);
+				else if (current.right != null)
+					stack.push(current.right);
+				else {
+					stack.pop();
+					System.out.print(current + " ");
+				}
+			} else if (current.left == prev) {
+				if (current.right != null)
+					stack.push(current.right);
+				else {
+					stack.pop();
+					System.out.print(current + " ");
+				}
+			} else if (current.right == prev) {
+				stack.pop();
+				System.out.print(current + " ");
+			}
+			prev = current;
+		}
+	}
+
+	// Using 2 stacks
+	protected static void postOrderIterativeTwoStacks(Node<Character> root) {
+		if (root == null)
+			return;
+		Stack<Node> stack = new Stack<Node>();
+		Stack<Node> stack2 = new Stack<Node>();
+		Node n = root;
+		stack.push(n);
+		while (!stack.isEmpty()) {
+			stack2.push(n = stack.pop());
+			if (n.left != null)
+				stack.push(n.left);
+			if (n.right != null)
+				stack.push(n.right);
+		}
+		while (!stack2.isEmpty())
+			System.out.print(stack2.pop() + " ");
+		System.out.println();
+	}
+
+	/**
+	 * Difference between preOrder and postOrder iterative:
+	 * preOrder - push right then left.
+	 * postOrder - push right then left.
+	*/
+
+	protected static void preOrderIterative(Node<Character> root) {
+		if (root == null)
+			return;
+		Stack<Node> stack = new Stack<Node>();
+		Node n = root;
+		stack.push(n);
+		while (!stack.isEmpty()) {
+			n = stack.pop();
+			System.out.print(n + " ");
+			if (n.right != null)
+				stack.push(n.right);
+			if (n.left != null)
+				stack.push(n.left);
+		}
+		System.out.println();
+	}
+
+	protected static void preOrderIterative2(Node<Character> root) {
+		if (root == null)
+			return;
+		Stack<Node> stack = new Stack<Node>();
+		Node n = root;
+		while (n != null) {
+			stack.push(n);
+			System.out.print(n + " ");
+			n = n.left;
+		}
+		while (!stack.isEmpty()) {
+			n = stack.pop();
+			if (n.right != null) {
+				n = n.right;
+				System.out.print(n + " ");
+				stack.push(n);
+				while (n.left != null) {
+					n = n.left;
+					System.out.print(n + " ");
+					stack.push(n);
+				}
+			}
+		}
+		System.out.println();
+	}
+
 	protected static void inOrderIterative(Node root) {
 		if (root == null)
 			return;
@@ -65,7 +164,7 @@ public class Traversals {
 		}
 		while (!stack.isEmpty()) {
 			n = stack.pop();
-			System.out.print(n.data + " ");
+			System.out.print(n + " ");
 			if (n.right != null) {
 				n = n.right;
 				while (n != null) {
@@ -74,6 +173,7 @@ public class Traversals {
 				}
 			}
 		}
+		System.out.println();
 	}
 
 	protected static void diagonal(Node root) {
@@ -174,7 +274,7 @@ public class Traversals {
 		if (root == null)
 			return;
 		else
-			System.out.print(root.data + " ");
+			System.out.print(root + " ");
 
 		LinkedList<Node> q = new LinkedList<Node>();
 		q.add(root.left);
@@ -188,12 +288,12 @@ public class Traversals {
 				Node left = null, right = null;
 				if (q.peekFirst() != null) {
 					left = q.remove();
-					System.out.print(left.data + " ");
+					System.out.print(left + " ");
 					size--;
 				}
 				if (q.peekLast() != null) {
 					right = q.remove();
-					System.out.print(right.data + " ");
+					System.out.print(right + " ");
 					size--;
 				}
 
@@ -223,7 +323,7 @@ public class Traversals {
 			System.out.println("Level: " + i++);
 			while (size > 0) {
 				Node temp = q.pop();
-				System.out.print(temp.data + " ");
+				System.out.print(temp + " ");
 				if (temp.left != null)
 					q.add(temp.left);
 				if (temp.right != null)
@@ -238,7 +338,7 @@ public class Traversals {
 		if (root == null)
 			return;
 		reverseInorderRecursive(root.right);
-		System.out.print(root.data + " ");
+		System.out.print(root + " ");
 		reverseInorderRecursive(root.left);
 	}
 
@@ -247,13 +347,13 @@ public class Traversals {
 			return;
 		postOrderRecursive(root.left);
 		postOrderRecursive(root.right);
-		System.out.print(root.data + " ");
+		System.out.print(root + " ");
 	}
 
 	protected static void preOrderRecursive(Node root) {
 		if (root == null)
 			return;
-		System.out.print(root.data + " ");
+		System.out.print(root + " ");
 		preOrderRecursive(root.left);
 		preOrderRecursive(root.right);
 	}
@@ -262,7 +362,7 @@ public class Traversals {
 		if (root == null)
 			return;
 		inOrderRecursive(root.left);
-		System.out.print(root.data + " ");
+		System.out.print(root + " ");
 		inOrderRecursive(root.right);
 	}
 
@@ -288,7 +388,7 @@ public class Traversals {
 		if (root == null)
 			return;
 		if (level == 0)
-			System.out.print(root.data + " ");
+			System.out.print(root + " ");
 		levelOrder(root.left, level - 1);
 		levelOrder(root.right, level - 1);
 	}
@@ -298,7 +398,7 @@ public class Traversals {
 		System.out.println("Morris PreOrder Traversal:");
 		while (node != null) {
 			if (node.left == null) {
-				System.out.print(node.data + " ");
+				System.out.print(node + " ");
 				node = node.right;
 			} else {
 				Node current = node.left;
@@ -308,7 +408,7 @@ public class Traversals {
 					current.right = null;
 					node = node.right;
 				} else {
-					System.out.print(node.data + " ");
+					System.out.print(node + " ");
 					current.right = node;
 					node = node.left;
 				}
@@ -322,14 +422,14 @@ public class Traversals {
 		System.out.println("Morris InOrder Traversal:");
 		while (node != null) {
 			if (node.left == null) {
-				System.out.print(node.data + " ");
+				System.out.print(node + " ");
 				node = node.right;
 			} else {
 				Node current = node.left;
 				while (current.right != null && current.right != node)
 					current = current.right;
 				if (current.right == node) {
-					System.out.print(node.data + " ");
+					System.out.print(node + " ");
 					current.right = null;
 					node = node.right;
 				} else {

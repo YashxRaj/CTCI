@@ -27,4 +27,9 @@ public class Node<E> {
 		return this.left == null && this.right == null;
 	}
 
+	@Override
+	public String toString() {
+		return String.valueOf(this.data);
+	}
+
 }
