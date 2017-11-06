@@ -23,17 +23,20 @@ public class Traversals {
 		// inOrderRecursive(charRoot);
 		// inOrderIterative(charRoot);
 		// reverseInorderRecursive(charRoot);
+		// reverseInorderIterative(charRoot);
 
 		// preOrderRecursive(charRoot);
 		// preOrderIterative(charRoot);
 		// preOrderIterative2(charRoot);
 		// reversePreorderRecursive(charRoot);
+		// reversePreorderIterative(charRoot);
 
 		// postOrderRecursive(charRoot);
 		// postOrderIterativeOneStack(charRoot);
 		// postOrderIterativeTwoStacks(charRoot);
 		// reversePostorderRecursive(charRoot);
-
+		// reversePostorderIterativeTwoStacks(charRoot);
+		
 		// levelOrder(charRoot);
 		// reverseLevelOrder(charRoot);
 
@@ -44,11 +47,78 @@ public class Traversals {
 		// Requires a perfect Binary Tree
 		// perfectBinaryTreeSpecificLevelOrder(charRoot);
 
-		// TO DO:
-		// reverseInorderIterative(charRoot);
-		// reversePreorderIterative(charRoot);
-		// reversePostorderIterative(charRoot);
+	}
 
+	protected static void reversePostorderRecursive(Node<Character> root) {
+		if (root == null)
+			return;
+		reversePostorderRecursive(root.right);
+		reversePostorderRecursive(root.left);
+		System.out.print(root + " ");
+	}
+
+	protected static void reversePostorderIterativeTwoStacks(Node<Character> root) {
+		if (root == null)
+			return;
+		Stack<Node> stack = new Stack<Node>();
+		Stack<Node> mainStack = new Stack<Node>();
+		Node n = root;
+		stack.push(n);
+		while (!stack.isEmpty()) {
+			n = stack.pop();
+			mainStack.push(n);
+			if (n.right != null)
+				stack.push(n.right);
+			if (n.left != null)
+				stack.push(n.left);
+		}
+		while (!mainStack.isEmpty())
+			System.out.print(mainStack.pop() + " ");
+		
+	}
+
+	protected static void reversePreorderIterative(Node<Character> root) {
+		if (root == null)
+			return;
+		Stack<Node> stack = new Stack<Node>();
+		Node n = root;
+		stack.push(n);
+		while (!stack.isEmpty()) {
+			n = stack.pop();
+			System.out.print(n + " ");
+			if (n.left != null)
+				stack.push(n.left);
+			if (n.right != null)
+				stack.push(n.right);
+		}
+	}
+
+	protected static void reversePreorderRecursive(Node<Character> root) {
+		if (root == null)
+			return;
+		System.out.print(root + " ");
+		reversePreorderRecursive(root.right);
+		reversePreorderRecursive(root.left);
+	}
+
+	protected static void reverseInorderIterative(Node<Character> root) {
+		if (root == null)
+			return;
+		Stack<Node> stack = new Stack<Node>();
+		Node n = root;
+		stack.push(n);
+		while (n.right != null)
+			stack.push(n = n.right);
+		while (!stack.isEmpty()) {
+			n = stack.pop();
+			System.out.print(n + " ");
+			if (n.left != null) {
+				stack.push(n = n.left);
+				while (n.right != null)
+					stack.push(n = n.right);
+			}
+		}
+		System.out.println();
 	}
 
 	// Using 1 stack - Need to understand this thoroughly.
