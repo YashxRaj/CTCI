@@ -9,10 +9,6 @@ import java.util.LinkedList;
 @SuppressWarnings({ "unused", "rawtypes", "unchecked" })
 public class Miscellaneous {
 
-	public static void main(String[] args) {
-
-	}
-
 	protected static Vector<Vector<Node>> getLevelVectors(Node root) {
 		int height = Miscellaneous.height(root);
 		// Must initialize before using otherwise what are we getting from called function?

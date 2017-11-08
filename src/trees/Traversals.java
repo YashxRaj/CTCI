@@ -12,10 +12,10 @@ import java.util.Collections;
 public class Traversals {
 
 	public static void main(String[] args) {
-		int charRootSize = HelperFunctions.randomTreeSize();
-		char[] rootChar = HelperFunctions.makeCharArray(charRootSize);
-		Node<Character> charRoot = ConstructionsAndConversions.makeCharBinaryTree(rootChar);
-		HelperFunctions.printTree(charRoot);
+		//		int charRootSize = HelperFunctions.randomTreeSize();
+		//		char[] rootChar = HelperFunctions.makeCharArray(charRootSize);
+		//		Node<Character> charRoot = ConstructionsAndConversions.makeCharBinaryTree(rootChar);
+		//		HelperFunctions.printTree(charRoot);
 
 		// morrisInOrder(charRoot);
 		// morrisPreOrder(charRoot);
@@ -36,7 +36,7 @@ public class Traversals {
 		// postOrderIterativeTwoStacks(charRoot);
 		// reversePostorderRecursive(charRoot);
 		// reversePostorderIterativeTwoStacks(charRoot);
-		
+
 		// levelOrder(charRoot);
 		// reverseLevelOrder(charRoot);
 
@@ -47,6 +47,43 @@ public class Traversals {
 		// Requires a perfect Binary Tree
 		// perfectBinaryTreeSpecificLevelOrder(charRoot);
 
+		char[] in = { 'D', 'B', 'E', 'A', 'F', 'C', 'G' };
+		char[] pre = { 'A', 'B', 'D', 'E', 'C', 'F', 'G' };
+		postFromInPre(in, pre);
+	}
+	// Not working yet.
+	protected static void postFromInPre(char[] in, char[] pre) {
+		char[] post = new char[pre.length];
+		postFromInPre(in, 0, in.length - 1, pre, 0, post, 0);
+		for (char x : post)
+			System.out.print(x + " ");
+		System.out.println("--");
+	}
+
+	private static char[] postFromInPre(char[] in, int inStart, int inEnd, char[] pre, int preIndex, char[] post,
+			int postIndex) {
+		if (inStart > inEnd || preIndex > pre.length)
+			return post;
+
+		int inIndex = search(in, pre[preIndex], inStart, inEnd);
+
+		if (inIndex != -1 && inStart == inEnd)
+			post[postIndex++] = in[inStart];
+
+		System.out.print(inIndex == -1 ? "- | " : (in[inIndex] + " | "));
+
+		postFromInPre(in, inStart, inIndex - 1, pre, ++preIndex, post, postIndex);
+		postFromInPre(in, inIndex + 1, inEnd, pre, ++preIndex, post, postIndex);
+		return post;
+	}
+
+	private static int search(char[] in, char current, int inStart, int inEnd) {
+		int i;
+		System.out.println(inStart + " " + inEnd + " - " + current);
+		for (i = inStart; i <= inEnd; i++)
+			if (in[i] == current)
+				return i;
+		return -1;
 	}
 
 	protected static void reversePostorderRecursive(Node<Character> root) {
@@ -74,7 +111,7 @@ public class Traversals {
 		}
 		while (!mainStack.isEmpty())
 			System.out.print(mainStack.pop() + " ");
-		
+
 	}
 
 	protected static void reversePreorderIterative(Node<Character> root) {
