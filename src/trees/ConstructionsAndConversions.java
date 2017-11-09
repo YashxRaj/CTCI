@@ -2,7 +2,10 @@ package trees;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class ConstructionsAndConversions {
-
+	
+	// For constructTreeFromInPre
+	static int preIndex = 0;
+	
 	public static void main(String[] args) {
 
 		// System.out.println("\nString Tree:");
@@ -26,8 +29,37 @@ public class ConstructionsAndConversions {
 		constructInOrderSuccessors(charRoot);
 
 		// HelperFunctions.printTree(convertMirrorTree(charRoot));
+
+		// char[] in = { 'D', 'B', 'E', 'A', 'F', 'C', 'G' };
+		// char[] pre = { 'A', 'B', 'D', 'E', 'C', 'F', 'G' };
+		// constructTreeFromInPre(in, pre);
+
+		//
 		
-		
+	}
+
+	protected static void constructTreeFromInPre(char[] in, char[] pre) {
+		HelperFunctions.printTree(constructTreeFromInPre(pre, in, 0, in.length - 1));
+	}
+
+	private static Node constructTreeFromInPre(char[] pre, char[] in, int inStart, int inEnd) {
+		if (inStart > inEnd)
+			return null;
+		Node n = new Node(pre[preIndex++]);
+		if (inStart == inEnd)
+			return n;
+		int inIndex = search(in, inStart, inEnd, (Character) n.data);
+		n.left = constructTreeFromInPre(pre, in, inStart, inIndex - 1);
+		n.right = constructTreeFromInPre(pre, in, inIndex + 1, inEnd);
+		return n;
+	}
+
+	private static int search(char[] in, int inStart, int inEnd, char c) {
+		int i;
+		for (i = inStart; i <= inEnd; i++)
+			if (in[i] == c)
+				return i;
+		return -1;
 	}
 
 	protected static Node convertMirrorTree(Node root) {

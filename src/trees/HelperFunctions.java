@@ -56,7 +56,7 @@ public class HelperFunctions {
 
 	protected static void printVector(Vector<Node> vector) {
 		for (Node n : vector)
-			System.out.print(n.data + " ");
+			System.out.print(n + " ");
 		System.out.println();
 	}
 
@@ -139,5 +139,17 @@ public class HelperFunctions {
 			System.out.println();
 			perpiece /= 2;
 		}
+	}
+
+	protected static char randomChar(char[] rootChar) {
+		return rootChar[(int) (Math.random() * (rootChar.length - 1))];
+	}
+
+	protected static char otherRandomChar(char[] rootChar, char x) {
+		int random;
+		do
+			random = (int) (Math.random() * (rootChar.length - 1));
+		while (rootChar[random] == x);
+		return rootChar[random];
 	}
 }

@@ -11,6 +11,8 @@ import java.util.Collections;
 @SuppressWarnings({ "unused", "rawtypes", "unchecked" })
 public class Traversals {
 
+	static int preIndex = 0;
+
 	public static void main(String[] args) {
 		//		int charRootSize = HelperFunctions.randomTreeSize();
 		//		char[] rootChar = HelperFunctions.makeCharArray(charRootSize);
@@ -51,39 +53,29 @@ public class Traversals {
 		char[] pre = { 'A', 'B', 'D', 'E', 'C', 'F', 'G' };
 		postFromInPre(in, pre);
 	}
-	// Not working yet.
+
 	protected static void postFromInPre(char[] in, char[] pre) {
-		char[] post = new char[pre.length];
-		postFromInPre(in, 0, in.length - 1, pre, 0, post, 0);
-		for (char x : post)
-			System.out.print(x + " ");
-		System.out.println("--");
+		postFromInPre(in, 0, in.length - 1, pre);
 	}
 
-	private static char[] postFromInPre(char[] in, int inStart, int inEnd, char[] pre, int preIndex, char[] post,
-			int postIndex) {
-		if (inStart > inEnd || preIndex > pre.length)
-			return post;
-
-		int inIndex = search(in, pre[preIndex], inStart, inEnd);
-
-		if (inIndex != -1 && inStart == inEnd)
-			post[postIndex++] = in[inStart];
-
-		System.out.print(inIndex == -1 ? "- | " : (in[inIndex] + " | "));
-
-		postFromInPre(in, inStart, inIndex - 1, pre, ++preIndex, post, postIndex);
-		postFromInPre(in, inIndex + 1, inEnd, pre, ++preIndex, post, postIndex);
-		return post;
-	}
-
-	private static int search(char[] in, char current, int inStart, int inEnd) {
-		int i;
-		System.out.println(inStart + " " + inEnd + " - " + current);
-		for (i = inStart; i <= inEnd; i++)
-			if (in[i] == current)
-				return i;
-		return -1;
+	private static void postFromInPre(char[] in, int inStart, int inEnd, char[] pre) {
+		if (inStart > inEnd)
+			return;
+		if (inStart == inEnd) {
+			System.out.print(pre[preIndex++] + " ");
+			return;
+		}
+		// searching
+		int index;
+		for (index = 0; index <= in.length - 1; index++)
+			if (in[index] == pre[preIndex])
+				break;
+		index = index == in.length ? 0 : index;
+		// moving to next index
+		preIndex++;
+		postFromInPre(in, inStart, index - 1, pre);
+		postFromInPre(in, index + 1, inEnd, pre);
+		System.out.print(in[index] + " ");
 	}
 
 	protected static void reversePostorderRecursive(Node<Character> root) {

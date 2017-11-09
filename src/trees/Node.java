@@ -13,8 +13,8 @@ public class Node<E> {
 
 	public Node(E data) {
 		this.data = data;
-		left = null;
-		right = null;
+		this.left = null;
+		this.right = null;
 	}
 
 	public Node(E data, Node<E> left, Node<E> right) {
